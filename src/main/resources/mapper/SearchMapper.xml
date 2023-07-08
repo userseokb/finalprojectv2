@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.team2.finalproject.mapper.SearchMapper">
+<!--  	 	<select id="getProductBySearchQuery"
+ 	 	resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product 
+		WHERE name LIKE '%'||#{query}||'%'
+ 	 	</select> -->
+ 	 	
+	<!-- getTotalCount -->
+	<select id="getSearchTotalCount"
+			parameterType="com.team2.finalproject.dto.pagination.PageRequestDto" 
+			resultType="_int">
+		SELECT COUNT(product_code)
+		FROM product
+		WHERE name LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="getProductBySearchKeyword"
+		parameterType="com.team2.finalproject.dto.pagination.PageRequestDto" 
+		resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM (
+				SELECT product_code, category_code, name, content, price, stock, rdate ,rownum rn
+				FROM (
+					SELECT product_code, category_code, name, content, price, stock, rdate 
+					FROM product
+					WHERE name LIKE '%'||#{keyword}||'%'
+				)
+				<![CDATA[
+			        WHERE rownum <= #{pageNum} * #{amount}
+			     ]]>
+			)<![CDATA[
+			WHERE rn > (#{pageNum} - 1) *  #{amount}
+			]]>
+	</select>
+	
+ </mapper>

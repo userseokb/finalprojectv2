@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.team2.finalproject.mapper.NoticeMapper">
+ 	 	<select id="getAllNoticeList" resultType="com.team2.finalproject.dto.user.NoticeDto">
+ 	 		SELECT
+ 	 			notice_no,
+ 	 			user_no,
+ 	 			title,
+ 	 			state,
+ 	 			write_date,
+ 	 			content,
+ 	 			kinds
+ 	 		FROM notice
+ 	 	</select>
+ 		
+ 		<select id="getNoticeByNoticeNo" resultType="com.team2.finalproject.dto.user.NoticeDto">
+ 			SELECT
+ 	 			notice_no,
+ 	 			user_no,
+ 	 			title,
+ 	 			state,
+ 	 			write_date,
+ 	 			content,
+ 	 			kinds
+ 	 		FROM notice
+ 	 		WHERE notice_no = #{noticeNo}
+ 		</select>
+ </mapper>

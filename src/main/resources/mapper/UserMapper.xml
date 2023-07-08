@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.team2.finalproject.mapper.UserMapper">
+ 	 	
+ 	<select id="getAllUser" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 		FROM users
+ 	</select>
+
+ 	<select id="insertUser" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		INSERT INTO users (user_no, user_name, user_id, user_pw, email, birth, join_date, 
+ 							phone, tongsin, basic_addr, detail_addr) 
+ 		VALUES (user_no_seq.NEXTVAL, #{userName}, #{userId}, #{userPw}, #{email}, #{birth}, sysdate, 
+ 				#{phone}, #{tongsin}, #{basicAddr}, #{detailAddr}) 
+ 	</select>
+ 	
+ 	<select id="deleteUserByUserNo" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		DELETE FROM users
+ 		WHERE user_no = #{userNo}
+ 	</select>
+
+ 	<select id="getUserByUserNo" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 		FROM users
+ 		WHERE user_no = #{userNo}
+ 	</select>
+ 	
+ 	 <select id="getUserByUserId" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 		FROM users
+ 		WHERE user_id = #{userId}
+ 	</select>
+ 	
+ 
+ </mapper>
