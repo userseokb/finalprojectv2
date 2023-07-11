@@ -53,6 +53,21 @@ public class MainController {
 			return "productdetail";
 		}
 	
+	@RequestMapping(value = "/category/{categoryCode}",method = RequestMethod.GET)
+	public String category(@ModelAttribute PageRequestDto pageRequest,
+			Model model) {
+			List<ProductDto> result = mainMapper.getProductByPagination(pageRequest);
+			log.info("all products = {}", result);
+
+			int total = mainMapper.getTotalCount(pageRequest);
+			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
+
+			model.addAttribute("products", result);
+			model.addAttribute("pageInfo", pageResponse);
+			
+		return "category";
+	}
+	
 	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
 	public String adminLogin() {
 			
