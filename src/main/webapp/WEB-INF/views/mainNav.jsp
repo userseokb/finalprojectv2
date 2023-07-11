@@ -37,6 +37,13 @@
                     <button class="btn btn-outline-dark" onclick="location.href='login'"> 
                         <i class="bi-person-circle"></i>
                        	 로그인
+                    </button> &nbsp;&nbsp;&nbsp;
+                    </sec:authorize>
+                    
+                    <sec:authorize access="!isAuthenticated()">
+                    <button class="btn btn-outline-dark" onclick="location.href='signUp'"> 
+                        <i class="bi-person-circle"></i>
+                       	 회원가입
                     </button>
                     </sec:authorize>
                     
