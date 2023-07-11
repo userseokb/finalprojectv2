@@ -73,13 +73,13 @@
 							<c:if test="${pageInfo.prev}">
 								<li class="page-item prev">
 									<a class="page-link" aria-label="Previous" 
-									href="/category?pageNum=${pageInfo.startPage - 1}&amount=${pageInfo.pageRequest.amount}">이전</a>
+									href="/category/${categoryCode}?pageNum=${category.pageInfo.startPage - 1}&amount=${pageInfo.pageRequest.amount}">이전</a>
 								</li>
 							</c:if>
 							<c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 								<li class="page-item ${pageInfo.pageRequest.pageNum == num ? "active" : "" } ">
 									<a class="page-link" 
-									href="/category?pageNum=${num}&amount=${pageInfo.pageRequest.amount}">${num}</a>
+									href="/category/${categoryCode}?pageNum=${num}&amount=${category.pageInfo.pageRequest.amount}">${num}</a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageInfo.next}">

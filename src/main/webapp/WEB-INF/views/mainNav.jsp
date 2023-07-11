@@ -15,10 +15,10 @@
                         <li class="nav-item dropdown">
 							 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">우리 술 한눈에 보기</a>
                         	 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/category">소주/증류주</a></li>
-                                <li><a class="dropdown-item" href="/category">리큐르</a></li>
-                                <li><a class="dropdown-item" href="/category">막걸리</a></li>
-                                <li><a class="dropdown-item" href="/category">약주/청주</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='A'}">소주/증류주</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='B'}">리큐르</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='C'}">막걸리</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='D'}">약주/청주</a></li>
                              </ul>
                         </li>
 
