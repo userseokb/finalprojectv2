@@ -42,6 +42,27 @@
 		FROM product
 		WHERE product_code = #{product_code}
 	</select>
+	
+	<!-- getProductByCategoryCode -->
+	<select id="getProductByCategoryCode" 
+			parameterType="com.team2.finalproject.dto.product.CategoryDto"
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		WHERE category_code = #{categoryCode}
+	</select>
+	
+	<!-- getCategoryTotalCount -->
+	<select id="getCategoryTotalCount"
+			parameterType="com.team2.finalproject.dto.pagination.PageRequestDto" 
+			resultType="_int">
+		
+		SELECT COUNT(product_code)
+		FROM product
+		WHERE category_code = #{categoryCode}
+		
+	</select>
+   
    
     </mapper>
    

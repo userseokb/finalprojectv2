@@ -15,6 +15,10 @@ public interface MainMapper {
 	public ProductDto getProductByProductCode(Integer productCode);
 	
 	public List<ProductDto> getProductByPagination(PageRequestDto pageRequest);
+	
+	public List<ProductDto> getProductByCategoryCode(String categoryCode);
 
 	public int getTotalCount(PageRequestDto pageRequest);
+	
+	public int getCategoryTotalCount(String categoryCode, PageRequestDto pageRequest);
 }

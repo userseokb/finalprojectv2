@@ -12,7 +12,15 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="main">우리술 한 눈에 보기</a></li>
+                        <li class="nav-item dropdown">
+							 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">우리 술 한눈에 보기</a>
+                        	 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/category/${categoryCode='A'}">소주/증류주</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='B'}">리큐르</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='C'}">막걸리</a></li>
+                                <li><a class="dropdown-item" href="/category/${categoryCode='D'}">약주/청주</a></li>
+                             </ul>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
