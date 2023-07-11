@@ -56,14 +56,21 @@
                     </sec:authorize>
                     
                     <sec:authorize access="isAuthenticated()">
-                    <button class="btn btn-outline-dark" onclick="location.href='mypage'"> 
+                    <button class="btn btn-outline-dark btn-small" onclick="location.href='mypage'"> 
                         <i class="bi-info-circle"></i>
                        	 마이페이지
                     </button>&nbsp;&nbsp;&nbsp;
                     </sec:authorize>
                     
                     <sec:authorize access="isAuthenticated()">
-                    <button class="btn btn-outline-dark" onclick="location.href='logout'"> 
+                    <button class="btn btn-outline-dark btn-small" onclick="location.href='basket'"> 
+                        <i class="bi-cart"></i>
+                       	 장바구니
+                    </button>&nbsp;&nbsp;&nbsp;
+                    </sec:authorize>
+                    
+                    <sec:authorize access="isAuthenticated()">
+                    <button class="btn btn-outline-dark btn-small" onclick="location.href='logout'"> 
                         <i class="bi-person-circle"></i>
                        	 로그아웃
                     </button>
