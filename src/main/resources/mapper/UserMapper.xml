@@ -52,6 +52,10 @@
  				tongsin = #{tongsin}, basic_addr = #{basicAddr}, detail_addr = #{detailAddr}
  		WHERE user_id = #{userId}
  	</update>
- 	
+   
+ 	<select id="getUserCountByUserId" resultType="int">
+			select count(user_id) from users where user_id=#{userId}
+ 	</select>
+
  
  </mapper>
