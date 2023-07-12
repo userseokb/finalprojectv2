@@ -35,5 +35,9 @@ public class UserService {
 	public UserDto getUserByUserId(String userId) {
 		return mapper.getUserByUserId(userId);
 	}
+	
+	public int getUserCountByUserId(String userId) {
+		return mapper.getUserCountByUserId(userId);
+	}
 
 }

@@ -21,6 +21,8 @@ public interface UserMapper {
 	
 	public UserDto getUserByUserId(String userId);
 	
+	public int getUserCountByUserId(String userId);
+	
 	
 	
 

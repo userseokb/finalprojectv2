@@ -14,6 +14,9 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../resources/css/styles.css" rel="stylesheet" />
     <link href="../resources/css/traditional-main.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- axios 비동기 사용 -->
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> <!-- jquery 사용 -->
+    
 </head>
 
 <body>
@@ -31,8 +34,8 @@
             <div class="input-wrap">
                 <div>
                     <i class="bi-person"></i>
-                    <input class="user-info-input" type="text" name="userId" id="userId" placeholder="아이디(공백X 특문X 4~18글자)">
-                    <input class="input-right" type="button" name="idCheck" id="idCheck" value="중복확인">
+                    <input class="user-info-input" type="text" name="userId" id="userId" check_result="fail" placeholder="아이디(공백X 특문X 4~18글자)" required/>
+                    <input class="input-right" type="button" name="idCheck" id="idCheck" onclick="idDuplicateCheck();" value="중복확인"/>
                 </div>
                 <div>
                     <i class="bi-key"></i>
@@ -101,6 +104,41 @@
     <script src="js/scripts.js"></script>
 
 <script type="text/javascript">
+
+
+function idDuplicateCheck() {
+    $("#userId").change(function () {	//id 입력창의 내용이 변경되면...
+        $("#idCheck").show();			//id체크 버튼 다시 보여줌
+        $("#userId").attr("check_result", "fail"); //체크 결과 fail로 변경
+      })
+      
+      var userId = document.getElementById("userId");
+      var idPwReg = /^[a-zA-Z0-9]{4,18}$/; //공백없는 숫자와 대소문자 4~18글자 정규식
+      //중복 체크 전 아이디 유효성 검사
+      if (!idPwReg.test(userId.value)) {
+          alert("아이디를 입력 조건에 맞게 입력해 주세요");
+          userId.focus();
+          return;
+      };
+      //실제 중복 체크를 위한 axios 비동기 로직
+      axios.get('http://localhost:8083/api/user/idcheck/'+userId.value)
+		.then(response => {
+			if(response.data == 0) {	//중복되는 id가 없으면...
+				alert("사용가능한 아이디입니다");	//알림창 출력
+				$("#userId").attr("check_result", "success");	//체크 결과 success로 변경
+				$("#idCheck").hide();
+			} else if(response.data >= 1) {	//중복되는 id가 있으면
+				alert("이미 존재하는 아이디 입니다."); //알림창 출력
+				userId.focus();
+				return;
+			}
+		})
+}
+
+
+
+
+
 function registerCheck() {
     var userId = document.getElementById("userId");
     var userPw = document.getElementById("userPw");
@@ -114,13 +152,16 @@ function registerCheck() {
     var detailAddr = document.getElementById("detailAddr");
 
 
+    
+
+    
     var idPwReg = /^[a-zA-Z0-9]{4,18}$/; //공백없는 숫자와 대소문자 4~18글자 정규식
-    //아이디 유효성 검사
+/*     //아이디 유효성 검사(중복확인에서 체크하므로 필요없음)
     if (!idPwReg.test(userId.value)) {
         alert("아이디가 제대로 입력되지 않았습니다. 입력 조건을 확인해 주세요");
         userId.focus();
         return false;
-    };
+    }; */
 	//비밀번호 유효성 검사
     if (!idPwReg.test(userPw.value)) {
         alert("비밀번호가 제대로 입력되지 않았습니다. 입력 조건을 확인해 주세요");
@@ -176,11 +217,20 @@ function registerCheck() {
     	alert("주소가 입력되지 않았습니다.");
         return false;
     };
+    
+    //아이디 중복체크 여부 검사
+    if ($("#userId").attr("check_result") == "fail"){
+        alert("아이디 중복체크를 해주시기 바랍니다.");
+        userId.focus();
+        return false;
+      };
 
    //입력 값 전송
    document.inputForm.submit(); //유효성 검사의 포인트
 
 }
+
+
 </script>
 
 </body>
