@@ -12,6 +12,8 @@ public class PageRequestDto {
 	
 	private String keyword;
 	
+	private String categoryCode;
+	
 	public PageRequestDto() {
 		this(1,12);
 	}
@@ -24,11 +26,12 @@ public class PageRequestDto {
 	}
 
 	@Builder
-	public PageRequestDto(int pageNum, int amount, String keyword) {
+	public PageRequestDto(int pageNum, int amount, String keyword, String categoryCode) {
 		super();
 		this.pageNum = pageNum;
 		this.amount = amount;
 		this.keyword = keyword;
+		this.categoryCode = categoryCode;
 	}
 	
 	
