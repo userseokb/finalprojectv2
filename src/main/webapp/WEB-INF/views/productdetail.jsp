@@ -15,7 +15,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/styles.css" rel="stylesheet" />
-        <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+        <link href="../resources/css/traditional-main.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- <script src="../resources/jquery/jquery-3.3.1.min.js"></script> -->
     </head>
     <body>
         <%@ include file="mainNav.jsp" %>
@@ -47,14 +49,24 @@
 
 
                         <div class="d-flex" > <!--수량버튼, 장바구니, 바로구매 -->
-                            <button type ="button" class="plus">+</button>
+                            <!-- <button type ="button" class="plus">+</button>
                             <input class="form-control " id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button type="button" class="minus">-</button>
+                            <button type="button" class="minus">-</button> -->
 
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <div class="count-btn float-right">
+								<button type="button" onclick="minus(this)">-</button>
+									<input class="count-input" type="number" name=""
+									value="1"
+									id="productQuantity">
+								<button type="button" onclick="plus(this)">+</button>
+							</div>	
+								
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addToBasket(${products.productCode});">
                                 <i class="bi-cart-fill me-1"></i>
                                 장바구니
                             </button>
+                           
+                            
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                  <i class="bi bi-cash"></i>
                                 바로구매
@@ -99,6 +111,42 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="../resources/js/scripts.js"></script>
+        <script>
+     // 수량감소
+        function minus(tag){
+            let curNum = tag.nextElementSibling;
+            curNum.value -= 1;
+            if(Number(curNum.value) < 1){
+                curNum.value = 1;
+            }
+        }
+
+        // 수량증가
+        function plus(tag){
+            let curNum = tag.previousElementSibling;
+            curNum.value = Number(curNum.value) + 1;
+        }
+        
+        function addToBasket(productCode){
+        	let detailForm = document.getElementById("detailForm");
+        	let quantity = document.getElementById("productQuantity");
+        	
+			axios({
+					url: "/basket/"+ productCode + "/" + quantity.value,
+					method: 'post'
+			})
+			.then((response)=>{
+				if(response.status==200){
+					if(confirm("장바구니에 담겼습니다. 장바구니로 이동하겠습니까?")) location.href="/basket";
+					else location.href="/productdetail/"+productCode;
+				}
+			})
+			.catch((error)=>{
+				console.log(error)
+			});
+					
+        }
+        </script>
     </body>
 </html>

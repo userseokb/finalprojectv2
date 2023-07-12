@@ -40,7 +40,6 @@ public class BasketController {
 		// productCode로 상품정보 가져오기
 		for(int i=0; i<basketList.size(); i++) {
 			int productCode = basketList.get(i).getProductCode();
-			System.out.println(productCode);
 			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
 			productList.add(basketProduct);
 		}
@@ -50,9 +49,27 @@ public class BasketController {
 		return "basket";
 	}
 	
+	// 항목삭제
 	@RequestMapping(value="basket/{basketNo}", method=RequestMethod.DELETE)
 	public String deleteBasket(@PathVariable int basketNo) {
 		basketService.deleteBasketNo(basketNo);
 		return "redirect:/basket";
 	}
+	
+	// 장바구니 추가
+	@RequestMapping(value="basket/{productCode}/{quantity}", method=RequestMethod.POST)
+	public String addToBasket(@PathVariable int productCode, @PathVariable int quantity, Principal principal) {
+		//security 에서 userId 획득
+		String userId = principal.getName();
+		//조회
+		int userNo = userService.getUserByUserId(userId).getUserNo();
+		basketService.addToBasket(userNo,productCode,quantity);
+		
+		return "redirect:/productdetail/"+productCode;
+	}
+	
+	
+	
+	
+	
 }
