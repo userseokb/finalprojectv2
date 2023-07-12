@@ -16,6 +16,7 @@
     <link href="../resources/css/traditional-main.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- axios 비동기 사용 -->
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> <!-- jquery 사용 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- daum 주소검색 api 사용 -->
     
 </head>
 
@@ -81,8 +82,8 @@
                 </div>
                 <div>
                     <i class="bi-signpost"></i>
-                    <input class="user-info-input" type="text" name="basicAddr" id="basicAddr" placeholder="주소">
-                    <input class="input-right" type="button" value="주소검색">
+                    <input class="user-info-input" type="text" name="basicAddr" id="basicAddr" placeholder="주소" readonly/>
+                    <input class="input-right" type="button" onclick = "addressSearch();" value="주소검색">
                 </div>
                 <div>
                     <i class="bi-signpost"></i>
@@ -104,6 +105,19 @@
     <script src="js/scripts.js"></script>
 
 <script type="text/javascript">
+
+function addressSearch() {
+    //카카오 지도 api
+    new daum.Postcode({
+        oncomplete: function(data) { //선택시 입력값 세팅
+            document.getElementById("basicAddr").value = data.address; // 주소 넣기
+            document.querySelector("input[name=detailAddr]").focus(); //상세입력 포커싱
+        }
+    }).open();
+}
+
+
+
 
 
 function idDuplicateCheck() {
@@ -212,7 +226,7 @@ function registerCheck() {
         return false;
     };
     
-    //주소 유효성 검사(주소검색 api 적용예정으로 단순 값이 있는지 없는지만 판단)
+    //주소 유효성 검사(단순 값이 있는지 없는지만 판단)
     if ((basicAddr.value == "") || (detailAddr.value == "")) {
     	alert("주소가 입력되지 않았습니다.");
         return false;
