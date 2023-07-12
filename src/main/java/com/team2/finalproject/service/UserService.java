@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team2.finalproject.dto.order.OrderInfoDto;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.mapper.UserMapper;
 
@@ -34,6 +35,14 @@ public class UserService {
 	
 	public UserDto getUserByUserId(String userId) {
 		return mapper.getUserByUserId(userId);
+	}
+	
+	public List<OrderInfoDto> orderInfoByUserId(String userId) {
+		return mapper.orderInfoByUserId(userId);
+	}
+	
+	public UserDto updateUser(UserDto updateUser){
+		return mapper.updateUser(updateUser);
 	}
 
 }
