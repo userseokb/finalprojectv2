@@ -48,8 +48,8 @@
 	
 	<update id="updateUser" parameterType="com.team2.finalproject.dto.user.UserDto">
  		UPDATE users
- 		SET		user_pw = ${userPw}, email = ${email}, birth = ${birth}, phone = ${phone}, 
- 				tongsin = ${tongsin}, basic_addr = ${basicAddr}, detail_addr = ${detailAddr}
+ 		SET		user_pw = #{userPw}, email = #{email}, birth = #{birth}, phone = #{phone}, 
+ 				tongsin = #{tongsin}, basic_addr = #{basicAddr}, detail_addr = #{detailAddr}
  		WHERE user_id = #{userId}
  	</update>
  	

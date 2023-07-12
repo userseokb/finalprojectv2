@@ -24,7 +24,7 @@ public interface UserMapper {
 
 	public List<OrderInfoDto> orderInfoByUserId(String userId);
 
-	public UserDto updateUser(UserDto updateUser);
+	public void updateUser(UserDto updateUser);
 	
 	
 	
