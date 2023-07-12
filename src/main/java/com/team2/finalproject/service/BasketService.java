@@ -23,4 +23,14 @@ public class BasketService {
 		basketMapper.deleteBasketNo(basketNo);
 	}
 
+	public boolean addToBasket(int userNo, int productCode, int quantity) {		
+		return basketMapper.addToBasket(userNo,productCode,quantity);
+		
+	}
+
+	public void modifyQuantity(int basketNo, int quantity) {
+		basketMapper.modifyQuantity(basketNo,quantity);
+		
+	}
+
 }

@@ -79,12 +79,16 @@
 								<td id="price${status.index}">${productList[status.index].price}</td>
 								<td>
 									<div class="count-btn">
-										<button onclick="minus(this)">-</button>
+										<button onclick="minus(this,${status.index})">-</button>
 										<input class="count-input" type="number" name=""
 											value="${basket.productQuantity}"
-											id="productQuantity${status.index}" onchange="totalPrice();">
-										<button onclick="plus(this)">+</button>
-									</div>
+											id="productQuantity${status.index}" onchange="totalPrice(); 
+											createButton(${status.index});">
+										<button onclick="plus(this,${status.index})">+</button>
+										
+									</div><br>
+									<input id="quantityChange${status.index}" style="display: none;" type="button" value="수량 변경" class="change-option-btn" 
+									onclick="changeQuantity(${basket.basketNo},${status.index})">
 								</td>
 								<td><input type="button" value="항목 삭제"
 									class="change-option-btn"
@@ -167,20 +171,22 @@
         }
 
         // 수량감소
-        function minus(tag){
+        function minus(tag,index){
             let curNum = tag.nextElementSibling;
             curNum.value -= 1;
             if(Number(curNum.value) < 1){
                 curNum.value = 1;
             }
             totalPrice();
+            createButton(index);
         }
 
         // 수량증가
-        function plus(tag){
+        function plus(tag,index){
             let curNum = tag.previousElementSibling;
             curNum.value = Number(curNum.value) + 1;
           	totalPrice();
+          	createButton(index);
         }
 
         // 총 가격 계산,출력
@@ -216,6 +222,24 @@
 			input.value  = 'DELETE'; 
 			basketForm.appendChild(input); 
         	basketForm.action = "/basket/" + basketCode;
+        	basketForm.method = "POST";
+        	basketForm.submit();
+        }
+        
+        function createButton(index){
+        	let btn = document.getElementById("quantityChange"+index);
+        	btn.style.display="";
+        }
+        
+        function changeQuantity(basketNo,index){
+			let basketForm = document.getElementById("basketForm");
+			let quantity = document.getElementById("productQuantity"+index);
+        	let input = document.createElement('input'); 
+			input.type = 'hidden'; 
+			input.name = '_method'; 
+			input.value  = 'PUT'; 
+			basketForm.appendChild(input); 
+        	basketForm.action = "/basket/" + basketNo + "/" + quantity.value;
         	basketForm.method = "POST";
         	basketForm.submit();
         }
