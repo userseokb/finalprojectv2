@@ -43,6 +43,7 @@ public class UserService {
 	
 	public void updateUser(UserDto updateUser){
 		mapper.updateUser(updateUser);
+	}
 
 	public int getUserCountByUserId(String userId) {
 		return mapper.getUserCountByUserId(userId);
