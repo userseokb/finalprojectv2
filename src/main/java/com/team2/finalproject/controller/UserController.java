@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.UserService;
@@ -77,25 +80,30 @@ public class UserController {
 	
 
 	
-	@RequestMapping(value = "/personalInfomation/{userNo}", method = RequestMethod.PUT)
-	public String updateUser(@PathVariable int userNo,
+	@RequestMapping(value = "/updateForm", method = RequestMethod.POST)
+	public String updateUser(@RequestParam String userId,
+							@ModelAttribute("userPw") String userPw,
 							@ModelAttribute("email") String email,
 							@ModelAttribute("phone") int phone,
 							@ModelAttribute("tongsin") String tongsin,
-							@ModelAttribute("basicAddr") String basicAddr ,
+							@ModelAttribute("basicAddr") String basicAddr,
 							@ModelAttribute("detailAddr") String detailAddr) {
 		
-		UserDto user = service.getUserByUserNo(userNo);
-		user.setEmail(email);
-		user.setPhone(phone);
-		user.setTongsin(tongsin);
-		user.setBasicAddr(basicAddr);
-		user.setDetailAddr(detailAddr);
 		
-		System.out.println();
+		UserDto updateUser = service.getUserByUserId(userId);
+		updateUser.setUserPw(passwordEncoder.encode(updateUser.getUserPw()));
+		updateUser.setEmail(email);
+		updateUser.setPhone(phone);
+		updateUser.setTongsin(tongsin);
+		updateUser.setBasicAddr(basicAddr);
+		updateUser.setDetailAddr(detailAddr);
 		
-		return "/personalInfomation/{userNo}";
 		
+		service.updateUser(updateUser);
+			
+		
+		return "/updateForm";
 	}
+		
 	
 }

@@ -18,10 +18,10 @@
  				#{phone}, #{tongsin}, #{basicAddr}, #{detailAddr}) 
  	</select>
  	
- 	<select id="deleteUserByUserNo" resultType="com.team2.finalproject.dto.user.UserDto">
+ 	<delete id="deleteUserByUserNo" parameterType="_int">
  		DELETE FROM users
  		WHERE user_no = #{userNo}
- 	</select>
+ 	</delete>
 
  	<select id="getUserByUserNo" resultType="com.team2.finalproject.dto.user.UserDto">
  		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
@@ -37,9 +37,25 @@
  		WHERE user_id = #{userId}
  	</select>
  	
+ 	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.user.UserDto">
+    	SELECT o.order_no, o.product_quantity, o.used_point, o.basic_addr, o.detail_addr, o.payment_method, o.order_date, o.delivery_charge, o.price, o.order_status,
+               od.order_detail_no, od.product_code, od.order_detail_price, od.order_detail_quantity
+        FROM users u
+        JOIN orders o ON u.user_no = o.user_no
+        JOIN order_detail od ON o.order_no = od.order_no
+        WHERE u.user_id = #{userId}
+	</select> 
+	
+	<update id="updateUser" parameterType="com.team2.finalproject.dto.user.UserDto">
+ 		UPDATE users
+ 		SET		user_pw = #{userPw}, email = #{email}, birth = #{birth}, phone = #{phone}, 
+ 				tongsin = #{tongsin}, basic_addr = #{basicAddr}, detail_addr = #{detailAddr}
+ 		WHERE user_id = #{userId}
+ 	</update>
+   
  	<select id="getUserCountByUserId" resultType="int">
 			select count(user_id) from users where user_id=#{userId}
  	</select>
- 	
+
  
  </mapper>
