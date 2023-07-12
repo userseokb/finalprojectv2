@@ -31,12 +31,13 @@ public class updateFormController {
 @PreAuthorize("isAuthenticated()")
     //마이페이지 창으로 이동
     @GetMapping
-    public void profile(Principal principal,Model model) {
+    public void profile(Principal principal,Model model, HttpSession session) {
         
         log.info("회원정보 변경 창으로 이동");
         log.info("유저아이디: " + principal.getName());
         String userid = principal.getName();
         UserDto user = service.getUserByUserId(userid);
+        session.setAttribute("user", user);
         model.addAttribute("user", user);
         
         System.out.println(user);

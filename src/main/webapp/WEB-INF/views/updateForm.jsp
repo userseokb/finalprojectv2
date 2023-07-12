@@ -47,7 +47,7 @@
 				                </div>
 				                <div>
 				                    <i class="bi-key"></i>
-				                    <input class="user-info-input" type="password" name="userPw" id="userPw" placeholder="비밀번호">
+				                    <input class="user-info-input" type="password" name="userPw" id="userPw" placeholder="새로운 비밀번호">
 				                </div>
 				                <div>
 				                    <i class="bi-check"></i>
@@ -69,7 +69,7 @@
 				                <div>
 				                    <i class="bi-telephone"></i>
 				                    <input class="user-info-input" name="phone" placeholder="전화번호" value="${user.phone}">
-				                        <select class="select-box float-right" name="tongsin" id="tongsin">
+				                        <select class="select-box float-right" name="tongsin" id="tongsin" value="${user.tongsin}">
 				                            <option value="" selected>선택</option>
 				                            <option value="SKT">SKT</option>
 				                            <option value="KT">KT</option>
@@ -78,16 +78,16 @@
 				                </div>
 				                <div>
 				                    <i class="bi-mailbox"></i>
-				                    <input class="user-info-input" type="email" name="email" id="email" placeholder="[선택] 비밀번호 분실 시 확인용 이메일">
+				                    <input class="user-info-input" type="email" name="email" id="email" placeholder="[선택] 비밀번호 분실 시 확인용 이메일" value="${user.email}">
 				                </div>
 				                <div>
 				                    <i class="bi-signpost"></i>
-				                    <input class="user-info-input" type="text" name="basicAddr" placeholder="주소">
+				                    <input class="user-info-input" type="text" name="basicAddr" placeholder="주소" value="${user.basicAddr}">
 				                    <input class="input-right" type="button" value="주소검색">
 				                </div>
 				                <div>
 				                    <i class="bi-signpost"></i>
-				                    <input class="user-info-input" type="text" name="detailAddr" placeholder="상세주소">
+				                    <input class="user-info-input" type="text" name="detailAddr" placeholder="상세주소" value="${user.detailAddrt}">
 				                </div>
 				            </div>
 				
