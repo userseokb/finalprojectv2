@@ -21,4 +21,23 @@
  	 		DELETE FROM basket
  	 		WHERE basket_no = #{basketNo}
  	 	</delete>
+ 	 	
+ 	 	<insert id="addToBasket" parameterType="com.team2.finalproject.dto.product.BasketDto">
+ 	 		INSERT INTO basket
+ 	 		VALUES (
+ 	 		basket_no_seq.NEXTVAL,
+ 	 		#{productCode},
+ 	 		#{userNo},
+ 	 		#{quantity},
+ 	 		0,0
+ 	 		)
+ 	 	</insert>
+ 	 	
+ 	 	<update id="modifyQuantity" parameterType="com.team2.finalproject.dto.product.BasketDto">
+ 	 		UPDATE basket
+ 	 		SET
+ 	 		 product_quantity = #{quantity}
+ 	 		WHERE basket_no = #{basketNo}
+ 	 	
+ 	 	</update>
  </mapper>

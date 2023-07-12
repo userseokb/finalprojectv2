@@ -91,6 +91,7 @@ public class UserController {
 							@RequestParam("basicAddr") String basicAddr,
 							@RequestParam("detailAddr") String detailAddr,
 							HttpSession session) {
+				
 		
 		
 		UserDto updateUser = service.getUserByUserId(userId);

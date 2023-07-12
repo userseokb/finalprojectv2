@@ -53,22 +53,39 @@ public class MainController {
 		model.addAttribute("products", productDto);
 			return "productdetail";
 		}
+//	
+//	@RequestMapping(value = "/category/{categoryCode}",method = RequestMethod.GET)
+//	public String category(@PathVariable String categoryCode,PageRequestDto pageRequest,
+//			Model model) {
+//			List<ProductDto> result = mainMapper.getProductByCategoryCode(categoryCode);
+//			log.info("all products = {}", result);
+//
+//			int total = mainMapper.getCategoryTotalCount(categoryCode, pageRequest);
+//			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
+//
+//			model.addAttribute("products", result);
+//			model.addAttribute("pageInfo", pageResponse);
+//			
+//		return "category";
+//	}
 	
-	@RequestMapping(value = "/category/{categoryCode}",method = RequestMethod.GET)
-	public String category(@PathVariable String categoryCode,PageRequestDto pageRequest,
-			Model model) {
-			List<ProductDto> result = mainMapper.getProductByCategoryCode(categoryCode);
-			log.info("all products = {}", result);
-
+	//카테고리 A,B,C,D 별로 페이지네이션
+		@RequestMapping(value = "/category/{categoryCode}", method=RequestMethod.GET)
+		public String getProductByCategoryCodeWithPagination(
+															@PathVariable String categoryCode,PageRequestDto pageRequest,
+															Model model) {
+			
+			List<ProductDto> categoryList = mainMapper.getProductByCategoryCodeWithPagination(pageRequest);
+			
 			int total = mainMapper.getCategoryTotalCount(categoryCode, pageRequest);
 			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
-
-			model.addAttribute("products", result);
+			
+			model.addAttribute("products", categoryList);
 			model.addAttribute("pageInfo", pageResponse);
 			
-		return "category";
-	}
-	
+			return "category";
+		}
+		
 	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
 	public String adminLogin() {
 			

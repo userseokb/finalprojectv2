@@ -48,12 +48,12 @@
             </div>
 
             <!-- id msg -->
-            <div class="error-text" style="display: none;">
+<!--             <div class="error-text" style="display: none;">
                 아이디: 사용할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.
             </div>
             <div class="success-text" style="display: none;">
                 아이디: 사용할 수 있는 아이디입니다. 회원가입을 진행해 주세요
-            </div>
+            </div> -->
             <br>
             <!-- user private infomation -->
             <div class="input-wrap">

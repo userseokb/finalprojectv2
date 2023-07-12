@@ -60,9 +60,27 @@
 		SELECT COUNT(product_code)
 		FROM product
 		WHERE category_code = #{categoryCode}
-		
 	</select>
+   <!--getProductByCategoryCodeWithPagination -->
+   <select id="getProductByCategoryCodeWithPagination"
+   		   parameterType="com.team2.finalproject.dto.pagination.PageRequestDto"
+   		   resultType="com.team2.finalproject.dto.product.ProductDto">
+  		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM (
+				SELECT product_code, category_code, name, content, price, stock, rdate ,rownum rn
+				FROM (
+					SELECT product_code, category_code, name, content, price, stock, rdate 
+					FROM product
+			        WHERE category_code = #{categoryCode})
+			        <![CDATA[
+			        WHERE rownum <= #{pageNum} * #{amount}
+			     ]]>
+			)<![CDATA[
+			WHERE rn > (#{pageNum} - 1) *  #{amount}
+			]]>
+		
    
+   </select>
    
     </mapper>
    
