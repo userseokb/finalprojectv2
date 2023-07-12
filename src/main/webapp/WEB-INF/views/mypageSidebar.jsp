@@ -10,9 +10,9 @@
                 </ul>
             </div>
             <ul class="sidebar-nav">
-                <li><a href="mypage.html">마이 페이지</a></li>
-                <li><a href="personalInfomation.html">회원 정보 변경</a></li>
-                <li><a href="orderHistory.html">주문 내역 조회<br>및 리뷰 작성</a></li>
+                <li><a href="/mypage">마이 페이지</a></li>
+                <li><a href="/updateForm">회원 정보 변경</a></li>
+                <li><a href="/basket">주문 내역 조회<br>및 리뷰 작성</a></li>
                 <li><a href="">Q&A(1:1문의)</a></li>
             </ul>
         </div>
