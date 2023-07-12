@@ -2,6 +2,8 @@ package com.team2.finalproject.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -87,7 +89,9 @@ public class UserController {
 							@RequestParam("phone") int phone,
 							@RequestParam("tongsin") String tongsin,
 							@RequestParam("basicAddr") String basicAddr,
-							@RequestParam("detailAddr") String detailAddr) {
+							@RequestParam("detailAddr") String detailAddr,
+							HttpSession session) {
+				
 		
 		
 		UserDto updateUser = service.getUserByUserId(userId);
@@ -98,6 +102,7 @@ public class UserController {
 		updateUser.setBasicAddr(basicAddr);
 		updateUser.setDetailAddr(detailAddr);
 		
+	    session.setAttribute("user", updateUser);
 		
 		service.updateUser(updateUser);
 			
