@@ -82,16 +82,16 @@ public class UserController {
 	
 	@RequestMapping(value = "/updateForm", method = RequestMethod.POST)
 	public String updateUser(@RequestParam String userId,
-							@ModelAttribute("userPw") String userPw,
-							@ModelAttribute("email") String email,
-							@ModelAttribute("phone") int phone,
-							@ModelAttribute("tongsin") String tongsin,
-							@ModelAttribute("basicAddr") String basicAddr,
-							@ModelAttribute("detailAddr") String detailAddr) {
+							@RequestParam("userPw") String userPw,
+							@RequestParam("email") String email,
+							@RequestParam("phone") int phone,
+							@RequestParam("tongsin") String tongsin,
+							@RequestParam("basicAddr") String basicAddr,
+							@RequestParam("detailAddr") String detailAddr) {
 		
 		
 		UserDto updateUser = service.getUserByUserId(userId);
-		updateUser.setUserPw(passwordEncoder.encode(updateUser.getUserPw()));
+		updateUser.setUserPw(passwordEncoder.encode(userPw));
 		updateUser.setEmail(email);
 		updateUser.setPhone(phone);
 		updateUser.setTongsin(tongsin);
