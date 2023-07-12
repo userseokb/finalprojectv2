@@ -41,8 +41,8 @@ public class UserService {
 		return mapper.orderInfoByUserId(userId);
 	}
 	
-	public UserDto updateUser(UserDto updateUser){
-		return mapper.updateUser(updateUser);
+	public void updateUser(UserDto updateUser){
+		mapper.updateUser(updateUser);
 	}
 
 }

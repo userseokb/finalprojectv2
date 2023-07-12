@@ -89,16 +89,20 @@ public class UserController {
 							@ModelAttribute("basicAddr") String basicAddr,
 							@ModelAttribute("detailAddr") String detailAddr) {
 		
+		
 		UserDto updateUser = service.getUserByUserId(userId);
-		updateUser.setUserPw(userPw);
+		updateUser.setUserPw(passwordEncoder.encode(updateUser.getUserPw()));
 		updateUser.setEmail(email);
 		updateUser.setPhone(phone);
 		updateUser.setTongsin(tongsin);
 		updateUser.setBasicAddr(basicAddr);
 		updateUser.setDetailAddr(detailAddr);
 		
-	    service.updateUser(updateUser);
-	    return "updateForm";
+		
+		service.updateUser(updateUser);
+			
+		
+		return "/updateForm";
 	}
 		
 	
