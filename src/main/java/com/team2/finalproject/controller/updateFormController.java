@@ -20,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @AllArgsConstructor
-@RequestMapping("/mypage")
-public class MypageController {
+@RequestMapping("/updateForm")
+public class updateFormController {
 	
 	@Autowired
 	private UserService service;
@@ -31,12 +31,12 @@ public class MypageController {
     @GetMapping
     public void profile(Principal principal,Model model) {
         
-        log.info("마이페이지 창으로 이동");
+        log.info("회원정보 변경 창으로 이동");
         log.info("유저아이디: " + principal.getName());
         String userid = principal.getName();
-        List<OrderInfoDto> orderInfo = service.orderInfoByUserId(userid);
-        model.addAttribute("orderInfo", orderInfo);
+        UserDto user = service.getUserByUserId(userid);
+        model.addAttribute("user", user);
         
-        System.out.println(orderInfo);
+        System.out.println(user);
     }
 }

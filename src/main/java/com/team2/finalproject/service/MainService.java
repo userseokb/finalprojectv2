@@ -31,4 +31,19 @@ public class MainService {
 		List<ProductDto> productDto = mainMapper.getProductByCategoryCode(categoryCode);
 		return productDto;
 	}
+	
+	public List<ProductDto> getProductByCategoryCodeWithPagination(PageRequestDto pageRequest) {
+		List<ProductDto> categoryList;
+		if(pageRequest.getCategoryCode() == "" || pageRequest.getCategoryCode() == null) {
+			categoryList = mainMapper.getProductByPagination(pageRequest);
+		}else {
+			categoryList = mainMapper.getProductByCategoryCodeWithPagination(pageRequest);
+		}
+		return categoryList;
+	}
+	
+	public int getCategoryTotalCount(String categoryCode, PageRequestDto pageRequest) {
+		int total = mainMapper.getCategoryTotalCount(categoryCode, pageRequest);
+		return total;
+	}
 }

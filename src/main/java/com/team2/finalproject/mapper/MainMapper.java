@@ -21,4 +21,7 @@ public interface MainMapper {
 	public int getTotalCount(PageRequestDto pageRequest);
 	
 	public int getCategoryTotalCount(String categoryCode, PageRequestDto pageRequest);
+	
+	//category_code로 분류후 페이지네이션
+	public List<ProductDto> getProductByCategoryCodeWithPagination(PageRequestDto pageRequest);
 }
