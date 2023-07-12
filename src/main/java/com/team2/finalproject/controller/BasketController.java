@@ -68,7 +68,12 @@ public class BasketController {
 		return "redirect:/productdetail/"+productCode;
 	}
 	
-	
+	@RequestMapping(value="basket/{basketNo}/{quantity}", method=RequestMethod.PUT)
+	public String modifyQuantity(@PathVariable int basketNo, @PathVariable int quantity) {
+		
+		basketService.modifyQuantity(basketNo,quantity);
+		return "redirect:/basket";
+	}
 	
 	
 	

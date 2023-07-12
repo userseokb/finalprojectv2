@@ -28,4 +28,9 @@ public class BasketService {
 		
 	}
 
+	public void modifyQuantity(int basketNo, int quantity) {
+		basketMapper.modifyQuantity(basketNo,quantity);
+		
+	}
+
 }

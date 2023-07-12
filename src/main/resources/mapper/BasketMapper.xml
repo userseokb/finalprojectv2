@@ -32,4 +32,12 @@
  	 		0,0
  	 		)
  	 	</insert>
+ 	 	
+ 	 	<update id="modifyQuantity" parameterType="com.team2.finalproject.dto.product.BasketDto">
+ 	 		UPDATE basket
+ 	 		SET
+ 	 		 product_quantity = #{quantity}
+ 	 		WHERE basket_no = #{basketNo}
+ 	 	
+ 	 	</update>
  </mapper>

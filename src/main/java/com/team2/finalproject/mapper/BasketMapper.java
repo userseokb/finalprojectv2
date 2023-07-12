@@ -16,4 +16,6 @@ public interface BasketMapper {
 
 	boolean addToBasket(@Param("userNo") int userNo,@Param("productCode") int productCode,@Param("quantity") int quantity);
 
+	void modifyQuantity(@Param("basketNo") int basketNo,@Param("quantity") int quantity);
+
 }
