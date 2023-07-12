@@ -70,7 +70,7 @@
 				                    <i class="bi-telephone"></i>
 				                    <input class="user-info-input" name="phone" id="phone" placeholder="전화번호(숫자 11자리)" value="${user.phone}">
 				                        <select class="select-box float-right" name="tongsin" id="tongsin" value="${user.tongsin}">
-				                            <option value="" selected>선택</option>
+				                            <option value="">선택</option>
 				                            <option value="SKT">SKT</option>
 				                            <option value="KT">KT</option>
 				                            <option value="LG">LG</option>
@@ -169,16 +169,16 @@ function updateCheck() {
         return false;
     };
     
-    console.log('1');
+    /* console.log('1');
     let updateForm = document.getElementById('updateForm');
     let input = document.createElement('input');
     input.type = 'hidden';
     input.name = '_method';
     input.value = 'PUT';
-    updateForm.appendChild(input);
+    updateForm.appendChild(input); */
 
     // 입력 값 전송
-    updateForm.submit();
+    document.updateForm.submit();
     
   	//입력 값 전송
    /*  document.updateForm.submit(); //유효성 검사의 포인트 */
