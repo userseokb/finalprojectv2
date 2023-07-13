@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.team2.finalproject.dto.pagination.PageRequestDto;
 import com.team2.finalproject.dto.product.ProductDto;
+import com.team2.finalproject.dto.user.ReviewDto;
 
 @Mapper
 public interface MainMapper {
@@ -24,4 +25,7 @@ public interface MainMapper {
 	
 	//category_code로 분류후 페이지네이션
 	public List<ProductDto> getProductByCategoryCodeWithPagination(PageRequestDto pageRequest);
+	
+	// productCode 에 해당하는 리뷰
+	public List<ReviewDto> getReviewByProductCode(Integer productCode);
 }

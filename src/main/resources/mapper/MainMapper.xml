@@ -78,10 +78,16 @@
 			)<![CDATA[
 			WHERE rn > (#{pageNum} - 1) *  #{amount}
 			]]>
-		
-   
    </select>
    
+   <!-- getReviewByProductCode -->
+   <select id="getReviewByProductCode"
+   		   parameterType="com.team2.finalproject.dto.product.ProductDto"
+   		   resultType="com.team2.finalproject.dto.user.ReviewDto">
+   		SELECT review_no, user_no, product_code, product_name, title, rate, purpose, agegroup, rdate, content
+   		FROM REVIEW
+   		WHERE product_code = #{productCode} 
+   </select>
     </mapper>
    
   
