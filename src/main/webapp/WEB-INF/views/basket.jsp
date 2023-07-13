@@ -51,7 +51,7 @@
 
 				<c:if test="${!empty basketList}">
 					<!-- 기본 마이페이지 진입시 표 -->
-
+					<form id="basketForm">
 					<table class="mypage-table table-text-center">
 						<tr>
 							<th><input type="checkbox" id="totalCheck"
@@ -63,13 +63,14 @@
 						</tr>
 
 						<!-- c태그 반복영역 -->
-
+					
 						<c:forEach items="${basketList}" var="basket" varStatus="status">
 							<tr>
 								<td>
 									<div class="flex-row">
-										<input type="checkbox" class="items"
-											id="checkbox${status.index}" onclick="totalPrice()">
+										<input type="checkbox" class="items" name="productCheck"
+											id="checkbox${status.index}" onclick="totalPrice()"
+											value="${basket.basketNo}">
 										<img
 											src="../resources/image/productimage/${productList[status.index].productCode}.png"
 											width="100px">
@@ -79,12 +80,12 @@
 								<td id="price${status.index}">${productList[status.index].price}</td>
 								<td>
 									<div class="count-btn">
-										<button onclick="minus(this,${status.index})">-</button>
+										<button onclick="minus(this,${status.index})" type="button">-</button>
 										<input class="count-input" type="number" name=""
 											value="${basket.productQuantity}"
 											id="productQuantity${status.index}" onchange="totalPrice(); 
 											createButton(${status.index});">
-										<button onclick="plus(this,${status.index})">+</button>
+										<button onclick="plus(this,${status.index})" type="button">+</button>
 										
 									</div><br>
 									<input id="quantityChange${status.index}" style="display: none;" type="button" value="수량 변경" class="change-option-btn" 
@@ -98,8 +99,8 @@
 						<!-- 반복 여기까지 -->
 
 					</table>
-
-					<form action="" method="POST" id="basketForm">
+					</form>
+					
 						<div class="half-area margin-center">
 							<div>
 								<span>총 상품 금액</span> <span><input id="productPrice"
@@ -114,12 +115,13 @@
 									type="text" class="price-input" readonly value="0">원</span>
 							</div>
 							<div class="border-top-grey">
-								<input type="submit" value="주문하기"
-									class="margin-center change-option-btn">
+								<input type="button" value="주문하기"
+									class="margin-center change-option-btn"
+									onclick="order();">
 							</div>
 						</div>
 
-					</form>
+					
 				</c:if>
 
 
@@ -240,6 +242,13 @@
 			input.value  = 'PUT'; 
 			basketForm.appendChild(input); 
         	basketForm.action = "/basket/" + basketNo + "/" + quantity.value;
+        	basketForm.method = "POST";
+        	basketForm.submit();
+        }
+        
+        function order(){
+        	let basketForm = document.getElementById("basketForm");
+        	basketForm.action="/order";
         	basketForm.method = "POST";
         	basketForm.submit();
         }
