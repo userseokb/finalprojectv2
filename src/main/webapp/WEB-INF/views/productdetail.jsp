@@ -90,21 +90,33 @@
         </section>
 
         <!--상품 후기 -->
-        <section class="mb-5">
-            <div class="card bg-light">
-    
-                <!-- 리뷰 전체 조회 -->
-                <div class="card m-3" th:each="review : ${reviews}" th:id="|review-${review.id}|" >
-                    <div th:replace="~{review/reviews::reviewHeader(
-                            ${review.getId()},
-                            ${item.getId()},
-                            ${review.getNickname()},
-                            ${review.getStar()},
-                            ${review.getComment()})}"></div>
-                    <div th:replace="~{review/reviews::reviewBody(${review.getComment()})}"></div>
-                </div>
-            </div>
-        </section>
+			<div class="container px-4 px-lg-5 mt-5">
+			  <h2 class="fw-bolder mb-4">상품 후기</h2>
+			  <hr class="reviewSeparator">
+			  <c:choose>
+			    <c:when test="${not empty reviews}">
+			      <c:forEach var="review" items="${reviews}">
+			        <div class="reviewContainer">
+			          <div class="review">
+			            <h5 class="fw-bolder mb-4">제목: ${review.title}</h5>
+			            <div class="rating">
+			            평점:
+			              <c:forEach var="i" begin="1" end="${review.rate}">
+			                <span class="star-icon bi bi-star-fill active"></span>
+			              </c:forEach>
+			            </div>
+			            <h6>후기내용: ${review.content}</h6>
+			            <h6>작성일자: ${review.rdate}</h6>
+			          </div>
+			        </div>
+			        <hr class="reviewSeparator">
+			      </c:forEach>
+			    </c:when>
+			    <c:otherwise>
+			      <p>등록된 리뷰가 없습니다.</p>
+			    </c:otherwise>
+			  </c:choose>
+			</div>
         
      
         <%@ include file="mainFooter.jsp" %>
@@ -148,5 +160,13 @@
 					
         }
         </script>
+        
+      
     </body>
+    <style>
+  .reviewSeparator {
+    border-top: 1px solid black;
+    margin: 10px 0;
+  }
+</style>
 </html>

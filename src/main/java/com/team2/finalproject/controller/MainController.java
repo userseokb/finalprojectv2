@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.team2.finalproject.dto.pagination.PageRequestDto;
 import com.team2.finalproject.dto.pagination.PageResponseDto;
 import com.team2.finalproject.dto.product.ProductDto;
+import com.team2.finalproject.dto.user.ReviewDto;
 import com.team2.finalproject.mapper.MainMapper;
 import com.team2.finalproject.service.MainService;
 
@@ -68,8 +69,10 @@ public class MainController {
 								Model model) {
 		
 		ProductDto productDto = mainService.getProductByProductCode(productCode);
+		List<ReviewDto> reviewDto = mainService.getReviewByProductCode(productCode);
 		
 		model.addAttribute("products", productDto);
+		model.addAttribute("reviews", reviewDto);
 			return "productdetail";
 		}
 //	
