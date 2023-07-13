@@ -103,14 +103,6 @@
 				        <tr>
                         <td colspan="2"><input class="change-option-btn" type="button" value="회원탈퇴" onclick="withdrawal()"></td>
                     </tr>
-                    <!-- 회원탈퇴 버튼 -->
-                    <tr id="withdrawal" style="display:none;">
-                        <td class="warn-color">탈퇴 확인</td>
-                        <td>
-                            <input class="user-info-input" type="password" name="checkPw" id="checkPw" placeholder="비밀번호를 입력해주세요">
-                            <input class="change-option-btn float-right warn-color" type="button" value="탈퇴하기">
-                        </td>
-                    </tr>
 				    </form>
                 </table>
             </div>
@@ -238,10 +230,18 @@ function updateCheck() {
 
 }
    //회원 탈퇴
-function withdrawal(){
-        document.getElementById("withdrawal").style.display="";
-	}
+function withdrawal() {
+	var result = confirm("정말로 회원을 탈퇴하시겠습니까?");
+	if (result) {
+        // 확인 버튼을 눌렀을 때의 동작
+        // 여기에 회원탈퇴 처리를 위한 코드를 작성하세요
+    } else {
+        // 취소 버튼을 눌렀을 때의 동작
+        // 여기에 취소 동작을 작성하세요
+    }
+}
 
+     
 </script>
  
 </body>
