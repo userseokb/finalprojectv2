@@ -1,7 +1,12 @@
 package com.team2.finalproject.controller;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +37,23 @@ public class MainController {
 	
 	@GetMapping(value = "/main")
 	public String mainmethod(@ModelAttribute PageRequestDto pageRequest,
-						Model model) {
+						Model model, Authentication authentication) {
+		//관리자 권한 있을시 관리자 페이지로 리다이렉트 되는 로직
+		if(authentication != null) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			Optional<? extends GrantedAuthority> authOp = userDetails.getAuthorities()
+			.stream()
+			.findFirst();
+			GrantedAuthority auth = authOp.get();
+		log.info("GrantedAuthority = {}", auth.getAuthority());
+		if(auth.getAuthority().equals("ROLE_ADMIN")) {
+			return "redirect:admin/main";
+		}
+	}
+
+		
 		List<ProductDto> result = mainMapper.getProductByPagination(pageRequest);
-		log.info("all products = {}", result);
+//		log.info("all products = {}", result);
 		
 		int total = mainMapper.getTotalCount(pageRequest);
 		PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
@@ -89,15 +108,4 @@ public class MainController {
 			return "category";
 		}
 		
-	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
-	public String adminLogin() {
-			
-			return "adminLogin";
-		}
-	
-	@RequestMapping(value = "/adminSidebar", method = RequestMethod.GET)
-	public String adminSidebar() {
-			
-			return "adminSidebar";
-		}
 }
