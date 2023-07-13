@@ -109,6 +109,15 @@ public class UserController {
 		
 		return "/updateForm";
 	}
+	
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
+	public String userWithdrawal(@RequestParam String userId) {
 		
+		service.userWithdrawal(userId);
+		
+		return "/main";
+	}
+	
+	
 	
 }

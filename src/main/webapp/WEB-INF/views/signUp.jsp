@@ -107,7 +107,7 @@
 <script type="text/javascript">
 
 function addressSearch() {
-    //카카오 지도 api
+    //카카오 주소 api
     new daum.Postcode({
         oncomplete: function(data) { //선택시 입력값 세팅
             document.getElementById("basicAddr").value = data.address; // 주소 넣기
