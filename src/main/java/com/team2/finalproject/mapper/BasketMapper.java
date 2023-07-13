@@ -18,4 +18,8 @@ public interface BasketMapper {
 
 	void modifyQuantity(@Param("basketNo") int basketNo,@Param("quantity") int quantity);
 
+	BasketDto getBasketByBasketNo(int basketNo);
+
+	int getProductCodeByBasketNo(int basketNo);
+
 }

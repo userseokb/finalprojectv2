@@ -40,4 +40,23 @@
  	 		WHERE basket_no = #{basketNo}
  	 	
  	 	</update>
+ 	 	
+ 	 	<select id="getBasketByBasketNo" resultType="com.team2.finalproject.dto.product.BasketDto">
+ 	 		SELECT 
+ 				basket_no,
+ 	 			product_code,
+ 	 			user_no,
+ 	 			product_quantity,
+ 	 			delivery_charge,
+ 	 			price_sum
+ 	 		FROM basket
+ 	 		WHERE basket_no = #{basketNo}
+ 	 	</select>
+ 	 	
+ 	 	<select id="getProductCodeByBasketNo" resultType="_int">
+ 	 		SELECT
+ 	 			product_code
+			FROM basket
+			WHERE basket_no = #{basketNo}
+ 	 	</select>
  </mapper>

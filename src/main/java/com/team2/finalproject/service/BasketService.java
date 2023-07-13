@@ -15,7 +15,6 @@ public class BasketService {
 	BasketMapper basketMapper;
 	
 	public List<BasketDto> getUserBasketByUserNo(int userNo) {
-		
 		return basketMapper.getUserBasketByUserNo(userNo);
 	}
 
@@ -25,12 +24,17 @@ public class BasketService {
 
 	public boolean addToBasket(int userNo, int productCode, int quantity) {		
 		return basketMapper.addToBasket(userNo,productCode,quantity);
-		
 	}
 
 	public void modifyQuantity(int basketNo, int quantity) {
 		basketMapper.modifyQuantity(basketNo,quantity);
-		
 	}
 
+	public BasketDto getBasketByBasketNo(int basketNo) {
+		return basketMapper.getBasketByBasketNo(basketNo);
+	}
+
+	public int getProductCodeByBasketNo(int basketNo) {
+		return basketMapper.getProductCodeByBasketNo(basketNo);
+	}
 }
