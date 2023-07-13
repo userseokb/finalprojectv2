@@ -295,6 +295,7 @@ td label:not(:first-child){
 .count-input{
     text-align: center;
     width:41px;
+    background-color: transparent;
 }
 
 .count-input:focus{
@@ -370,4 +371,14 @@ td label:not(:first-child){
 .btn-small{
 	padding:0.3rem;
 	font-size:0.8rem;
+}
+
+.width100{
+	width:100%;
+}
+
+#usePoint::-webkit-outer-spin-button,
+#usePoint::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+  	margin: 0;
 }
