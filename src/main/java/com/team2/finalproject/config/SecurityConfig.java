@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .csrf().disable()
         .authorizeRequests()
         	.antMatchers("/main**", "/signUp**", "/notice**", "/login**", "/api/user/idcheck/**").permitAll()
-//        	.antMatchers("/admin").hasRole("Y")
+        	.antMatchers("/admin", "/admin/**").hasRole("ADMIN") //권한이 'ADMIN'일 시
             .anyRequest().authenticated()
         .and()
             .formLogin()
