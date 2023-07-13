@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.team2.finalproject.dto.pagination.PageRequestDto;
 import com.team2.finalproject.dto.product.ProductDto;
+import com.team2.finalproject.dto.user.ReviewDto;
 import com.team2.finalproject.mapper.MainMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,12 @@ public class MainService {
 	public int getCategoryTotalCount(String categoryCode, PageRequestDto pageRequest) {
 		int total = mainMapper.getCategoryTotalCount(categoryCode, pageRequest);
 		return total;
+	}
+	
+	public List<ReviewDto> getReviewByProductCode(Integer productCode){
+		
+		List<ReviewDto> reviewDto = mainMapper.getReviewByProductCode(productCode);
+	
+		return reviewDto;
 	}
 }
