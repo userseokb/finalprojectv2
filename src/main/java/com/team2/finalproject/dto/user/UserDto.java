@@ -44,13 +44,15 @@ public class UserDto {
 	private Integer point;
 	//관리자권한
 	private String admin;
+	//회원 상태
+	private String operate;
 	
 	
 	
 	@Builder
 	public UserDto(Integer userNo, String userGrade, String userName, String userId, String userPw, String email,
 			Date birth, Timestamp joinDate, Integer phone, String tongsin, String basicAddr, String detailAddr,
-			Integer buySum, Integer point, String admin) {
+			Integer buySum, Integer point, String admin, String operate) {
 		this.userNo = userNo;
 		this.userGrade = userGrade;
 		this.userName = userName;
@@ -66,6 +68,7 @@ public class UserDto {
 		this.buySum = buySum;
 		this.point = point;
 		this.admin = admin;
+		this.operate = operate;
 	}
 	
 	

@@ -26,9 +26,9 @@
 	<!-- https://getbootstrap.com/docs/5.3/components/list-group/ -->
             <div id="product_order_list" style="margin-right: 8em;">
                 <p align="right">
-                <a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-                <a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-                <a href="javascript:pricelistdesc();">높은가격</a> 
+	                <a href="/main/recentlist">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+	                <a href="/main/pricelist">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+	                <a href="/main/pricelistdesc">높은가격</a> 
                 </p>
             </div>
 
