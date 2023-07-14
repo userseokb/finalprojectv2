@@ -80,6 +80,57 @@
 			]]>
    </select>
    
+         <!-- getProductByRecentList -->
+   <select id="getProductByRecentList" 
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		ORDER BY product_code DESC
+	</select>
+   <!-- getProductByPriceList -->
+   <select id="getProductByPriceList" 
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		ORDER BY price
+	</select>
+   
+   <!-- getProductByPriceListDesc -->
+   	<select id="getProductByPriceListDesc" 
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		ORDER BY price DESC
+	</select>
+	
+   		<!--getProductByCategoryRecentList -->
+	<select id="getProductByCategoryRecentList" 
+			parameterType="com.team2.finalproject.dto.product.CategoryDto"
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		WHERE category_code = #{categoryCode}
+		ORDER BY product_code DESC
+	</select>
+	
+	<select id="getProductByCategoryPriceList" 
+			parameterType="com.team2.finalproject.dto.product.CategoryDto"
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		WHERE category_code = #{categoryCode}
+		ORDER BY price
+	</select>
+	
+	<select id="getProductByCategoryPriceListDesc" 
+			parameterType="com.team2.finalproject.dto.product.CategoryDto"
+			resultType="com.team2.finalproject.dto.product.ProductDto">
+		SELECT product_code, category_code, name, content, price, stock, rdate 
+		FROM product
+		WHERE category_code = #{categoryCode}
+		ORDER BY price DESC
+	</select>
+   
    <!-- getReviewByProductCode -->
    <select id="getReviewByProductCode"
    		   parameterType="com.team2.finalproject.dto.product.ProductDto"
