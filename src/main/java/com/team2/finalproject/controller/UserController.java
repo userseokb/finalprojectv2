@@ -113,6 +113,7 @@ public class UserController {
 	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
 	public String userWithdrawal(@RequestParam String userId) {
 		
+		System.out.println(userId);
 		service.userWithdrawal(userId);
 		
 		return "/main";

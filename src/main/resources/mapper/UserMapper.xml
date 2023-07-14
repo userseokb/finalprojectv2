@@ -34,7 +34,7 @@
  		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
  				tongsin, basic_addr, detail_addr, buy_sum, point, admin, operate
  		FROM users
- 		WHERE user_id = #{userId}
+ 		WHERE user_id = #{userId} AND operate = 'Y'
  	</select>
  	
  	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.user.UserDto">

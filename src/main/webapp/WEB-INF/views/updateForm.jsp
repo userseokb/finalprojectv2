@@ -74,25 +74,26 @@
 				                <div>
 				                    <label class="required">*</label>
 				                    <i class="bi-telephone"></i>
-				                    <input class="user-info-input" name="phone" id="phone" placeholder="전화번호(숫자 11자리)" value="0${user.phone}">
+				                    <input class="user-info-input" name="phone" id="phone" placeholder="전화번호(숫자 11자리)" value="0${user.phone}" style="color:#808080">
 				                        <select class="select-box float-right" name="tongsin" id="tongsin">
+				                   
 				                        </select>
 				                </div>
 				                <div>
 				                    <label class="required">*</label>
 				                    <i class="bi-mailbox"></i>
-				                    <input class="user-info-input" type="email" name="email" id="email" placeholder="[선택] 비밀번호 분실 시 확인용 이메일" value="${user.email}">
+				                    <input class="user-info-input" type="email" name="email" id="email" placeholder="[선택] 비밀번호 분실 시 확인용 이메일" value="${user.email}" style="color:#808080">
 				                </div>
 				                <div>
 				                    <label class="required">*</label>
 				                    <i class="bi-signpost"></i>
-				                    <input class="user-info-input" type="text" name="basicAddr" id="basicAddr" placeholder="주소" value="${user.basicAddr}" readonly="readonly">
+				                    <input class="user-info-input" type="text" name="basicAddr" id="basicAddr" placeholder="주소" value="${user.basicAddr}" style="color:#808080" readonly="readonly">
 				                    <input class="input-right" type="button" onclick = "addressSearch();" value="주소검색">
 				                </div>
 				                <div>
 				                    <label class="required">*</label>
 				                    <i class="bi-signpost"></i>
-				                    <input class="user-info-input" type="text" name="detailAddr" id ="detailAddr" placeholder="상세주소" value="${user.detailAddr}">
+				                    <input class="user-info-input" type="text" name="detailAddr" id ="detailAddr" placeholder="상세주소" value="${user.detailAddr}" style="color:#808080">
 				                </div>
 				            </div>
 				
@@ -231,13 +232,21 @@ function updateCheck() {
 }
    //회원 탈퇴
 function withdrawal() {
-	var result = confirm("정말로 회원을 탈퇴하시겠습니까?");
-	if (result) {
-        // 확인 버튼을 눌렀을 때의 동작
-        // 여기에 회원탈퇴 처리를 위한 코드를 작성하세요
-    } else {
-        // 취소 버튼을 눌렀을 때의 동작
-        // 여기에 취소 동작을 작성하세요
+    var result = confirm("정말로 회원을 탈퇴하시겠습니까?");
+    if (result) {
+        $.ajax({
+            url: "/withdrawal",
+            type: 'post',
+            data: {
+                userId: $("#userId").val()
+            },
+            success: function(data) {
+            location.href = "/logout";
+            },
+            error: function() {
+                alert("error");
+            }
+        });
     }
 }
 
