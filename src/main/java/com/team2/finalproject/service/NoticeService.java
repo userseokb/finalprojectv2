@@ -20,6 +20,7 @@ public class NoticeService {
 	}
 
 	public NoticeDto getNoticeByNoticeNo(int noticeNo) {
+		noticeMapper.hitCount(noticeNo);
 		return noticeMapper.getNoticeByNoticeNo(noticeNo);
 	}
 }

@@ -11,4 +11,6 @@ public interface NoticeMapper {
 	public List<NoticeDto> getAllNoticeList();
 
 	public NoticeDto getNoticeByNoticeNo(int noticeNo);
+
+	public void hitCount(int noticeNo);
 }

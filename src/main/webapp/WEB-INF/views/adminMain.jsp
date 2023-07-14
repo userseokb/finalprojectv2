@@ -9,18 +9,19 @@
         <meta name="author" content="" />
         <title>전통주 양조장 관리자 페이지 - 메인</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/adminStyles.css" rel="stylesheet" />
+        <link href="../resources/css/traditional-admin.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-        <style>
+        <!-- <style>
 	        .canvas {
 				display: block; 
 				box-sizing: border-box; 
 				height: 20%; 
 				width: 20%;
 	      	}
-        </style>
+        </style> -->
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -31,7 +32,7 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <h1 class="mt-4">상품 월별 총 판매량</h1>
-						<div>
+						<div class="width50">
 						<canvas id="sell-chart"></canvas>
 						</div>
                 </div>
