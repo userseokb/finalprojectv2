@@ -7,7 +7,7 @@
  	 	
  	<select id="getAllUser" resultType="com.team2.finalproject.dto.user.UserDto">
  		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
- 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin, operate
  		FROM users
  	</select>
 
@@ -25,16 +25,16 @@
 
  	<select id="getUserByUserNo" resultType="com.team2.finalproject.dto.user.UserDto">
  		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
- 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin, operate
  		FROM users
  		WHERE user_no = #{userNo}
  	</select>
  	
  	 <select id="getUserByUserId" resultType="com.team2.finalproject.dto.user.UserDto">
  		SELECT user_no, user_grade, user_name, user_id, user_pw, email, birth, join_date, phone, 
- 				tongsin, basic_addr, detail_addr, buy_sum, point, admin
+ 				tongsin, basic_addr, detail_addr, buy_sum, point, admin, operate
  		FROM users
- 		WHERE user_id = #{userId}
+ 		WHERE user_id = #{userId} AND operate = 'Y'
  	</select>
  	
  	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.user.UserDto">
@@ -48,13 +48,19 @@
 	
 	<update id="updateUser" parameterType="com.team2.finalproject.dto.user.UserDto">
  		UPDATE users
- 		SET		user_pw = #{userPw}, email = #{email}, birth = #{birth}, phone = #{phone}, 
- 				tongsin = #{tongsin}, basic_addr = #{basicAddr}, detail_addr = #{detailAddr}
+ 		SET	user_pw = #{userPw}, email = #{email}, birth = #{birth}, phone = #{phone}, 
+ 			tongsin = #{tongsin}, basic_addr = #{basicAddr}, detail_addr = #{detailAddr}
  		WHERE user_id = #{userId}
  	</update>
    
  	<select id="getUserCountByUserId" resultType="int">
 			select count(user_id) from users where user_id=#{userId}
+ 	</select>
+ 	
+ 	<select id="userWithdrawal" resultType="com.team2.finalproject.dto.user.UserDto">
+ 		UPDATE users
+ 		SET operate = 'N'
+ 		WHERE user_id = #{userId}
  	</select>
 
  

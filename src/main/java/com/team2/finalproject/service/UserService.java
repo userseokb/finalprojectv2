@@ -48,4 +48,10 @@ public class UserService {
 	public int getUserCountByUserId(String userId) {
 		return mapper.getUserCountByUserId(userId);
 	}
+
+	public void userWithdrawal(String userId) {
+		mapper.userWithdrawal(userId);
+	}
+
+	
 }
