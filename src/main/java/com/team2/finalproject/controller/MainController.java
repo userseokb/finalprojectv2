@@ -104,7 +104,64 @@ public class MainController {
 			
 			model.addAttribute("products", categoryList);
 			model.addAttribute("pageInfo", pageResponse);
+			model.addAttribute("category", categoryCode);
+			return "category";
+		}
+		
+		// main 최신순|낮은가격|높은가격 
+		@RequestMapping(value = "/main/{sort}", method=RequestMethod.GET)
+		public String getProductBySort(
+				@PathVariable String sort,@ModelAttribute PageRequestDto pageRequest,Model model) {
+			List<ProductDto> productList;
+			// 최신순
+			if(sort.equals("recentlist")) {
+				productList = mainMapper.getProductByRecentList(pageRequest);}
+			// 낮은가격
+			else if (sort.equals("pricelist")) {
+				productList = mainMapper.getProductByPriceList(pageRequest);}
+			// 높은가격
+			else if (sort.equals("pricelistdesc")) {
+				productList = mainMapper.getProductByPriceListDesc(pageRequest);}
+			// 에러시 메인으로 이동 
+			else {
+				return "main";
+			}
+			int total = mainMapper.getTotalCount(pageRequest);
+			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
+			model.addAttribute("products", productList);
+			model.addAttribute("pageInfo", pageResponse);
 			
+			return "main";
+		}
+
+		// 카테고리에서 정렬
+		@RequestMapping(value = "/{categoryCode}/{sort}", method=RequestMethod.GET)
+		public String getProductByCategorySort(	
+				@PathVariable String categoryCode,@PathVariable String sort,PageRequestDto pageRequest,
+															Model model) {
+			System.out.println(sort);
+			List<ProductDto> categoryList;
+			// 최신순
+			if(sort.equals("recentlist")) {
+				categoryList = mainMapper.getProductByCategoryRecentList(pageRequest);}
+			// 낮은가격
+			else if (sort.equals("pricelist")) {
+				categoryList = mainMapper.getProductByCategoryPriceList(pageRequest);}
+			// 높은가격
+			else if (sort.equals("pricelistdesc")) {
+				categoryList = mainMapper.getProductByCategoryPriceListDesc(pageRequest);}
+			// 에러시 메인으로 이동 
+			else {
+				return "category";
+			}
+
+			int total = mainMapper.getCategoryTotalCount(categoryCode, pageRequest);
+			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
+			
+			
+			model.addAttribute("products", categoryList);
+			model.addAttribute("pageInfo", pageResponse);
+			model.addAttribute("category", categoryCode);
 			return "category";
 		}
 		

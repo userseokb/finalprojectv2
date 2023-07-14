@@ -26,6 +26,18 @@ public interface MainMapper {
 	//category_code로 분류후 페이지네이션
 	public List<ProductDto> getProductByCategoryCodeWithPagination(PageRequestDto pageRequest);
 	
+	public List<ProductDto> getProductByRecentList(PageRequestDto pageRequest);
+
+	public List<ProductDto> getProductByPriceList(PageRequestDto pageRequest);
+	
+	public List<ProductDto> getProductByPriceListDesc(PageRequestDto pageRequest);
+
+	public List<ProductDto> getProductByCategoryPriceList(PageRequestDto pageRequest);
+	
+	public List<ProductDto> getProductByCategoryPriceListDesc(PageRequestDto pageRequest);
+
+	public List<ProductDto> getProductByCategoryRecentList(PageRequestDto pageRequest);
+	
 	// productCode 에 해당하는 리뷰
 	public List<ReviewDto> getReviewByProductCode(Integer productCode);
 }
