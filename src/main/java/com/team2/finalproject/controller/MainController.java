@@ -129,7 +129,8 @@ public class MainController {
 			int total = mainMapper.getTotalCount(pageRequest);
 			PageResponseDto pageResponse = new PageResponseDto(total, 5, pageRequest);
 			model.addAttribute("products", productList);
-			model.addAttribute("pageInfo", pageResponse);
+			model.addAttribute("pageInfoSort", pageResponse);
+			model.addAttribute("sort", sort);
 			
 			return "main";
 		}
@@ -160,8 +161,9 @@ public class MainController {
 			
 			
 			model.addAttribute("products", categoryList);
-			model.addAttribute("pageInfo", pageResponse);
+			model.addAttribute("pageInfoSort", pageResponse);
 			model.addAttribute("category", categoryCode);
+			model.addAttribute("sort", sort);
 			return "category";
 		}
 		

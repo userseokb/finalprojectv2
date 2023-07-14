@@ -19,6 +19,7 @@ public class FaqService {
 	}
 
 	public FaqDto getFaqByFaqNo(int faqNo) {
+		faqMapper.hitCount(faqNo);
 		return faqMapper.getFaqByFaqNo(faqNo);
 	}
 

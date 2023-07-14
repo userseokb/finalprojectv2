@@ -6,18 +6,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +31,7 @@ import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
+import com.team2.finalproject.service.OrderService;
 import com.team2.finalproject.service.UserService;
 
 @Controller
@@ -38,6 +43,8 @@ public class OrderController {
 	MainService mainService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	OrderService orderService;
 	
 	@RequestMapping(value="/order", method=RequestMethod.POST)
 	public String order(HttpServletRequest request, Model model,Principal principal) {
@@ -73,7 +80,23 @@ public class OrderController {
 	
 	@RequestMapping(value="/kakaoPayment", method=RequestMethod.POST)
 	@ResponseBody
-	public String kakaopay() {
+	public String kakaopay(@RequestBody Map<String, Object> payload, Principal pricipal) {
+		String userName = pricipal.getName();
+		UserDto userInfo = userService.getUserByUserId(userName);
+		int userNo = userInfo.getUserNo();
+		
+		System.out.println(payload);
+		
+		//상품이름 인코딩
+		String joinName = (String) payload.get("joinName");
+		String encodeName ="";
+		try {
+			encodeName = URLEncoder.encode(joinName,"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		
+		//카카오페이 결제로직 호출
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection();
@@ -84,10 +107,9 @@ public class OrderController {
 			String parameter = "cid=TC0ONETIME" 
 					+ "&partner_order_id=partner_order_id"
 					+ "&partner_user_id=partner_user_id"
-					+ "&item_name=초코파이" 
-					+ "&quantity=1" 
-					+ "&total_amount=5000" 
-					+ "&vat_amount=200" 
+					+ "&item_name="+encodeName 
+					+ "&quantity=" + payload.get("productQuantity") 
+					+ "&total_amount=" + payload.get("price")
 					+ "&tax_free_amount=0"
 					+ "&approval_url=http://localhost:8083/main" // 결제 성공 시
 					+ "&fail_url=http://localhost:8083/basket" // 결제 실패 시
@@ -100,8 +122,12 @@ public class OrderController {
 			int result = connection.getResponseCode();
 			InputStream receive;
 			
+			//결제성공
 			if(result == 200) {
 				receive = connection.getInputStream();
+//				orderService.insertOrder(userNo,payload.get("productQuantity"),payload.get("usedPoint")
+//						,payload.get("basicAddr"),payload.get("detailAddr"),payload.get("paymentMethod")
+//						,payload.get("price"));
 			}else {
 				receive = connection.getErrorStream(); 
 			}

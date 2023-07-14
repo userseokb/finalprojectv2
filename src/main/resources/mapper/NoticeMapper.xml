@@ -28,4 +28,10 @@
  	 		FROM notice
  	 		WHERE notice_no = #{noticeNo}
  		</select>
+ 		
+ 		<update id="hitCount">
+ 			UPDATE notice
+ 			SET kinds = kinds + 1
+ 			WHERE notice_no = #{noticeNo}
+ 		</update>
  </mapper>

@@ -27,6 +27,10 @@ public interface UserMapper {
 	public void updateUser(UserDto updateUser);
 	
 	public int getUserCountByUserId(String userId);
+
+	public void userWithdrawal(String userId);
+
+
 	
 	
 	

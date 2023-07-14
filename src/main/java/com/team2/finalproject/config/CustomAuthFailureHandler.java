@@ -24,9 +24,9 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 
 		String errorMessage;
 			if (exception instanceof BadCredentialsException) {
-				errorMessage = "아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해 주세요.";
+				errorMessage = "로그인에 실패했습니다.";
 				} else if (exception instanceof InternalAuthenticationServiceException) {
-					errorMessage = "아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해 주세요.";
+					errorMessage = "로그인에 실패했습니다.";
 				} else if (exception instanceof UsernameNotFoundException) {
 					errorMessage = "계정이 존재하지 않습니다. 회원가입 진행 후 로그인 해주세요.";
 				} else if (exception instanceof AuthenticationCredentialsNotFoundException) {

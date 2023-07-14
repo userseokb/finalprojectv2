@@ -12,6 +12,8 @@ public interface FaqMapper {
 	List<FaqDto> getAllFaqList();
 
 	FaqDto getFaqByFaqNo(int faqNo);
+
+	void hitCount(int faqNo);
 	
 
 
