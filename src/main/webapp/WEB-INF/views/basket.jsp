@@ -19,7 +19,7 @@
 <link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
-<body onload="onloadCheck();totalPrice();">
+<body onload="onloadCheck();totalPrice();toLocaleString();">
 	<%@ include file="mainNav.jsp"%>
 
 
@@ -209,7 +209,7 @@
             	}
             }
             productPrice.value = totalProductPrice;
-            if(totalProductPrice > 30000 ||totalProductPrice == 0) deliveryPrice.value = 0;
+            if(totalProductPrice >= 30000 ||totalProductPrice == 0) deliveryPrice.value = 0;
             
             totalPrice.value = Number(productPrice.value) + Number(deliveryPrice.value);
         }
@@ -251,6 +251,23 @@
         	basketForm.action="/order";
         	basketForm.method = "POST";
         	basketForm.submit();
+        }
+        
+        function toLocaleString(){
+        	let productPriceList = document.querySelectorAll("[id^=price]");
+        	let productPrice = document.getElementById("productPrice");			
+            let deliveryPrice = document.getElementById("deliveryPrice");
+            let totalPrice = document.getElementById("totalPrice");
+        	for(let i=0; i<productPriceList.length; i++){
+        		productPriceList[i].innerText = Number(productPriceList[i].innerText).toLocaleString("ko-KR");
+        	}
+        	toLocaleStringLogic(productPrice);
+        	toLocaleStringLogic(deliveryPrice);
+        	toLocaleStringLogic(totalPrice);
+        }
+        
+        function toLocaleStringLogic(input){
+        	input.value = Number(input.value).toLocaleString("ko-KR");
         }
         
     </script>

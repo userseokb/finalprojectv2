@@ -24,7 +24,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
-<body>
+<body onload="toLocaleString();">
 	<%@ include file="mainNav.jsp"%>
 
 	<!-- 중앙 메인 컨테이너 -->
@@ -53,7 +53,7 @@
 							<tr>
 								<td>${status.count}</td>
 								<td id="name${status.count}">${productList[status.index].name}</td>
-								<td>${productList[status.index].price}</td>
+								<td id="price${status.count}">${productList[status.index].price}</td>
 								<td><input class="count-input" type="number"
 									value="${basket.productQuantity}" id="quantity${status.count}" readonly></td>
 							</tr>
@@ -282,8 +282,8 @@
 				basicAddr : basicAddr,
 				detailAddr : detailAddr,
 				paymentMethod : paymentMethod,
-				deliveryCharge : document.getElementById("deliveryPrice").value,
-				price : document.getElementById("totalPrice").value,
+				deliveryCharge : document.getElementById("deliveryPrice").value.replace(",",""),
+				price : document.getElementById("totalPrice").value.replace(",",""),
 				joinName : addName
 			};
 			switch(paymentMethod){
@@ -293,6 +293,25 @@
 				}break
 			}
 		}
+		
+		function toLocaleString(){
+        	let productPriceList = document.querySelectorAll("[id^=price]");
+        	let productPrice = document.getElementById("productPrice");			
+            let deliveryPrice = document.getElementById("deliveryPrice");
+            let totalPrice = document.getElementById("totalPrice");
+            let userPoint = document.getElementById("userPoint");
+        	for(let i=0; i<productPriceList.length; i++){
+        		productPriceList[i].innerText = Number(productPriceList[i].innerText).toLocaleString("ko-KR");
+        	}
+        	toLocaleStringLogic(productPrice);
+        	toLocaleStringLogic(deliveryPrice);
+        	toLocaleStringLogic(totalPrice);
+        	toLocaleStringLogic(userPoint);
+        }
+        
+        function toLocaleStringLogic(input){
+        	input.value = Number(input.value).toLocaleString("ko-KR");
+        }
 		
 </script>
 <body>

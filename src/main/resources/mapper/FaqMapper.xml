@@ -28,4 +28,10 @@
  	 		FROM faq
  	 		WHERE faq_no = #{faqNo}
  		</select>
+ 		
+ 		<update id="hitCount">
+ 			UPDATE faq
+ 			SET kinds = kinds + 1
+ 			WHERE faq_no = #{faqNo}
+ 		</update>
  </mapper>

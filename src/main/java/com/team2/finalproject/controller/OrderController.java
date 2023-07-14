@@ -85,6 +85,8 @@ public class OrderController {
 		UserDto userInfo = userService.getUserByUserId(userName);
 		int userNo = userInfo.getUserNo();
 		
+		System.out.println(payload);
+		
 		//상품이름 인코딩
 		String joinName = (String) payload.get("joinName");
 		String encodeName ="";
