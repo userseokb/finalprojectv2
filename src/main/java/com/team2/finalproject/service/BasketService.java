@@ -37,4 +37,12 @@ public class BasketService {
 	public int getProductCodeByBasketNo(int basketNo) {
 		return basketMapper.getProductCodeByBasketNo(basketNo);
 	}
+
+
+	public void deleteBasketNoArr(List<Integer> basketNoArr) {
+		for(int i=0; i<basketNoArr.size(); i++) {
+			int basketNo = Integer.parseInt(String.valueOf(basketNoArr.get(i)));
+			basketMapper.deleteBasketNo(basketNo);
+		}
+	}
 }

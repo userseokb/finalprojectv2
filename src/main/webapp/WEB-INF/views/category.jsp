@@ -18,7 +18,7 @@
         <link href="../resources/css/styles.css" rel="stylesheet" />
         <link href="../resources/css/traditional-main.css" rel="stylesheet" />
     </head>
-    <body>
+    <body onload="toLocaleString();">
         <%@ include file="mainNav.jsp" %>
         <%@ include file="mainHeader.jsp" %>
 
@@ -48,7 +48,8 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${product.name}</h5>
                                     <!-- Product price-->
-                                   ₩${product.price}
+                                  <span>₩</span>
+                                  <span class="price">${product.price}</span>
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -155,6 +156,14 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>	
+    <script src="../resources/js/scripts.js"></script>	
+    <script>
+    	function toLocaleString(){
+    		let priceList = document.querySelectorAll(".price");
+    		for(let i=0; i<priceList.length; i++){
+    			priceList[i].innerText = Number(priceList[i].innerText).toLocaleString("ko-KR");
+        	}
+    	}
+    </script>
 </body>
 </html>

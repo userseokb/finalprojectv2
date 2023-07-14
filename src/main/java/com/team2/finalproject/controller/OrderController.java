@@ -46,6 +46,7 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
+	//주문 페이지 이동
 	@RequestMapping(value="/order", method=RequestMethod.POST)
 	public String order(HttpServletRequest request, Model model,Principal principal) {
 		String[] arr = request.getParameterValues("productCheck");
@@ -78,23 +79,40 @@ public class OrderController {
 		return "order";
 	}
 	
+	
+	
+	//카카오페이 결제 로직
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/kakaoPayment", method=RequestMethod.POST)
 	@ResponseBody
 	public String kakaopay(@RequestBody Map<String, Object> payload, Principal pricipal) {
+		// 유저 정보 획득
 		String userName = pricipal.getName();
 		UserDto userInfo = userService.getUserByUserId(userName);
 		int userNo = userInfo.getUserNo();
 		
-		System.out.println(payload);
+		// json 데이터 형 변환
+		int productQuantity = Integer.parseInt(String.valueOf(payload.get("productQuantity")));
+		int usedPoint = Integer.parseInt(String.valueOf(payload.get("usedPoint")));
+		String basicAddr = String.valueOf(payload.get("basicAddr"));
+		String detailAddr = String.valueOf(payload.get("detailAddr"));
+		String paymentMethod = String.valueOf(payload.get("paymentMethod"));
+		int deliveryCharge = Integer.parseInt(String.valueOf(payload.get("deliveryCharge")));
+		int price = Integer.parseInt(String.valueOf(payload.get("price")));
+
 		
+		@SuppressWarnings("unchecked")
+		List<List<Integer>> productOrderDetail = (List<List<Integer>>) payload.get("productList");
+		List<Integer> basketNoArr =(List<Integer>)payload.get("basketNoArr");
 		//상품이름 인코딩
-		String joinName = (String) payload.get("joinName");
+		String joinName = String.valueOf(payload.get("joinName"));
 		String encodeName ="";
 		try {
 			encodeName = URLEncoder.encode(joinName,"UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
+
 		
 		//카카오페이 결제로직 호출
 		try {
@@ -113,7 +131,7 @@ public class OrderController {
 					+ "&tax_free_amount=0"
 					+ "&approval_url=http://localhost:8083/main" // 결제 성공 시
 					+ "&fail_url=http://localhost:8083/basket" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8083/faq"; // 결제 취소 시
+					+ "&cancel_url=http://localhost:8083/basket"; // 결제 취소 시
 			OutputStream send = connection.getOutputStream();
 			DataOutputStream dataSend = new DataOutputStream(send);
 			dataSend.writeBytes(parameter);
@@ -125,9 +143,17 @@ public class OrderController {
 			//결제성공
 			if(result == 200) {
 				receive = connection.getInputStream();
-//				orderService.insertOrder(userNo,payload.get("productQuantity"),payload.get("usedPoint")
-//						,payload.get("basicAddr"),payload.get("detailAddr"),payload.get("paymentMethod")
-//						,payload.get("price"));
+				
+				// 주문생성
+				orderService.insertOrder(userNo, productQuantity ,usedPoint, basicAddr,detailAddr,paymentMethod
+						,deliveryCharge, price);
+				
+				// 주문 상세 생성
+				int orderNo = orderService.getOrderNoByUserNo(userNo);
+				orderService.insertDetailOrder(productOrderDetail,orderNo);
+				
+				// 장바구니에서 삭제
+				basketService.deleteBasketNoArr(basketNoArr);
 			}else {
 				receive = connection.getErrorStream(); 
 			}
