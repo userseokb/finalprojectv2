@@ -93,6 +93,33 @@
 					</div>
 					</c:if>
 					
+					<!-- 메인 페이지네이션 -->
+ 					<c:if test="${!empty pageInfoSort}">
+					<div>
+						<nav class="page navigation">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pageInfoSort.prev}">
+								<li class="page-item prev">
+									<a class="page-link" aria-label="Previous" 
+									href="/main/${sort }?pageNum=${pageInfoSort.startPage - 1}&amount=${pageInfoSort.pageRequest.amount}">이전</a>
+								</li>
+							</c:if>
+							<c:forEach var="num" begin="${pageInfoSort.startPage}" end="${pageInfoSort.endPage}">
+								<li class="page-item ${pageInfoSort.pageRequest.pageNum == num ? "active" : "" } ">
+									<a class="page-link" 
+									href="/main/${sort }?pageNum=${num}&amount=${pageInfoSort.pageRequest.amount}">${num}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageInfoSort.next}">
+								<li class="page-item next">
+									<a class="page-link" aria-label="next" 
+									href="/main/${sort }?pageNum=${pageInfoSort.endPage + 1}&amount=${pageInfoSort.pageRequest.amount}">다음</a>
+								</li>
+							</c:if>
+						</ul>
+						</nav>
+					</div>
+					</c:if>
 					
 					<!-- 검색 페이지네이션 -->
 					<c:if test="${!empty searchInfo}">

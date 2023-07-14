@@ -65,7 +65,7 @@
 			<!-- https://getbootstrap.com/docs/5.3/components/pagination/#disabled-and-active-states -->
  			
  			
- 					<!-- 메인 페이지네이션 -->
+ 					<!-- 카테고리 페이지네이션 -->
  					<c:if test="${!empty pageInfo}">
 					<div>
 						<nav class="page navigation">
@@ -93,7 +93,33 @@
 					</div>
 					</c:if>
 					
-					
+					<!-- 카테고리 정렬 후 페이지네이션 -->
+ 					<c:if test="${!empty pageInfoSort}">
+					<div>
+						<nav class="page navigation">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pageInfoSort.prev}">
+								<li class="page-item prev">
+									<a class="page-link" aria-label="Previous" 
+									href="/${pageInfoSort.pageRequest.categoryCode}/${sort }?pageNum=${pageInfoSort.startPage - 1}&amount=${pageInfo.pageRequest.amount}">이전</a>
+								</li>
+							</c:if>
+							<c:forEach var="num" begin="${pageInfoSort.startPage}" end="${pageInfoSort.endPage}">
+								<li class="page-item ${pageInfoSort.pageRequest.pageNum == num ? "active" : "" } ">
+									<a class="page-link" 
+									href="/${pageInfoSort.pageRequest.categoryCode}/${sort }?pageNum=${num}&amount=${pageInfoSort.pageRequest.amount}">${num}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageInfoSort.next}">
+								<li class="page-item next">
+									<a class="page-link" aria-label="next" 
+									href="/${pageInfoSort.pageRequest.categoryCode}/${sort }?pageNum=${pageInfoSort.endPage + 1}&amount=${pageInfoSort.pageRequest.amount}">다음</a>
+								</li>
+							</c:if>
+						</ul>
+						</nav>
+					</div>
+					</c:if>
 					
 					
 					<!-- 검색 페이지네이션 -->
