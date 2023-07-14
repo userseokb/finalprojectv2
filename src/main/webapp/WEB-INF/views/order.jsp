@@ -39,7 +39,7 @@
 			<!-- 마이페이지 컨텐츠 영역 -->
 			<div class="mypage-content-detail">
 				<!-- 기본 마이페이지 진입시 표 -->
-				<form>
+				<form id=>
 					<table class="mypage-table table-text-center">
 						<tr>
 							<th>번호</th>
@@ -52,10 +52,10 @@
 						<c:forEach items="${orderList}" var="basket" varStatus="status">
 							<tr>
 								<td>${status.count}</td>
-								<td>${productList[status.index].name}</td>
+								<td id="name${status.count}">${productList[status.index].name}</td>
 								<td>${productList[status.index].price}</td>
 								<td><input class="count-input" type="number"
-									value="${basket.productQuantity}" readonly></td>
+									value="${basket.productQuantity}" id="quantity${status.count}" readonly></td>
 							</tr>
 						</c:forEach>
 						<!-- 반복 여기까지 -->
@@ -97,7 +97,7 @@
 							</div>
 							<div>
 								<span>사용할 포인트</span> <input id="usePoint" type="number"
-									class="price-input" placeholder="사용할 포인트"
+									class="price-input" placeholder="사용할 포인트" 
 									onchange="verifyPoint(this);">
 							</div>
 						</div>
@@ -150,13 +150,11 @@
 					<div class="flex-row">
 						<div class="half-area">
 							<div>
-								<span><b>결제수단</b></span> <span> <label> <input
-										type="radio" name="method" id=""> 신용카드
-								</label><br> <label> <input type="radio" name="method"
-										id=""> <img
-										src="../resources/image/payment_icon_yellow_small.png"
-										width="50px" id="kakao" onclick="kakaoPayAPI();">
-								</label>
+								<span><b>결제수단</b></span> 
+								<span> 
+									<label> <input type="radio" name="method" id="" value="creditCard"> 신용카드</label><br> 
+								<label> <input type="radio" name="method" id="" value="kakaoPay"> 
+								<img src="../resources/image/payment_icon_yellow_small.png" width="50px" id="kakao"></label>
 								</span>
 							</div>
 							<div class="border-top-grey">
@@ -170,7 +168,7 @@
 
 						<div class="flex-row right-bottom">
 							<div>
-								<input type="button" value="결제하기" class="change-option-btn">
+								<input type="button" value="결제하기" class="change-option-btn" onclick="payment();">
 							</div>
 						</div>
 					</div>
@@ -215,10 +213,11 @@
 		    }).open();
 		}
 		
-		function kakaoPayAPI(){
+		function kakaoPayAPI(data){
 			axios({
 				url : "/kakaoPayment",
-				method : "POST"
+				method : "POST",
+				data : data
 			})
 			.then((response)=>{
 				let qrcode = response.data.next_redirect_pc_url;
@@ -239,7 +238,61 @@
 			totalPrice.value = Number(totalPrice.value) - Number(point.value); 
 			
 		}
-	
+		
+		function payment(){
+			let productQuantity = document.querySelectorAll("[id^='quantity']");
+			let defaultAddressCheck = document.getElementById("defaultAddressCheck");
+			let basicAddr = "${userInfo.basicAddr}";
+			let detailAddr = "${userInfo.detailAddr}";
+			
+			//제품 이름 붙이기
+			let productNameList = document.querySelectorAll("[id^='name']");
+			let addName = "";
+			for(let i=0; i<productNameList.length; i++){
+				if(addName != "") addName += ",";
+				addName += productNameList[i].innerText;
+			}
+			
+			//총수량 확인
+			let totalProductQuantity = 0;
+			for(let i=0; i<productQuantity.length; i++){
+				totalProductQuantity += Number(productQuantity[i].value);
+			}
+			
+			//주소 확인
+			if(!defaultAddressCheck.checked){
+				basicAddr = document.getElementById("newAddr").innerText;
+				detailAddr = document.getElementById("newAddrDetail").value;
+			}
+			
+			//결제 방법
+			let radioList = document.querySelectorAll("[name='method']")
+			let paymentMethod = "";
+			for(let i=0; i<radioList.length; i++){
+				if(radioList[i].checked) paymentMethod = radioList[i].value;
+			}
+			
+			//포인트 디폴트값 설정
+			let usedPoint = document.getElementById("usePoint").value;
+			if(usedPoint = "" || usedPoint == "0" || usedPoint == 0) usedPoint = 0;
+			
+			let data = {
+				productQuantity : totalProductQuantity, 
+				usedPoint : usedPoint,
+				basicAddr : basicAddr,
+				detailAddr : detailAddr,
+				paymentMethod : paymentMethod,
+				deliveryCharge : document.getElementById("deliveryPrice").value,
+				price : document.getElementById("totalPrice").value,
+				joinName : addName
+			};
+			switch(paymentMethod){
+				case "creditCard" : {}break;
+				case "kakaoPay" : {
+					kakaoPayAPI(data);
+				}break
+			}
+		}
 		
 </script>
 <body>
