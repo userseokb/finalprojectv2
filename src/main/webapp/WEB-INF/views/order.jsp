@@ -51,7 +51,7 @@
 						<!-- c태그 반복영역 -->
 						<c:forEach items="${orderList}" var="basket" varStatus="status">
 							<tr>
-								<td>${status.count}</td>
+								<td id="productCode${productList[status.index].productCode}" productCode="${productList[status.index].productCode}" basketNo="${basket.basketNo}">${status.count}</td>
 								<td id="name${status.count}">${productList[status.index].name}</td>
 								<td id="price${status.count}">${productList[status.index].price}</td>
 								<td><input class="count-input" type="number"
@@ -241,9 +241,25 @@
 		
 		function payment(){
 			let productQuantity = document.querySelectorAll("[id^='quantity']");
+			let productCodeList = document.querySelectorAll("[id^='productCode']");
 			let defaultAddressCheck = document.getElementById("defaultAddressCheck");
 			let basicAddr = "${userInfo.basicAddr}";
 			let detailAddr = "${userInfo.detailAddr}";
+			
+			//basketcode배열 생성
+			let basketNoArr = [];
+			for(let i=0; i<productCodeList.length; i++){
+				let tmpno = productCodeList[i].getAttribute("basketNo");
+				basketNoArr.push(tmpno);
+			}
+			
+			//제품코드, 수량 배열
+			let productCodeQuantityArr = [];
+			for(let i=0; i<productCodeList.length; i++){
+				let tmpcode = productCodeList[i].getAttribute("productCode");
+				let tmpQuantity = productQuantity[i].value;
+				productCodeQuantityArr.push([tmpcode,tmpQuantity]);
+			}
 			
 			//제품 이름 붙이기
 			let productNameList = document.querySelectorAll("[id^='name']");
@@ -259,14 +275,20 @@
 				totalProductQuantity += Number(productQuantity[i].value);
 			}
 			
-			//주소 확인
+			//기본배송지 확인
 			if(!defaultAddressCheck.checked){
 				basicAddr = document.getElementById("newAddr").innerText;
 				detailAddr = document.getElementById("newAddrDetail").value;
 			}
 			
+			//주소 입력확인
+			if(basicAddr == ""||basicAddr == null||detailAddr == ""||detailAddr == null) {
+				alert("배송지를 확인해주세요");
+				return
+			}
+			
 			//결제 방법
-			let radioList = document.querySelectorAll("[name='method']")
+			let radioList = document.querySelectorAll("[name='method']");
 			let paymentMethod = "";
 			for(let i=0; i<radioList.length; i++){
 				if(radioList[i].checked) paymentMethod = radioList[i].value;
@@ -274,9 +296,10 @@
 			
 			//포인트 디폴트값 설정
 			let usedPoint = document.getElementById("usePoint").value;
-			if(usedPoint = "" || usedPoint == "0" || usedPoint == 0) usedPoint = 0;
+			if(usedPoint == "" || usedPoint == "0" || usedPoint == 0) usedPoint = 0;
 			
 			let data = {
+				productList : productCodeQuantityArr,
 				productQuantity : totalProductQuantity, 
 				usedPoint : usedPoint,
 				basicAddr : basicAddr,
@@ -284,7 +307,8 @@
 				paymentMethod : paymentMethod,
 				deliveryCharge : document.getElementById("deliveryPrice").value.replace(",",""),
 				price : document.getElementById("totalPrice").value.replace(",",""),
-				joinName : addName
+				joinName : addName,
+				basketNoArr : basketNoArr
 			};
 			switch(paymentMethod){
 				case "creditCard" : {}break;
