@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.finalproject.dto.order.OrderInfoDto;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.UserService;
 
@@ -119,6 +120,16 @@ public class UserController {
 		return "/main";
 	}
 	
+	//orderInfoByUserId
+	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
+	public String orderInfoByUserId(@RequestParam String userId, Model model) {
+
+		List<OrderInfoDto> orderInfo = service.orderInfoByUserId(userId);
+		
+		model.addAttribute("orderInfo", orderInfo);
+		
+		return "/mypage";
+	}
 	
 	
 }

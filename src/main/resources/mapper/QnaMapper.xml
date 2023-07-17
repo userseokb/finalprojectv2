@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.team2.finalproject.mapper.QnaMapper">
+ 	 	<select id="getAllQnaList" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 	 		SELECT
+ 	 			qna_no,
+ 	 			user_no,
+ 	 			title,
+ 	 			state,
+ 	 			write_date,
+ 	 			content,
+ 	 			kinds,
+ 	 			answer
+ 	 		FROM qna
+ 	 	</select>
+ 		
+ 		<select id="getFaqByQnaNo" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 			SELECT
+ 	 			qna_no,
+ 	 			user_no,
+ 	 			title,
+ 	 			state,
+ 	 			write_date,
+ 	 			content,
+ 	 			kinds,
+ 	 			answer
+ 	 		FROM faq
+ 	 		WHERE qna_no = #{qnaNo}
+ 		</select>
+ </mapper>
