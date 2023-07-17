@@ -4,20 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
  <mapper namespace="com.team2.finalproject.mapper.QnaMapper">
- 	 	<select id="getAllQnaList" resultType="com.team2.finalproject.dto.user.QnaDto">
- 	 		SELECT
- 	 			qna_no,
- 	 			user_no,
- 	 			title,
- 	 			state,
- 	 			write_date,
- 	 			content,
- 	 			kinds,
- 	 			answer
- 	 		FROM qna
+ 	 	
+ 	 	<select id="getAllQnaListByUserNo" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 	 		SELECT qnaNo, userNo, title, state, writeDate, content, kinds, answer
+			FROM QNA
+			WHERE userNo = (SELECT userNo FROM users WHERE userId = #{userId});
  	 	</select>
  		
- 		<select id="getFaqByQnaNo" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 		<select id="getQnaByQnaNo" resultType="com.team2.finalproject.dto.user.QnaDto">
  			SELECT
  	 			qna_no,
  	 			user_no,
@@ -29,5 +23,12 @@
  	 			answer
  	 		FROM faq
  	 		WHERE qna_no = #{qnaNo}
+ 		</select>
+ 		
+ 		<select id="insertQnaByUserNo" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 		INSERT INTO qna (qna_no, user_no, title, state, write_date, content, kinds, answer
+ 		VALUES (qna_no_seq.NEXTVAL, #{userNo}, #{title}, #{state}, sysdate, #{content},
+ 				#{kinds}, #{answer}
+ 		WHERE user_no = #{userNo}
  		</select>
  </mapper>

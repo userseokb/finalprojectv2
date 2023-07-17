@@ -29,7 +29,7 @@ public class MypageController {
 @PreAuthorize("isAuthenticated()")
     //마이페이지 창으로 이동
     @GetMapping
-    public void profile(Principal principal,Model model) {
+    public String profile(Principal principal,Model model) {
         
         log.info("마이페이지 창으로 이동");
         log.info("유저아이디: " + principal.getName());
@@ -38,5 +38,7 @@ public class MypageController {
         model.addAttribute("orderInfo", orderInfo);
         
         System.out.println(orderInfo);
+        
+        return "/mypage";
     }
 }

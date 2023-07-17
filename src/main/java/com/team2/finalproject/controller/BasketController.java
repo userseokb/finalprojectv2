@@ -17,6 +17,7 @@ import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
 
+
 @Controller
 public class BasketController {
 	
@@ -43,8 +44,13 @@ public class BasketController {
 			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
 			productList.add(basketProduct);
 		}
+		System.out.println(basketList);
+		
+		
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
+
+		System.out.println(productList);
 		
 		return "basket";
 	}

@@ -9,8 +9,10 @@ import com.team2.finalproject.dto.user.QnaDto;
 @Mapper
 public interface QnaMapper {
 
-	public List<QnaDto> getAllQnaList();
+	public List<QnaDto> getAllQnaListByUserNo();
 
 	public QnaDto getQnaByQnaNo(int qnaNo);
+
+	public QnaDto insertQnaByUserNo(int userNo);
 
 }
