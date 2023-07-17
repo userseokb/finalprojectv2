@@ -32,7 +32,7 @@
             
             <!-- 마이페이지 컨텐츠 영역 -->
             <div class="mypage-content-detail">
-              <form action="/mypage" name = "mypage" id = "mypage" method="POST">
+              <form action="/qna" name = "qna" id = "qna" method="POST">
             
 
                 <!-- 기본 마이페이지 진입시 표 -->
@@ -47,7 +47,7 @@
 			                    <th>분류</th>
 			                </tr>
 			                <!-- c태그 반복영역 -->
-			                <c:forEach items="${qna}" var="qna">
+			                <c:forEach items="${qnaList}" var="qna">
 			                <tr>
 			                    <td>${qna.qnaNo}</td>
 			                    <td><a href="qna/${qna.qnaNo}">${qna.title}</a></td>

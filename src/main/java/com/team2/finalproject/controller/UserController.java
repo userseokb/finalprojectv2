@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	//userDetail
-	@RequestMapping(value = "/qna", method = RequestMethod.POST)
+	@RequestMapping(value = "/getUserByUserNo", method = RequestMethod.POST)
 	public String getUserByUserNo(@PathVariable int userNo, Model model) {
 		
 		service.getUserByUserNo(userNo);

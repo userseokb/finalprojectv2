@@ -11,7 +11,7 @@ public interface QnaMapper {
 
 	public List<QnaDto> getAllQnaListByUserNo();
 
-	public QnaDto getQnaByQnaNo(int qnaNo);
+	public QnaDto getQnaByQnaNoByUserId(String userId);
 
 	public QnaDto insertQnaByUserNo(int userNo);
 

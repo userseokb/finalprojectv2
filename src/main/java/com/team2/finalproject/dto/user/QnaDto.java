@@ -30,12 +30,9 @@ public class QnaDto {
 	//답변
 	private String answer;
 	
-	//유저 아이디
-	private String userId;
-	
 	@Builder
 	public QnaDto(Integer qnaNo, Integer userNo, String title, String state, Date writeDate, String content,
-			Integer kinds, String answer, String userId) {
+			Integer kinds, String answer) {
 		this.qnaNo = qnaNo;
 		this.userNo = userNo;
 		this.title = title;
@@ -44,7 +41,6 @@ public class QnaDto {
 		this.content = content;
 		this.kinds = kinds;
 		this.answer = answer;
-		this.userId = userId;
 	}
 	
 	
