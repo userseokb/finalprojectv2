@@ -141,6 +141,7 @@
 
         // 페이지 로드후 체크박스 모두 선택
         function onloadCheck(){
+        	if(!document.getElementById("basketForm"))return;
         	checkbox.checked = true;
         	for(let i=0; i<items.length; i++){
                 items[i].checked = true;
