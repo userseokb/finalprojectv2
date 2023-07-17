@@ -36,24 +36,47 @@
             
 
                 <!-- 기본 마이페이지 진입시 표 -->
-                <table class="mypage-table table-text-center">
-                    <tr>
-                        <th>상품 정보</th>
-                        <th>주문 일자</th>
-                        <th>수량/금액</th>
-                        <th>주문상태</th>
-                    </tr>
-
-                    <!-- c태그 반복영역 -->
-                    <tr>
-                       	<td><%-- ${orderInfo.} --%>1</td>
-                        <td><%-- ${orderInfo.orderDate} --%>2</td>
-                        <td><%-- ${orderInfo.orderDetailPrice} --%>3</td>
-                        <td><%-- ${orderInfo.orderStatus} --%>4</td>
-                        
-                    </tr>
-                    <!-- 반복 여기까지 -->
-                </table>
+               <main>
+			        <div class="main-container">
+			            <h4>QNA</h4>
+			            
+			            <table class="main-table">
+			                <tr>
+			                    <th>No.</th>
+			                    <th>제목</th>
+			                    <th>분류</th>
+			                </tr>
+			                <!-- c태그 반복영역 -->
+			                <c:forEach items="${faq}" var="faq">
+			                <tr>
+			                    <td>${faq.faqNo}</td>
+			                    <td><a href="faq/${faq.faqNo}">${faq.title}</a></td>
+			                    
+			                    <td>
+			                    <c:choose>
+			                    	<c:when test="${faq.state == 'A'}">
+			                    	회원가입/정보
+			                    	</c:when>
+			                    	<c:when test="${faq.state == 'B'}">
+			                    	결제/배송
+			                    	</c:when>
+			                    	<c:when test="${faq.state == 'C'}">
+			                    	교환/환불/반품
+			                    	</c:when>
+			                    	<c:when test="${faq.state == 'D'}">
+			                    	마일리지
+			                    	</c:when>
+			                    	<c:when test="${faq.state == 'E'}">
+			                    	기타
+			                    	</c:when>
+			                    </c:choose>
+			                    </td>
+			                </tr>
+			                </c:forEach>
+			                <!-- 반복 종료 -->
+			            </table>
+			        </div>
+			    </main>
             </div>
         </div>
     </div>
