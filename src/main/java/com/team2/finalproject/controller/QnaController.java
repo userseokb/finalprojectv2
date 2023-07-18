@@ -36,7 +36,7 @@ public class QnaController {
 		        log.info("QNA 창으로 이동");
 		        log.info("유저아이디: " + principal.getName());
 		        String userid = principal.getName();
-		        QnaDto qna = qnaService.getQnaByQnaNoByUserId(userid);
+		        List<QnaDto> qna = qnaService.getQnaByQnaNoByUserId(userid);
 		        session.setAttribute("qna", qna);
 		        model.addAttribute("qna", qna);
 		        

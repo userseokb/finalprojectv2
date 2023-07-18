@@ -47,7 +47,7 @@
 			                    <th>분류</th>
 			                </tr>
 			                <!-- c태그 반복영역 -->
-			                <c:forEach items="${qnaList}" var="qna">
+			                <c:forEach items="${qna}" var="qna">
 			                <tr>
 			                    <td>${qna.qnaNo}</td>
 			                    <td><a href="qna/${qna.qnaNo}">${qna.title}</a></td>
