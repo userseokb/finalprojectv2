@@ -36,15 +36,25 @@
  		FROM users
  		WHERE user_id = #{userId} AND operate = 'Y'
  	</select>
+<<<<<<< HEAD
+ 	
+ 	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.order.OrderDto">
+     SELECT o.order_no, o.user_no, o.product_quantity, o.used_point, o.basic_addr, o.detail_addr, o.payment_method, o.order_date, o.delivery_charge, o.price, o.order_status,
+=======
 
  	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.order.OrderDto">
     	SELECT o.order_no, o.user_no, o.product_quantity, o.used_point, o.basic_addr, o.detail_addr, o.payment_method, o.order_date, o.delivery_charge, o.price, o.order_status,
+>>>>>>> master
                od.order_detail_no, od.product_code, od.order_detail_price, od.order_detail_quantity
         FROM users u
         JOIN orders o ON u.user_no = o.user_no
         JOIN order_detail od ON o.order_no = od.order_no
         WHERE u.user_id = #{userId}
+<<<<<<< HEAD
+   </select>
+=======
  	</select>
+>>>>>>> master
 	
 	<update id="updateUser" parameterType="com.team2.finalproject.dto.user.UserDto">
  		UPDATE users
