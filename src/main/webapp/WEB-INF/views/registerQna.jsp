@@ -19,31 +19,45 @@
 
 <body>
     <%@ include file="mainNav.jsp" %>
-
+					
+	<form action="/registerQna/{userNo}" name="qna" id="qna" method="POST">
     <main>
         <div class="main-container">
             
 			<h4>QnA</h4>            
             <table class="main-table">
                 <tr>
-                    <th>제목</th>
-                    <td colspan="2">${qna.title}</td>
-                </tr>
-                <tr>
-                    <th>작성자 : ${userId}</th>
-                    <th>작성일자 : ${qna.writeDate}</th>
-                    <th>조회수 : ${qna.kinds}</th>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        ${qna.content}
-                     </td>
-                </tr>
+				    <th>제목</th>
+					<td colspan="2">
+					        <input type="text" name="qna" id="qna" placeholder="제목을 입력하세요" class="form-control" />
+					    </td>
+					</tr>
+					<th>분류</th>
+				    <td colspan="2">
+				        <select name="category" id="category" class="form-control">
+				            <option value="A">상품</option>
+				            <option value="B">주문/배송</option>
+				            <option value="C">결제</option>
+				            <option value="D">교환/환불</option>
+				            <option value="E">기타</option>
+				            <option value="F">프로모션</option>
+				        </select>
+				    </td>
+					<tr>
+					    <th>작성자 : ${userId}</th>
+					    <th>작성일자 : <%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %></th>
+					    <th>조회수 : 0</th>
+					</tr>
+					<tr>
+				    <td colspan="3">
+				        <textarea name="content" id="content" placeholder="내용을 입력하세요" class="form-control" rows="8"></textarea>
+				    </td>
+				</tr>
             </table>
             
             
             <div>
-                <input type="button" value="목록으로" class="change-option-btn float-right margin-top" onclick="history.back()">
+                <input type="button" value="작성완료" class="change-option-btn float-right margin-top" onclick="history.back()">
             </div>
         </div>
     </main>
