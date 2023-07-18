@@ -14,10 +14,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet" />
-    <link href="/resources/css/traditional-main.css" rel="stylesheet" />
+    <link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
 <body>
+	<div class="nav-and-content">
     <!-- logo  -->
     <div class="login-header">
         <a class="navbar-brand" href="/main">
@@ -61,13 +62,9 @@
 
         </div>
     </form>
-
+	</div>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Korea Traditional 2023</p>
-        </div>
-    </footer>
+    <%@ include file="mainFooter.jsp"%>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

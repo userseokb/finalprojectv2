@@ -1,80 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전통주 양조장</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/traditional-main.css" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전통주 양조장</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
+<link href="css/traditional-main.css" rel="stylesheet" />
 </head>
 
 <body onload="deliveryStatus()">
-    <%@ include file="mainNav.jsp" %>
-    
-    <!-- 중앙 메인 컨테이너 -->
-    <div class="mypage-container">
-       <%@ include file="mypageSidebar.jsp" %>
+	<div class="nav-and-content">
+		<%@ include file="mainNav.jsp"%>
 
-        <!-- 사이드바 제외 영역 -->
-        <div class="mypage-content">
+		<!-- 중앙 메인 컨테이너 -->
+		<div class="mypage-container">
+			<%@ include file="mypageSidebar.jsp"%>
 
-            <%@ include file="mypageHeader.jsp" %>
+			<!-- 사이드바 제외 영역 -->
+			<div class="mypage-content">
 
-            <!-- 마이페이지 컨텐츠 영역 -->
-            <div class="mypage-content-detail">
+				<%@ include file="mypageHeader.jsp"%>
 
-                <!-- 주문내역 조회 -->
-                <table class="mypage-table table-text-center">
-                    <tr>
-                        <th>주문 날짜</th>
-                        <th>주문 상세</th>
-                        <th>배송 현황</th>
-                    </tr>
-                    <tr>
-                        <td>2023-07-04</td>
-                        <td>for test</td>
-                        <td class="delivery-status">배송시작</td>
-                    </tr>
-                    <tr>
-                        <td>2023-07-04</td>
-                        <td>for test</td>
-                        <td class="delivery-status">입금확인</td>
-                    </tr>
-                    <tr>
-                        <td>2023-07-04</td>
-                        <td>for test</td>
-                        <td class="delivery-status">배송완료</td>
-                    </tr>
-                    <tr>
-                        <td>2023-07-04</td>
-                        <td>for test</td>
-                        <td class="delivery-status">출고처리중</td>
-                    </tr>
-                    <tr>
-                        <td>2023-07-04</td>
-                        <td>for test</td>
-                        <td class="delivery-status">구매확정</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+				<!-- 마이페이지 컨텐츠 영역 -->
+				<div class="mypage-content-detail">
 
-	<%@ include file="mainFooter.jsp" %>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <script>
+					<!-- 주문내역 조회 -->
+					<table class="mypage-table table-text-center">
+						<tr>
+							<th>주문 날짜</th>
+							<th>주문 상세</th>
+							<th>배송 현황</th>
+						</tr>
+						<tr>
+							<td>2023-07-04</td>
+							<td>for test</td>
+							<td class="delivery-status">배송시작</td>
+						</tr>
+						<tr>
+							<td>2023-07-04</td>
+							<td>for test</td>
+							<td class="delivery-status">입금확인</td>
+						</tr>
+						<tr>
+							<td>2023-07-04</td>
+							<td>for test</td>
+							<td class="delivery-status">배송완료</td>
+						</tr>
+						<tr>
+							<td>2023-07-04</td>
+							<td>for test</td>
+							<td class="delivery-status">출고처리중</td>
+						</tr>
+						<tr>
+							<td>2023-07-04</td>
+							<td>for test</td>
+							<td class="delivery-status">구매확정</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%@ include file="mainFooter.jsp"%>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+	<script>
         // 배송상태에 따른 버튼 세팅
         function deliveryStatus(){
             ds = document.querySelectorAll('.delivery-status');
