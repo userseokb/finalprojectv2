@@ -13,5 +13,11 @@
    			#{title}, #{rate}, #{purpose}, #{agegroup}, sysdate, #{content})
    	</select>
    
+   <select id="getNameByProductCode">
+   	SELECT NAME
+   	FROM PRODUCT
+   	WHERE product_code = #{productCode}
+   </select>
+   
    
    </mapper>

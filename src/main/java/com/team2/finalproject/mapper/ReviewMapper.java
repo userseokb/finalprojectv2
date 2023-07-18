@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.ReviewDto;
 
 @Mapper
 public interface ReviewMapper {
 
-	public int insertReview(ReviewDto newReview);
+	public ReviewDto insertReview(ReviewDto newReview);
+	
 }
