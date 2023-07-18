@@ -13,17 +13,14 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -274,9 +271,6 @@ public class OrderController {
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("orderDetailList",orderDetailList);
 		model.addAttribute("productList",productList);
-		System.out.println(orderList);
-		System.out.println(orderDetailList);
-		System.out.println(productList);
 		return "orderHistory";
 	}
 	
