@@ -1,110 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전통주 양조장</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../resources/css/styles.css" rel="stylesheet" />
-    <link href="../resources/css/traditional-main.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- axios 비동기 사용 -->
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> <!-- jquery 사용 -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- daum 주소검색 api 사용 -->
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전통주 양조장</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="../resources/css/styles.css" rel="stylesheet" />
+<link href="../resources/css/traditional-main.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- axios 비동기 사용 -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- jquery 사용 -->
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- daum 주소검색 api 사용 -->
+
 </head>
 
 <body>
-    <!-- logo  -->
-    <div class="login-header">
-        <a class="navbar-brand" href="index.html">
-            <img src="../resources/image/logo.png" alt="logo" width="200px">
-        </a>
-    </div>
+	<div class="nav-and-content">
+		<!-- logo  -->
+		<div class="login-header">
+			<a class="navbar-brand" href="index.html"> <img
+				src="../resources/image/logo.png" alt="logo" width="200px">
+			</a>
+		</div>
 
-    <form action="/signUp" id="inputForm" name="inputForm" method="post">
-        <div class="content">
+		<form action="/signUp" id="inputForm" name="inputForm" method="post">
+			<div class="content">
 
-            <!-- id, pw, email -->
-            <div class="input-wrap">
-                <div>
-                    <i class="bi-person"></i>
-                    <input class="user-info-input" type="text" name="userId" id="userId" check_result="fail" placeholder="아이디(공백X 특문X 4~18글자)" required/>
-                    <input class="input-right" type="button" name="idCheck" id="idCheck" onclick="idDuplicateCheck();" value="중복확인"/>
-                </div>
-                <div>
-                    <i class="bi-key"></i>
-                    <input class="user-info-input" type="password" name="userPw" id="userPw" autocomplete="new-password" placeholder="비밀번호(공백X 특문X 4~18글자)">
-                </div>
-                <div>
-                    <i class="bi-check"></i>
-                    <input class="user-info-input" type="password" name="userPwCheck" id="userPwCheck" placeholder="비밀번호 확인">
-                </div>
-            </div>
+				<!-- id, pw, email -->
+				<div class="input-wrap">
+					<div>
+						<i class="bi-person"></i> <input class="user-info-input"
+							type="text" name="userId" id="userId" check_result="fail"
+							placeholder="아이디(공백X 특문X 4~18글자)" required /> <input
+							class="input-right" type="button" name="idCheck" id="idCheck"
+							onclick="idDuplicateCheck();" value="중복확인" />
+					</div>
+					<div>
+						<i class="bi-key"></i> <input class="user-info-input"
+							type="password" name="userPw" id="userPw"
+							autocomplete="new-password" placeholder="비밀번호(공백X 특문X 4~18글자)">
+					</div>
+					<div>
+						<i class="bi-check"></i> <input class="user-info-input"
+							type="password" name="userPwCheck" id="userPwCheck"
+							placeholder="비밀번호 확인">
+					</div>
+				</div>
 
-            <!-- id msg -->
-<!--             <div class="error-text" style="display: none;">
+				<!-- id msg -->
+				<!--             <div class="error-text" style="display: none;">
                 아이디: 사용할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.
             </div>
             <div class="success-text" style="display: none;">
                 아이디: 사용할 수 있는 아이디입니다. 회원가입을 진행해 주세요
             </div> -->
-            <br>
-            <!-- user private infomation -->
-            <div class="input-wrap">
-                <div>
-                    <i class="bi-person"></i>
-                    <input class="user-info-input" type="text" name="userName" id="userName" autocomplete="false" placeholder="이름(한글 2~4글자)">
-                </div>
-                <div>
-                    <i class="bi-calendar"></i>
-                    <input class="user-info-input" name="birth" id="birth" placeholder="생년월일[YYYY-MM-DD]">
-                </div>
-                <div>
-                    <i class="bi-telephone"></i>
-                    <input class="user-info-input" name="phone" id="phone" placeholder="전화번호(숫자 11자리)">
-                        <select class="select-box float-right" name="tongsin" id="tongsin">
-                            <option value="" selected>선택</option>
-                            <option value="SKT">SKT</option>
-                            <option value="KT">KT</option>
-                            <option value="LG">LG</option>
-                        </select>
-                </div>
-                <div>
-                    <i class="bi-mailbox"></i>
-                    <input class="user-info-input" type="email" name="email" id="email" placeholder="이메일 주소">
-                </div>
-                <div>
-                    <i class="bi-signpost"></i>
-                    <input class="user-info-input" type="text" name="basicAddr" id="basicAddr" placeholder="주소" readonly/>
-                    <input class="input-right" type="button" onclick = "addressSearch();" value="주소검색">
-                </div>
-                <div>
-                    <i class="bi-signpost"></i>
-                    <input class="user-info-input" type="text" name="detailAddr" id="detailAddr" placeholder="상세주소">
-                </div>
-            </div>
+				<br>
+				<!-- user private infomation -->
+				<div class="input-wrap">
+					<div>
+						<i class="bi-person"></i> <input class="user-info-input"
+							type="text" name="userName" id="userName" autocomplete="false"
+							placeholder="이름(한글 2~4글자)">
+					</div>
+					<div>
+						<i class="bi-calendar"></i> <input class="user-info-input"
+							name="birth" id="birth" placeholder="생년월일[YYYY-MM-DD]">
+					</div>
+					<div>
+						<i class="bi-telephone"></i> <input class="user-info-input"
+							name="phone" id="phone" placeholder="전화번호(숫자 11자리)"> <select
+							class="select-box float-right" name="tongsin" id="tongsin">
+							<option value="" selected>선택</option>
+							<option value="SKT">SKT</option>
+							<option value="KT">KT</option>
+							<option value="LG">LG</option>
+						</select>
+					</div>
+					<div>
+						<i class="bi-mailbox"></i> <input class="user-info-input"
+							type="email" name="email" id="email" placeholder="이메일 주소">
+					</div>
+					<div>
+						<i class="bi-signpost"></i> <input class="user-info-input"
+							type="text" name="basicAddr" id="basicAddr" placeholder="주소"
+							readonly /> <input class="input-right" type="button"
+							onclick="addressSearch();" value="주소검색">
+					</div>
+					<div>
+						<i class="bi-signpost"></i> <input class="user-info-input"
+							type="text" name="detailAddr" id="detailAddr" placeholder="상세주소">
+					</div>
+				</div>
 
-            <br>
-            <button class="long-btn bg-dark" onclick = "registerCheck();" type="button">
-                                   회원가입
-            </button>
+				<br>
+				<button class="long-btn bg-dark" onclick="registerCheck();"
+					type="button">회원가입</button>
 
-        </div>
-    </form>
-    
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+			</div>
+		</form>
 
-<script type="text/javascript">
+		<!-- Bootstrap core JS-->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Core theme JS-->
+		<script src="js/scripts.js"></script>
+
+		<script type="text/javascript">
 
 function addressSearch() {
     //카카오 주소 api
@@ -246,7 +259,6 @@ function registerCheck() {
 
 
 </script>
-
 </body>
 
 </html>

@@ -20,8 +20,8 @@
 </head>
 
 <body onload="onloadCheck();totalPrice();toLocaleString();">
+	<div class="nav-and-content">
 	<%@ include file="mainNav.jsp"%>
-
 
 	<!-- 중앙 메인 컨테이너 -->
 	<div class="mypage-container">
@@ -128,7 +128,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<%@ include file="mainFooter.jsp"%>
 	<!-- Bootstrap core JS-->
 	<script
