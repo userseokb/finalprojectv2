@@ -13,8 +13,8 @@ public class QnaService {
 	@Autowired
 	QnaMapper qnaMapper;
 
-	public List<QnaDto> getAllQnaListByUserNo() {
-		return qnaMapper.getAllQnaListByUserNo();
+	public List<QnaDto> getQnaByQnaNoByUserId(String userId) {
+		return qnaMapper.getQnaByQnaNoByUserId(userId);
 	}
 
 	public QnaDto getQnaByQnaNo(int qnaNo) {
@@ -22,8 +22,8 @@ public class QnaService {
 		return qnaMapper.getQnaByQnaNo(qnaNo);
 	}
 
-	public List<QnaDto> getQnaByQnaNoByUserId(String userId) {
-		return qnaMapper.getQnaByQnaNoByUserId(userId);
+	public List<QnaDto> getAllQnaList() {
+		return qnaMapper.getAllQnaList();
 	}
 
 	public QnaDto insertQnaByUserNo(int userNo) {

@@ -13,7 +13,7 @@ public interface QnaMapper {
 
 	public QnaDto getQnaByQnaNo(int qnaNo);
 
-	public List<QnaDto> getAllQnaListByUserNo();
+	public List<QnaDto> getAllQnaList();
 
 	public QnaDto insertQnaByUserNo(int userNo);
 
