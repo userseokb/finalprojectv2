@@ -32,7 +32,7 @@
             
             <!-- 마이페이지 컨텐츠 영역 -->
             <div class="mypage-content-detail">
-              <form action="/mypage" name = "mypage" id = "mypage" method="POST">
+              <form action="/qna" name = "qna" id = "qna" method="POST">
             
 
                 <!-- 기본 마이페이지 진입시 표 -->
@@ -47,27 +47,30 @@
 			                    <th>분류</th>
 			                </tr>
 			                <!-- c태그 반복영역 -->
-			                <c:forEach items="${faq}" var="faq">
-			                <tr>
-			                    <td>${faq.faqNo}</td>
-			                    <td><a href="faq/${faq.faqNo}">${faq.title}</a></td>
+			                <c:forEach items="${qna}" var="qna">
+			                <tr> 
+			                    <td><c:set var = "i" value ="${i+1}"></c:set> ${i} </td>
+			                    <td><a href="qna/${qna.qnaNo}">${qna.title}</a></td>
 			                    
 			                    <td>
 			                    <c:choose>
-			                    	<c:when test="${faq.state == 'A'}">
-			                    	회원가입/정보
+			                    	<c:when test="${qna.state == 'A'}">
+			                    	상품
 			                    	</c:when>
-			                    	<c:when test="${faq.state == 'B'}">
-			                    	결제/배송
+			                    	<c:when test="${qna.state == 'B'}">
+			                    	주문/배송
 			                    	</c:when>
-			                    	<c:when test="${faq.state == 'C'}">
+			                    	<c:when test="${qna.state == 'C'}">
+			                    	결제
+			                    	</c:when>
+			                    	<c:when test="${qna.state == 'D'}">
 			                    	교환/환불/반품
 			                    	</c:when>
-			                    	<c:when test="${faq.state == 'D'}">
-			                    	마일리지
-			                    	</c:when>
-			                    	<c:when test="${faq.state == 'E'}">
+			                    	<c:when test="${qna.state == 'E'}">
 			                    	기타
+			                    	</c:when>
+			                    	<c:when test="${qna.state == 'F'}">
+			                    	프로모
 			                    	</c:when>
 			                    </c:choose>
 			                    </td>

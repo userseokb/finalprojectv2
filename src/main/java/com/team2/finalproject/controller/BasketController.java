@@ -16,6 +16,7 @@ import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
 
+
 @Controller
 public class BasketController {
 	
@@ -36,8 +37,20 @@ public class BasketController {
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
 		List<ProductDto> productList = mainService.getProductByBasketList(basketList);
 		
+
+		// productCode로 상품정보 가져오기
+		for(int i=0; i<basketList.size(); i++) {
+			int productCode = basketList.get(i).getProductCode();
+			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
+			productList.add(basketProduct);
+		}
+		System.out.println(basketList);
+		
+
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
+
+		System.out.println(productList);
 		
 		return "basket";
 	}
