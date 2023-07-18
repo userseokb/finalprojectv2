@@ -15,11 +15,11 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-<link href="css/traditional-main.css" rel="stylesheet" />
+<link href="../resources/css/styles.css" rel="stylesheet" />
+<link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
-<body onload="deliveryStatus()">
+<body>
 	<div class="nav-and-content">
 		<%@ include file="mainNav.jsp"%>
 
@@ -40,33 +40,40 @@
 						<tr>
 							<th>주문 날짜</th>
 							<th>주문 상세</th>
+							<th>주문 수량</th>
 							<th>배송 현황</th>
 						</tr>
-						<tr>
-							<td>2023-07-04</td>
-							<td>for test</td>
-							<td class="delivery-status">배송시작</td>
-						</tr>
-						<tr>
-							<td>2023-07-04</td>
-							<td>for test</td>
-							<td class="delivery-status">입금확인</td>
-						</tr>
-						<tr>
-							<td>2023-07-04</td>
-							<td>for test</td>
-							<td class="delivery-status">배송완료</td>
-						</tr>
-						<tr>
-							<td>2023-07-04</td>
-							<td>for test</td>
-							<td class="delivery-status">출고처리중</td>
-						</tr>
-						<tr>
-							<td>2023-07-04</td>
-							<td>for test</td>
-							<td class="delivery-status">구매확정</td>
-						</tr>
+						<c:forEach items="${orderList}" var="order" varStatus="status">
+							<tr>
+								<td>${order.orderDate}</td>
+								<td>${productList[status.index].name}</td>
+								<td>${orderDetailList[status.index].orderDetailQuantity}</td>
+								<td class="delivery-status"><c:choose>
+										<c:when test="${order.orderStatus eq 1}">입금확인
+										<div>
+											<input type="button" class="change-option-btn" value="주문취소">
+										</div>
+										</c:when>
+										<c:when test="${order.orderStatus eq 2}">출고처리중</c:when>
+										<c:when test="${order.orderStatus eq 3}">출고 완료</c:when>
+										<c:when test="${order.orderStatus eq 4}">배송중</c:when>
+										<c:when test="${order.orderStatus eq 5}">배송완료
+										<div>
+											<input type="button" class="change-option-btn" value="교환/환불">
+											<input type="button" class="change-option-btn" value="구매확정">
+										</div>
+										</c:when>
+										<c:when test="${order.orderStatus eq 6}">구매확정
+										<a href="/review/${orderDetailList[status.index].productCode}">
+											<div>
+												<input type="button" class="change-option-btn" value="리뷰작성">
+											</div>
+										</a>
+										</c:when>
+										<c:when test="${order.orderStatus eq 7}">교환/환불</c:when>
+									</c:choose></td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>
@@ -77,52 +84,8 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-	<script>
-        // 배송상태에 따른 버튼 세팅
-        function deliveryStatus(){
-            ds = document.querySelectorAll('.delivery-status');
-            for(let i=0; i<ds.length; i++){
-                switch (ds[i].innerText){
-                    case "입금확인": {
-                        let btn = document.createElement("input");
-                        let div = document.createElement("div");
-                        btn.setAttribute("type","button");
-                        btn.setAttribute("class","change-option-btn");
-                        btn.setAttribute("value","주문취소");
-                        div.appendChild(btn);
-                        ds[i].appendChild(div);
-                    }break;
-                    case "배송완료": {
-                        let btn1 = document.createElement("input");
-                        let btn2 = document.createElement("input");
-                        let div = document.createElement("div");
-                        btn1.setAttribute("type","button");
-                        btn1.setAttribute("class","change-option-btn");
-                        btn1.setAttribute("value","환불/교환");
-                        btn2.setAttribute("type","button");
-                        btn2.setAttribute("class","change-option-btn");
-                        btn2.setAttribute("value","구매확정");
-                        div.appendChild(btn1);
-                        div.appendChild(btn2);
-                        ds[i].appendChild(div);
-                    }break;
-                    case "구매확정": {
-                        let btn = document.createElement("input");
-                        let div = document.createElement("div");
-                        let a = document.createElement("a");
-                        btn.setAttribute("type","button");
-                        btn.setAttribute("class","change-option-btn");
-                        btn.setAttribute("value","리뷰작성");
-                        a.setAttribute("href","review.html");
-                        div.appendChild(btn);
-                        a.appendChild(div);
-                        ds[i].appendChild(a);
-                    }break;
-                }
-            }
-        }
-    </script>
+	<script src="../resources/js/scripts.js"></script>
+
 </body>
 
 </html>
