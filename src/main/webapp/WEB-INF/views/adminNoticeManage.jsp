@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,11 +24,40 @@
                 <%@ include file="adminNav.jsp" %>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h2 class="mt-4">상품 월별 총 판매량</h2>
-						<div class="width50">
-						<canvas id="sell-chart"></canvas>
-						</div>
-                </div>
+					<div class="container">
+					<h4>공지사항 관리</h4>
+					<a class="btn btn-outline-dark mt-auto">선택삭제</a>
+					<table class="table">
+						<tr>
+							<th>선택</th>
+							<th>No.</th>
+							<th>제목</th>
+							<th>날짜</th>
+							<th>작성자</th>
+							<th>조회수</th>
+							<th>관리</th>
+						</tr>
+						<!-- c태그 반복영역 -->
+						<c:forEach items="${noticeList}" var="notice">
+							<tr>
+								<td>
+									<input type="checkbox" id="delCheck" name="delCheck" value="${notice.noticeNo}">
+								</td>
+								<td>${notice.noticeNo}</td>
+								<td><a href="admin/noticeManage/${notice.noticeNo}">${notice.title}</a></td>
+								<td>${notice.writeDate }</td>
+								<td>관리자</td>
+								<td>${notice.kinds}</td>
+								<td>
+									<a class="btn btn-outline-dark mt-auto">수정</a>
+								</td>
+							</tr>
+						</c:forEach>
+						<!-- 반복 종료 -->
+					</table>
+					<a class="btn btn-outline-dark mt-auto">등록</a>
+				</div>
+            </div>
             </div>
         </div>
         <!-- Bootstrap core JS-->
