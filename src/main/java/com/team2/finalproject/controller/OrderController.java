@@ -23,12 +23,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team2.finalproject.dto.order.OrderDetailDto;
+import com.team2.finalproject.dto.order.OrderDto;
 import com.team2.finalproject.dto.product.BasketDto;
 import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.UserDto;
@@ -223,7 +226,7 @@ public class OrderController {
 					,deliveryCharge, price);
 			
 			// 주문 상세 생성
-			int orderNo = orderService.getOrderNoByUserNo(userNo);
+			int orderNo = orderService.getMaxOrderNoByUserNo(userNo);
 			orderService.insertDetailOrder(productOrderDetail,orderNo);
 			
 			// 장바구니에서 삭제
@@ -240,7 +243,7 @@ public class OrderController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "main";
+		return "redirect:/main";
 	}
 	
 	
@@ -255,6 +258,26 @@ public class OrderController {
 	@RequestMapping(value="/payment/fail", method=RequestMethod.GET)
 	public String paymentFail() {
 		return "redirect:/basket";
+	}
+	
+	
+	@RequestMapping(value="/orderHistory", method=RequestMethod.GET)
+	public String orderHistory(Principal principal, Model model) {
+		String userId = principal.getName();
+		UserDto userInfo = userService.getUserByUserId(userId);
+		
+		List<OrderDto> orderList = orderService.getOrderByUserNo(userInfo.getUserNo());
+		List<OrderDetailDto> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
+		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
+		
+		
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("orderDetailList",orderDetailList);
+		model.addAttribute("productList",productList);
+		System.out.println(orderList);
+		System.out.println(orderDetailList);
+		System.out.println(productList);
+		return "orderHistory";
 	}
 	
 }

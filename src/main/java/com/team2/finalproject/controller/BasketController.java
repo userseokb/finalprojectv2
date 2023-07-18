@@ -44,13 +44,10 @@ public class BasketController {
 			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
 			productList.add(basketProduct);
 		}
-		System.out.println(basketList);
-		
 
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
 
-		System.out.println(productList);
 		
 		return "basket";
 	}
