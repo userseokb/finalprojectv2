@@ -28,6 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 public class QnaController {
 	@Autowired
 	QnaService qnaService;
+	@Autowired
+	UserService userService;
+	
 		
 	@PreAuthorize("isAuthenticated()")
 		@RequestMapping(value = "/qna", method = RequestMethod.GET)
@@ -45,27 +48,34 @@ public class QnaController {
 		
 		//qna 상세 페이지
 		@RequestMapping(value="/qna/{qnaNo}",method=RequestMethod.GET)
-		public String qnaDetail(@PathVariable int qnaNo, Model model) {
+		public String qnaDetail(@PathVariable int qnaNo, Model model, Principal principal) {
 			QnaDto qna = qnaService.getQnaByQnaNo(qnaNo);
-			model.addAttribute("qna",qna);
+			String userId = principal.getName();
+			model.addAttribute("qna", qna);
+			model.addAttribute("userId", userId);
 			return "qnaDetail";
 		}
 		
-		//qna 페이지
+		//모든 qna 가져오기
 		@RequestMapping(value="/qnaList", method=RequestMethod.GET)
 		public String qnaDetail (Model model) {
-			List<QnaDto> qnaList = qnaService.getAllQnaListByUserNo();
+			List<QnaDto> qnaList = qnaService.getAllQnaList();
 			model.addAttribute("qna", qnaList);
 			return "qna";
 		}
 		
-		
-		
+		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.GET)
+		public String QnaForm(Principal principal, Model model) {
+			String userId = principal.getName();
+			model.addAttribute("userId", userId);
+			return "/registerQna";
+		}
+
 		//insertQnaByUserNo
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.POST)
 		public String registerQna(@PathVariable int userNo, Model model) {
 			QnaDto newQna = qnaService.insertQnaByUserNo(userNo);
 			model.addAttribute("newQna", newQna);
-			return "";
+			return "/registerQna/{userNo}";
 		}
 }
