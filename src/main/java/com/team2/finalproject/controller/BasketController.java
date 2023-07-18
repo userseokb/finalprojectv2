@@ -1,7 +1,6 @@
 package com.team2.finalproject.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +34,8 @@ public class BasketController {
 		//조회
 		int userNo = userService.getUserByUserId(userId).getUserNo();
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
-		List<ProductDto> productList = new ArrayList<ProductDto>();
+		List<ProductDto> productList = mainService.getProductByBasketList(basketList);
 		
-		// productCode로 상품정보 가져오기
-		for(int i=0; i<basketList.size(); i++) {
-			int productCode = basketList.get(i).getProductCode();
-			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
-			productList.add(basketProduct);
-		}
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
 		
