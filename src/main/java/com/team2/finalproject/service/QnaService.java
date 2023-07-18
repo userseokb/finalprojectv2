@@ -13,11 +13,22 @@ public class QnaService {
 	@Autowired
 	QnaMapper qnaMapper;
 
-	public List<QnaDto> getAllQnaList() {
-		return qnaMapper.getAllQnaList();
+	public List<QnaDto> getAllQnaListByUserNo() {
+		return qnaMapper.getAllQnaListByUserNo();
 	}
 
 	public QnaDto getQnaByQnaNo(int qnaNo) {
+		qnaMapper.hitCount(qnaNo);
 		return qnaMapper.getQnaByQnaNo(qnaNo);
 	}
+
+	public List<QnaDto> getQnaByQnaNoByUserId(String userId) {
+		return qnaMapper.getQnaByQnaNoByUserId(userId);
+	}
+
+	public QnaDto insertQnaByUserNo(int userNo) {
+		return qnaMapper.insertQnaByUserNo(userNo);
+	}
+
+
 }

@@ -29,7 +29,7 @@ public class updateFormController {
 	private UserService service;
  
 @PreAuthorize("isAuthenticated()")
-    //마이페이지 창으로 이동
+    //회원정보 변경 창으로 이동
     @GetMapping
     public void profile(Principal principal,Model model, HttpSession session) {
         
