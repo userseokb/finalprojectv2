@@ -48,8 +48,8 @@
 			                </tr>
 			                <!-- c태그 반복영역 -->
 			                <c:forEach items="${qna}" var="qna">
-			                <tr>
-			                    <td>${qna.qnaNo}</td>
+			                <tr> 
+			                    <td><c:set var = "i" value ="${i+1}"></c:set> ${i} </td>
 			                    <td><a href="qna/${qna.qnaNo}">${qna.title}</a></td>
 			                    
 			                    <td>

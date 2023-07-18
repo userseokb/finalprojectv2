@@ -10,6 +10,18 @@
 			FROM qna
 			WHERE user_no = (SELECT user_no FROM users WHERE user_id = #{userId})
  	 	</select>
+ 	 	
+ 	 	<select id="getQnaByQnaNo" resultType="com.team2.finalproject.dto.user.QnaDto">
+ 	 		SELECT qna_no, user_no, title, state, write_date, content, kinds, answer
+			FROM qna
+			WHERE qna_no = #{qnaNo}
+ 	 	</select>
+ 	 	
+ 	 	<update id="hitCount">
+ 			UPDATE qna
+ 			SET kinds = kinds + 1
+ 			WHERE qna_no = #{qnaNo}
+ 		</update>
  		
  		<select id="getQnaByQnaNoByUserId" resultType="com.team2.finalproject.dto.user.QnaDto">
  			SELECT

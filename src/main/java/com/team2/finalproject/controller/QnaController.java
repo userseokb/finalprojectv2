@@ -43,6 +43,13 @@ public class QnaController {
 		        System.out.println(qna);
 		}
 		
+		//qna 상세 페이지
+		@RequestMapping(value="/qna/{qnaNo}",method=RequestMethod.GET)
+		public String qnaDetail(@PathVariable int qnaNo, Model model) {
+			QnaDto qna = qnaService.getQnaByQnaNo(qnaNo);
+			model.addAttribute("qna",qna);
+			return "qnaDetail";
+		}
 		
 		//qna 페이지
 		@RequestMapping(value="/qnaList", method=RequestMethod.GET)
@@ -53,13 +60,6 @@ public class QnaController {
 		}
 		
 		
-		//qna 상세 페이지
-//		@RequestMapping(value="/qna/{qnaNo}",method=RequestMethod.GET)
-//		public String qnaDetail(@PathVariable int qnaNo, Model model) {
-//			QnaDto qna = qnaService.getQnaByQnaNo(qnaNo);
-//			model.addAttribute("qna",qna);
-//			return "noticeQnaDetail";
-//		}
 		
 		//insertQnaByUserNo
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.POST)
