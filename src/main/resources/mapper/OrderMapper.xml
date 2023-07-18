@@ -35,10 +35,39 @@
  	 			)
  	 	</insert>
  	 	
- 		<select id="getOrderNoByUserNo">
+ 		<select id="getMaxOrderNoByUserNo">
  			SELECT MAX(order_no)
  			FROM orders
- 			WHERE user_no = #{user_no}
+ 			WHERE user_no = #{userNo}
  		</select>
  	 	
+ 	 	
+ 	 	<select id="getOrderByUserNo" resultType="com.team2.finalproject.dto.order.OrderDto">
+ 	 		SELECT 
+ 	 			order_no,
+ 	 			user_no,
+ 	 			product_quantity,
+ 	 			used_point,
+ 	 			basic_addr,
+ 	 			detail_addr,
+ 	 			payment_method,
+ 	 			order_date,
+ 	 			delivery_charge,
+ 	 			price,
+ 	 			order_status
+ 			FROM orders
+ 			WHERE user_no = #{userNo}
+ 	 	</select>
+ 	 	
+ 	 	<select id="getOrderDetailByOrderNo" resultType="com.team2.finalproject.dto.order.OrderDetailDto">
+ 	 		SELECT 
+ 	 			order_detail_no,
+ 	 			product_code,
+ 	 			order_no,
+ 	 			order_detail_price,
+ 	 			order_detail_quantity
+ 	 		FROM order_detail
+ 	 		WHERE order_no = #{orderNo}
+ 	 			
+ 	 	</select>
  </mapper>
