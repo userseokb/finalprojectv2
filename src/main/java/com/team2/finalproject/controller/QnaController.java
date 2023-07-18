@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team2.finalproject.dto.user.CustomUserDetails;
 import com.team2.finalproject.dto.user.QnaDto;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.QnaService;
@@ -31,11 +33,14 @@ public class QnaController {
 		
 	@PreAuthorize("isAuthenticated()")
 		@RequestMapping(value = "/qna", method = RequestMethod.GET)
-		public void profile(Principal principal,Model model, HttpSession session) {
+		public void profile(@AuthenticationPrincipal CustomUserDetails cud, Model model, HttpSession session) {
 		        
 		        log.info("QNA 창으로 이동");
-		        log.info("유저아이디: " + principal.getName());
-		        String userid = principal.getName();
+//		        log.info("유저아이디: " + principal.getName());
+//		        String userid = principal.getName();
+		        int userNo = cud.getUserNo();
+		        String userid = cud.getUsername();
+		        log.info("유저 번호 = {}", userNo);
 		        List<QnaDto> qna = qnaService.getQnaByQnaNoByUserId(userid);
 		        session.setAttribute("qna", qna);
 		        model.addAttribute("qna", qna);
