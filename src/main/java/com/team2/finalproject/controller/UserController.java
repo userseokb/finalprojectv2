@@ -73,12 +73,12 @@ public class UserController {
 	}
 	
 	//userDetail
-	@RequestMapping(value = "/personalInfomation/{userNo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUserByUserNo", method = RequestMethod.POST)
 	public String getUserByUserNo(@PathVariable int userNo, Model model) {
 		
 		service.getUserByUserNo(userNo);
 		
-		return "/personalInfomation/{userNo}";
+		return "qna";
 	}
 	
 
@@ -120,16 +120,7 @@ public class UserController {
 		return "/main";
 	}
 	
-	//orderInfoByUserId
-	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-	public String orderInfoByUserId(@RequestParam String userId, Model model) {
 
-		List<OrderInfoDto> orderInfo = service.orderInfoByUserId(userId);
-		
-		model.addAttribute("orderInfo", orderInfo);
-		
-		return "/mypage";
-	}
 	
 	
 }
