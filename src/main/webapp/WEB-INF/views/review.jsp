@@ -22,7 +22,7 @@
 <body>
     <%@ include file="mainNav.jsp" %>
 
-
+	<form action="/review" id="reviewForm" name="inputForm" method="post">
     <!-- 중앙 메인 컨테이너 -->
     <div class="mypage-container">
         <%@ include file="mypageSidebar.jsp" %>
@@ -38,11 +38,13 @@
                 <table class="mypage-table first-row-text-center">
                     <tr>
                         <td>상품</td>
-                        <td>${product.productName}</td>
+                        <td>${productName}</td>
                     </tr>
                     <tr>
                         <td>제목</td>
-                        <td>무진장 맛있는 막걸리</td>
+                        <td>
+            <input type="text" id="titleInput" placeholder="제목을 입력해주세요">
+        </td>
                     </tr>
                     <tr>
                         <td>별점</td>
@@ -57,18 +59,18 @@
                     <tr>
                         <td>용도</td>
                         <td>
-                            <label><input type="radio" name="usage" id=""> 선물용</label>
-                            <label><input type="radio" name="usage" id=""> 직접음용</label>
+                            <label><input type="radio" name="usage" id="1"> 선물용</label>
+                            <label><input type="radio" name="usage" id="2"> 직접음용</label>
                         </td>
                     </tr>
                     <tr>
                         <td>대상자 연령</td>
                         <td>
-                            <label><input type="radio" name="age" id=""> 20</label>
-                            <label><input type="radio" name="age" id=""> 30</label>
-                            <label><input type="radio" name="age" id=""> 40</label>
-                            <label><input type="radio" name="age" id=""> 50</label>
-                            <label><input type="radio" name="age" id=""> 60이상</label>
+                            <label><input type="radio" name="age" id="1"> 20</label>
+                            <label><input type="radio" name="age" id="2"> 30</label>
+                            <label><input type="radio" name="age" id="3"> 40</label>
+                            <label><input type="radio" name="age" id="4"> 50</label>
+                            <label><input type="radio" name="age" id="5"> 60이상</label>
                         </td>
                     </tr>
                     <tr>
@@ -94,7 +96,7 @@
             </div>
         </div>
     </div>
-
+</form>
     <%@ include file="mainFooter.jsp" %>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -164,6 +166,7 @@
         }
 
     </script>
+    
 </body>
 
 </html>

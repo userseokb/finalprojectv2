@@ -1,8 +1,11 @@
 package com.team2.finalproject.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.ReviewDto;
 import com.team2.finalproject.mapper.ReviewMapper;
 
@@ -12,17 +15,9 @@ public class ReviewService {
 	@Autowired
 	ReviewMapper mapper;
 	
-	public boolean insertReview(ReviewDto newReview) throws Exception {
-		
-		boolean result = false;
-		
-		int res = mapper.insertReview(newReview);
-		
-		if(res != 0) {
-			result = true;
-		} else {
-			throw new Exception("리뷰 작성 실패");
-		}
-		return result;
+	public ReviewDto insertReview(ReviewDto newReview){
+
+		return mapper.insertReview(newReview);
 	}
+	
 }

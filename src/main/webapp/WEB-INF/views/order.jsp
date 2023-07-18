@@ -213,7 +213,8 @@
 		    }).open();
 		}
 		
-		function kakaoPayAPI(data){
+		async function kakaoPayAPI(data){
+			let tid = "";
 			axios({
 				url : "/kakaoPayment",
 				method : "POST",
@@ -221,11 +222,16 @@
 			})
 			.then((response)=>{
 				let qrcode = response.data.next_redirect_pc_url;
-				window.open(qrcode);
+				tid=response.data;
+				console.log(response.data);
+				location.href=qrcode;
 			})
 			.catch((error)=>{
-				console.log(error)
-			})
+				console.log(error);
+				alert("!!");
+			});
+			
+			
 		}
 		
 		function verifyPoint(point){
