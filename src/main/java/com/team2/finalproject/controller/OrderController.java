@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ import com.team2.finalproject.dto.order.OrderDetailDto;
 import com.team2.finalproject.dto.order.OrderDto;
 import com.team2.finalproject.dto.product.BasketDto;
 import com.team2.finalproject.dto.product.ProductDto;
+import com.team2.finalproject.dto.user.CustomUserDetails;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
@@ -259,15 +261,15 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/orderHistory", method=RequestMethod.GET)
-	public String orderHistory(Principal principal, Model model) {
+	public String orderHistory(Principal principal, Model model,@AuthenticationPrincipal CustomUserDetails cud) {
 		String userId = principal.getName();
 		UserDto userInfo = userService.getUserByUserId(userId);
 		
 		List<OrderDto> orderList = orderService.getOrderByUserNo(userInfo.getUserNo());
-		List<OrderDetailDto> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
+		List<List<OrderDetailDto>> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
 		
-		
+		model.addAttribute("userInfo",cud);
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("orderDetailList",orderDetailList);
 		model.addAttribute("productList",productList);

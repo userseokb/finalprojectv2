@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team2.finalproject.dto.product.BasketDto;
 import com.team2.finalproject.dto.product.ProductDto;
+import com.team2.finalproject.dto.user.CustomUserDetails;
 import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
@@ -29,7 +31,7 @@ public class BasketController {
 	
 	//장바구니
 	@RequestMapping(value="basket", method=RequestMethod.GET)
-	public String basket(Principal principal, Model model) {
+	public String basket(@AuthenticationPrincipal CustomUserDetails cud,Principal principal, Model model) {
 		//security 에서 userId 획득
 		String userId = principal.getName();
 		//조회
@@ -45,6 +47,7 @@ public class BasketController {
 			productList.add(basketProduct);
 		}
 
+		model.addAttribute("userInfo", cud);
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
 

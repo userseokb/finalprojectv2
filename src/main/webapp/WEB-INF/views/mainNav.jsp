@@ -56,7 +56,7 @@
                     </sec:authorize>
                     
                     <sec:authorize access="isAuthenticated()">
-                    <button class="btn btn-outline-dark btn-small" onclick="location.href='/mypage'"> 
+                    <button class="btn btn-outline-dark btn-small" onclick="location.href='/orderHistory'"> 
                         <i class="bi-info-circle"></i>
                        	 마이페이지
                     </button>&nbsp;&nbsp;&nbsp;

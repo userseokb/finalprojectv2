@@ -71,12 +71,14 @@ public class MainService {
 		return reviewDto;
 	}
 
-	public List<ProductDto> getProductByOrderDetailList(List<OrderDetailDto> orderDetailList) {
+	public List<ProductDto> getProductByOrderDetailList(List<List<OrderDetailDto>> orderDetailList) {
 		List<ProductDto> productList = new ArrayList<ProductDto>();
 		for(int i=0; i<orderDetailList.size();i++) {
-			int productCode = orderDetailList.get(i).getProductCode();
+			for(int j=0; j<orderDetailList.get(i).size();j++) {
+			int productCode = orderDetailList.get(i).get(j).getProductCode();
 			ProductDto product = mainMapper.getProductByProductCode(productCode);
 			productList.add(product);
+			}
 		}
 		return productList;
 	}
