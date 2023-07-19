@@ -13,6 +13,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -274,11 +275,17 @@ public class OrderController {
 		List<OrderDto> orderList = orderService.getOrderByUserNo(userInfo.getUserNo());
 		List<List<OrderDetailDto>> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
+		Collections.reverse(orderList);
+		Collections.reverse(orderDetailList);
+		Collections.reverse(productList);
 		
 		model.addAttribute("userInfo",cud);
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("orderDetailList",orderDetailList);
 		model.addAttribute("productList",productList);
+		model.addAttribute("basketList",basketList);
+		
 		return "orderHistory";
 	}
 	
