@@ -5,20 +5,19 @@
   
    <mapper namespace="com.team2.finalproject.mapper.ReviewMapper">
    
-   	<select id="insertReview"
-   			resultType="com.team2.finalproject.dto.user.ReviewDto">
-   	INSERT INTO review(review_no, user_no, product_code, product_name, title, rate, purpose, agegroup, rdate, content)
-   	VALUES(review_file_no_seq.NEXTVAL,
-   		   #{userNo, javaType=java.lang.Integer, jdbcType=INTEGER},
-   		   #{productCode, javaType=java.lang.Integer, jdbcType=INTEGER}, 
-   		   #{productName, jdbcType=VARCHAR},
-   		   #{title, jdbcType=VARCHAR},
-   		   #{rate, javaType=java.lang.Integer, jdbcType=INTEGER}, 
-   		   #{purpose, javaType=java.lang.Integer, jdbcType=INTEGER}, 
-   		   #{agegroup, javaType=java.lang.Integer, jdbcType=INTEGER}, 
-   		   sysdate, 
-   		   #{content, jdbcType=VARCHAR})
-   	</select>
+<insert id="insertReview" parameterType="com.team2.finalproject.dto.user.ReviewDto">
+    INSERT INTO review(review_no, user_no, product_code, product_name, title, rate, purpose, agegroup, rdate, content)
+    VALUES(review_file_no_seq.NEXTVAL,
+           #{userNo},
+           #{productCode}, 
+           #{productName},
+           #{title},
+           #{rate}, 
+           #{purpose}, 
+           #{agegroup}, 
+           sysdate, 
+           #{content})
+</insert>
    	
    <select id="getProductNameByProductCode">
   	 SELECT name
