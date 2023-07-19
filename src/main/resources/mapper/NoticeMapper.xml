@@ -34,4 +34,17 @@
  			SET kinds = kinds + 1
  			WHERE notice_no = #{noticeNo}
  		</update>
+ 		
+ 		<insert id="insertNotice">
+ 			insert into notice
+ 				values(
+ 				notice_no_seq.NEXTVAL,
+ 				#{userNo},
+ 	 			#{title},
+ 	 			#{state},
+ 	 			#{writeDate},
+ 	 			#{content},
+ 				0)
+ 		</insert>
+ 		
  </mapper>

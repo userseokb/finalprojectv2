@@ -14,9 +14,11 @@ import com.team2.finalproject.dto.user.ReviewDto;
 import com.team2.finalproject.mapper.MainMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MainService {
 	
 	private final MainMapper mainMapper;
@@ -32,7 +34,9 @@ public class MainService {
 		// productCode로 상품정보 가져오기
 		for(int i=0; i<basketList.size(); i++) {
 			int productCode = basketList.get(i).getProductCode();
+			log.info("productCode = {}", productCode);
 			ProductDto basketProduct = mainMapper.getProductByProductCode(productCode); 
+			log.info("basketProduct = {}", basketProduct);
 			productList.add(basketProduct);
 		}
 		return productList;

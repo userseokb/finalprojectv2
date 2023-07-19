@@ -23,4 +23,8 @@ public class NoticeService {
 		noticeMapper.hitCount(noticeNo);
 		return noticeMapper.getNoticeByNoticeNo(noticeNo);
 	}
+	
+	public int insertNotice(NoticeDto noticeDto) {
+		return noticeMapper.insertNotice(noticeDto);
+	}
 }

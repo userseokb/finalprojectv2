@@ -35,7 +35,6 @@ public class BasketDto {
 		this.priceSum = priceSum;
 	}
 	
-	
-	
+
 
 }
