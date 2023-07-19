@@ -24,19 +24,19 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <h2 class="mt-4">상품 월별 총 판매량</h2>
-						<div class="width50">
+						<div class="widthheight">
 						<canvas id="sell-chart"></canvas>
 						</div>
                 </div>
                 <div class="container-fluid">
                     <h2 class="mt-4">판매량 순위(1~3등)</h2>
-						<div class="width50">
+						<div class="widthheight">
 						<canvas id="sellRank-chart"></canvas>
 						</div>
                 </div>
                 <div class="container-fluid">
-                    <h2 class="mt-4">연령별 판매량(20~60대)(시계 방향)</h2>
-						<div class="width50">
+                    <h2 class="mt-4">연령별 최다 판매 상품(20~60대)(시계 방향)</h2>
+						<div class="widthheight">
 						<canvas id="ageRank-chart"></canvas>
 						</div>
                 </div>
@@ -67,6 +67,7 @@
         	  type: 'line',
         	  data: sellData,
         	  options: {
+        		  maintainAspectRatio :false,
         	    title: {
         	      display: false,
         	      text: '상품 월별 총 판매량'
@@ -113,6 +114,7 @@
         	type: 'bar',
         	  data: sellRankData,
         	  options: {
+        		maintainAspectRatio :false,
         	    title: {
         	      display: false,
         	      text: '판매량 순위(1~3등)'
@@ -124,7 +126,7 @@
         var mySellRankChart = new Chart(sellRankCtx, sellRankConfig);
         //상품 판매량 순위(1~3등) 끝
         
-        //연령병 판매량 시작
+        //연령별 최대 판매 상품 시작
         var ageRankCtx = document.getElementById("ageRank-chart");
         
         var ageRankData = {
@@ -150,19 +152,20 @@
   			  }]
   			};
 			var ageRankConfig = {
-					type: 'pie',
+					type: 'doughnut',
 					data: ageRankData,
 	        	    options: {
+	        	      maintainAspectRatio :false,
 	          	      title: {
 	          	        display: false,
-	          	        text: '연령별 판매량(20~60대)'
+	          	        text: '연령별 최다 판매 상품(20~60대)'
 	          	      },
 	          	    }
 			};
         
         var ageRankChart = new Chart(ageRankCtx, ageRankConfig);
         
-        //연령병 판매량 끝
+        //연령별 최대 판매 상품 끝
         </script>
     </body>
 </html>
