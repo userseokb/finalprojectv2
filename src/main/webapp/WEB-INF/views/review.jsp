@@ -22,7 +22,7 @@
 <body>
     <%@ include file="mainNav.jsp" %>
 
-	<form action="/review" id="reviewForm" name="inputForm" method="post">
+	<form action="/review/${productCode}" id="reviewForm" name="reviewForm" method="post">
     <!-- 중앙 메인 컨테이너 -->
     <div class="mypage-container">
         <%@ include file="mypageSidebar.jsp" %>
@@ -38,7 +38,7 @@
                 <table class="mypage-table first-row-text-center">
                     <tr>
                         <td>상품</td>
-                        <td>${productName}</td>
+                        <td>${products.name}</td>
                     </tr>
                     <tr>
                         <td>제목</td>
@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="button" value="리뷰등록" class="change-option-btn">
+                            <input type="submit" value="리뷰등록" class="change-option-btn">
                         </td>
                     </tr>
                 </table>
