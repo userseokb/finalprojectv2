@@ -35,8 +35,17 @@
                     <th>조회수 : ${qna.kinds}</th>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="3" >
+                    	내용:
+                    	<br>
                         ${qna.content}
+                     </td>
+                </tr>
+                <tr>
+                    <td colspan="3" id="answer">
+                    	답변:
+                    	<br>
+                        ${qna.answer}
                      </td>
                 </tr>
             </table>
@@ -51,7 +60,16 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../resources/js/scripts.js"></script>
+    <script src="../resources/js/scripts.js">
+   
+    function answerCheck() {
+        var answer = document.getElementById("answer");
+
+        if (answer.innerText.trim() === "") {
+            answer.innerText = "친절한 직원이 답변을 준비중입니다.";
+        }
+    }
+    </script>
 </body>
 
 </html>

@@ -18,8 +18,11 @@ import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
+@Slf4j
 public class BasketController {
 	
 	@Autowired
@@ -39,13 +42,17 @@ public class BasketController {
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
 		List<ProductDto> productList = mainService.getProductByBasketList(basketList);
 		
+		
+		log.info("basket list = {}", basketList);
+		log.info("product list = {}", productList);
+		
 
 		// productCode로 상품정보 가져오기
-		for(int i=0; i<basketList.size(); i++) {
-			int productCode = basketList.get(i).getProductCode();
-			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
-			productList.add(basketProduct);
-		}
+//		for(int i=0; i<basketList.size(); i++) {
+//			int productCode = basketList.get(i).getProductCode();
+//			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
+//			productList.add(basketProduct);
+//		}
 		
 		model.addAttribute("userInfo", cud);
 		model.addAttribute("basketList", basketList);
