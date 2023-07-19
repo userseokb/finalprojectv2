@@ -37,16 +37,17 @@ public class OrderService {
 	}
 
 	public List<OrderDto> getOrderByUserNo(int userNo) {
+		
 		List<OrderDto> orderDetailList  = orderMapper.getOrderByUserNo(userNo);
 		
 		return orderDetailList;
 	}
 
-	public List<OrderDetailDto> getOrderDetatilByOrder(List<OrderDto> orderList) {
-		List<OrderDetailDto> orderDetailList = new ArrayList<OrderDetailDto>();
+	public List<List<OrderDetailDto>> getOrderDetatilByOrder(List<OrderDto> orderList) {
+		List<List<OrderDetailDto>> orderDetailList = new ArrayList<List<OrderDetailDto>>();
 		for(int i=0; i<orderList.size();i++) {
 			int orderNo = orderList.get(i).getOrderNo();
-			OrderDetailDto orderDetail = orderMapper.getOrderDetailByOrderNo(orderNo);
+			List<OrderDetailDto> orderDetail = orderMapper.getOrderDetailByOrderNo(orderNo);
 			orderDetailList.add(orderDetail);
 		}
 		return orderDetailList;

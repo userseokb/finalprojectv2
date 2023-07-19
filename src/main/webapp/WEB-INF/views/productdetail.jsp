@@ -22,7 +22,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- <script src="../resources/jquery/jquery-3.3.1.min.js"></script> -->
 </head>
-<body>
+<body onload="toLocaleString();">
 	<div class="nav-and-content">
 		<%@ include file="mainNav.jsp"%>
 
@@ -38,46 +38,50 @@
 								alt="..." />
 						</div>
 						<div class="col-md-6">
-							<div class="small mb-1">분류: ${products.categoryCode}</div>
-							<h1 class="display-5 fw-bolder">${products.name}</h1>
+							<h2 class="">${products.name}</h2>
 							<div class="fs-5 mb-5">
 								<br>
-								<h5>판매가 : ₩${products.price}</h5>
+								<h6>
+									분류 :
+									<c:choose>
+										<c:when test="${products.categoryCode eq 'A'}">소주/증류주</c:when>
+										<c:when test="${products.categoryCode eq 'B'}">리큐르</c:when>
+										<c:when test="${products.categoryCode eq 'C'}">막걸리</c:when>
+										<c:when test="${products.categoryCode eq 'D'}">약주/청주</c:when>
+									</c:choose>
+								</h6>
 								<br>
-								<h5>제조사 : 더한</h5>
+								<h6>판매가 : ₩<span id="price">${products.price}</span></h6>
 								<br>
-								<h5>원산지 : 한국</h5>
+								<h6>제조사 : 더한</h6>
 								<br>
-								<h5>구매제한 : 1주문 당 100병</h5>
+								<h6>원산지 : 한국</h6>
 								<br>
-								<h5>적립 포인트 : +750p (₩1,000당 50포인트)</h5>
+								<h6>구매제한 : 1주문 당 100병</h6>
 								<br>
-								<h5>배송비 : ₩3,000 (₩30,000이상 주문 시 무료배송)</h5>
+								<h6>적립 포인트 : +750p (₩1,000당 50포인트)</h6>
+								<br>
+								<h6>배송비 : ₩3,000 (₩30,000이상 주문 시 무료배송)</h6>
 							</div>
 
 
-							<div class="d-flex">
-								<!--수량버튼, 장바구니, 바로구매 -->
-								<!-- <button type ="button" class="plus">+</button>
-                            <input class="form-control " id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button type="button" class="minus">-</button> -->
+							<div class="flex-align-center">
 
-								<div class="count-btn float-right">
-									<button type="button" onclick="minus(this)">-</button>
-									<input class="count-input" type="number" name="" value="1"
-										id="productQuantity">
-									<button type="button" onclick="plus(this)">+</button>
+								<div class="flex-row">
+									<div>수량변경</div>&nbsp;&nbsp;
+									<div class="count-btn float-right">
+										<button type="button" onclick="minus(this)">-</button>
+										<input class="count-input" type="number" name="" value="1"
+											id="productQuantity">
+										<button type="button" onclick="plus(this)">+</button>
+									</div>
 								</div>
-
+								<div>
 								<button class="btn btn-outline-dark flex-shrink-0" type="button"
 									onclick="addToBasket(${products.productCode});">
 									<i class="bi-cart-fill me-1"></i> 장바구니
 								</button>
-
-
-								<button class="btn btn-outline-dark flex-shrink-0" type="button">
-									<i class="bi bi-cash"></i> 바로구매
-								</button>
+								</div>
 							</div>
 						</div>
 
@@ -89,8 +93,7 @@
 		<section class="py-5 bg-light">
 			<div class="container px-4 px-lg-5 mt-5">
 				<h2 class="fw-bolder mb-4">상품 상세정보</h2>
-				<div
-					class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+				<div class="row justify-content-center">
 					<p>${products.content}</p>
 					<!-- 글로 작성시 p태그 사용  <p></p>   -->
 				</div>
@@ -106,7 +109,7 @@
 					<c:forEach var="review" items="${reviews}">
 						<div class="reviewContainer">
 							<div class="review">
-								<h5 class="fw-bolder mb-4">제목: ${review.title}</h5>
+								<h6 class="fw-bolder mb-4">제목: ${review.title}</h6>
 								<div class="rating">
 									평점:
 									<c:forEach var="i" begin="1" end="${review.rate}">
@@ -168,14 +171,14 @@
 			});
 					
         }
+        
+        function toLocaleString(){
+    		let price = document.querySelector("#price");
+    		price.innerText = Number(price.innerText).toLocaleString("ko-KR");
+        	
+    	}
         </script>
 
 
 </body>
-<style>
-.reviewSeparator {
-	border-top: 1px solid black;
-	margin: 10px 0;
-}
-</style>
 </html>

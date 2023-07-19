@@ -22,6 +22,6 @@ public interface OrderMapper {
 
 	List<OrderDto> getOrderByUserNo(int userNo);
 
-	OrderDetailDto getOrderDetailByOrderNo(int orderNo);
+	List<OrderDetailDto> getOrderDetailByOrderNo(int orderNo);
 
 }

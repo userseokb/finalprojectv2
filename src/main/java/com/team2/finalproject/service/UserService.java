@@ -82,5 +82,14 @@ public class UserService {
 			e.printStackTrace();
 		}
 	}
+
+	public void updateUserBuySum(int userNo, int price) {
+		mapper.updateUserBuySum(userNo,price);
+	}
+
+	public void updateUserPoint(int userNo, int price) {
+		int point = Math.floorDiv(price, 1000);
+		mapper.updateUserPoint(userNo,point*50);
+	}
 	
 }
