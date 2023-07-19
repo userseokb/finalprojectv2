@@ -17,6 +17,7 @@
 </head>
 
 <body>
+<div class="nav-and-content">
     <%@ include file="mainNav.jsp" %>
 
     <form action="/registerQna/${userNo}" name="qna" id="qna" method="POST">
@@ -68,7 +69,7 @@
             </div>
         </main>
     </form>
-
+</div>
     <%@ include file="mainFooter.jsp" %>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -61,14 +61,15 @@ public class OrderController {
 		// 유저정보
 		String userId = principal.getName();
 		UserDto userInfo = userService.getUserByUserId(userId);
-		
 		// request값 전달
 		List<ProductDto> productList = basketService.getProductCodeByBasketList(request);
 		List<BasketDto> orderList = basketService.getBasketByBasketList(request);
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
 		
 		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("productList",productList);
 		model.addAttribute("orderList",orderList);
+		model.addAttribute("basketList",basketList);
 		return "order";
 	}
 	
@@ -92,7 +93,11 @@ public class OrderController {
 		String paymentMethod = String.valueOf(payload.get("paymentMethod"));
 		int deliveryCharge = Integer.parseInt(String.valueOf(payload.get("deliveryCharge")));
 		int price = Integer.parseInt(String.valueOf(payload.get("price")));
-
+		
+		//포인트 사용 유효성검사
+		if(userInfo.getPoint() < usedPoint) {
+			return "redirect:/basket";
+		}
 		
 		@SuppressWarnings("unchecked")
 		List<List<Integer>> productOrderDetail = (List<List<Integer>>) payload.get("productList");
@@ -176,7 +181,7 @@ public class OrderController {
 		List<Integer> basketNoArr =(List<Integer>)jsonData.get("basketNoArr");
 		
 		
-		
+		// tid 추출
 		String tid = "";
 		String[] splitArr = resData.split(",");
 		for(int i=0; i<splitArr.length; i++) {
@@ -194,8 +199,6 @@ public class OrderController {
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(encode);
-		System.out.println(encodeTid);
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/approve");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection();
@@ -236,7 +239,7 @@ public class OrderController {
 			userService.updateUserBuySum(userNo,price);
 			
 			//포인트 적립
-			//userService.updateUserPoint(userNo,price);
+			userService.updateUserPoint(userNo,price);
 			}else {
 				receive = connection.getErrorStream(); 
 			}
