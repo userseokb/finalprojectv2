@@ -41,7 +41,7 @@ public class LoginIdPwValidator implements UserDetailsService {
         if (user == null) {
             throw new AuthenticationServiceException(String.format("아이디나 비밀번호를 찾을 수 없음"));
         }
-        String pw = user.getUserPw();
+//        String pw = user.getUserPw();
         
         //관리자 권한 확인 후 기록
         String role = "MEMBER";
