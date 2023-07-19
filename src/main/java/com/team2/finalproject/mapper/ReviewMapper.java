@@ -12,4 +12,6 @@ public interface ReviewMapper {
 
 	public ReviewDto insertReview(ReviewDto newReview);
 	
+	public ProductDto getProductNameByProductCode(Integer productCode);
+	
 }
