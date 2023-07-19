@@ -41,7 +41,7 @@
 						<!-- 기본 마이페이지 진입시 표 -->
 						<main>
 							<div class="main-container">
-								<h4>QNA</h4>
+								<h4>Q&A</h4>
 								<table class="main-table">
 									<tr>
 										<th>No.</th>
@@ -96,9 +96,6 @@
 	<!-- Core theme JS-->
 	<script src="../resources/js/scripts.js">
 	
-	function orderQnaList() {
-        
-    }
 	</script>
 
 </body>

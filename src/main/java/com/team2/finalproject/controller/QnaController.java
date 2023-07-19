@@ -59,17 +59,22 @@ public class QnaController {
 		public String qnaDetail(@PathVariable int qnaNo, Model model, Principal principal) {
 			QnaDto qna = qnaService.getQnaByQnaNo(qnaNo);
 			String userId = principal.getName();
+
+			if (qna.getAnswer() == null) {
+		        qna.setAnswer("친절한 직원이 답변을 준비중입니다.");
+		    }
+
 			model.addAttribute("qna", qna);
 			model.addAttribute("userId", userId);
 			return "qnaDetail";
 		}
 		
 		//모든 qna 가져오기
-		@RequestMapping(value="/qnaList", method=RequestMethod.GET)
+		@RequestMapping(value="/admin/qnaManage", method=RequestMethod.GET)
 		public String qnaDetail (Model model) {
 			List<QnaDto> qnaList = qnaService.getAllQnaList();
 			model.addAttribute("qna", qnaList);
-			return "qna";
+			return "adminQnaManage";
 		}
 		
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.GET)

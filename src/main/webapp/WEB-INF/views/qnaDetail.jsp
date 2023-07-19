@@ -23,7 +23,7 @@
     <main>
         <div class="main-container">
             
-			<h4>QnA</h4>            
+			<h4>Q&A</h4>            
             <table class="main-table">
                 <tr>
                     <th>제목</th>
@@ -42,7 +42,7 @@
                      </td>
                 </tr>
                 <tr>
-                    <td colspan="3" id="answer">
+                    <td colspan="3">
                     	답변:
                     	<br>
                         ${qna.answer}
@@ -61,14 +61,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../resources/js/scripts.js">
-   
-    function answerCheck() {
-        var answer = document.getElementById("answer");
-
-        if (answer.innerText.trim() === "") {
-            answer.innerText = "친절한 직원이 답변을 준비중입니다.";
-        }
-    }
+  
     </script>
 </body>
 
