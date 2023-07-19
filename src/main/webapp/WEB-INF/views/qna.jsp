@@ -42,7 +42,6 @@
 						<main>
 							<div class="main-container">
 								<h4>QNA</h4>
-
 								<table class="main-table">
 									<tr>
 										<th>No.</th>
@@ -56,24 +55,24 @@
 											<td><a href="qna/${qna.qnaNo}">${qna.title}</a></td>
 
 											<td><c:choose>
-													<c:when test="${qna.state == 'A'}">
-			                    	상품
-			                    	</c:when>
-													<c:when test="${qna.state == 'B'}">
-			                    	주문/배송
-			                    	</c:when>
-													<c:when test="${qna.state == 'C'}">
-			                    	결제
-			                    	</c:when>
-													<c:when test="${qna.state == 'D'}">
-			                    	교환/환불
-			                    	</c:when>
-													<c:when test="${qna.state == 'E'}">
-			                    	기타
-			                    	</c:when>
-													<c:when test="${qna.state == 'F'}">
-			                    	프로모션
-			                    	</c:when>
+												<c:when test="${qna.state == 'A'}">
+						                    	상품
+						                    	</c:when>
+												<c:when test="${qna.state == 'B'}">
+						                    	주문/배송
+						                    	</c:when>
+												<c:when test="${qna.state == 'C'}">
+						                    	결제
+						                    	</c:when>
+												<c:when test="${qna.state == 'D'}">
+						                    	교환/환불
+						                    	</c:when>
+												<c:when test="${qna.state == 'E'}">
+						                    	기타
+						                    	</c:when>
+												<c:when test="${qna.state == 'F'}">
+						                    	프로모션
+						                    	</c:when>
 												</c:choose></td>
 										</tr>
 									</c:forEach>
@@ -95,7 +94,12 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script src="../resources/js/scripts.js"></script>
+	<script src="../resources/js/scripts.js">
+	
+	function orderQnaList() {
+        
+    }
+	</script>
 
 </body>
 
