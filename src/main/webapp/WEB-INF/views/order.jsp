@@ -168,7 +168,7 @@
 								</div>
 								<div class="border-top-grey">
 									<span><b>주문자 동의</b></span> <span>전체 동의하기&nbsp;<input
-										type="checkbox"></span>
+									 id="agreement" type="checkbox"></span>
 								</div>
 							</div>
 
@@ -297,7 +297,7 @@
 			//주소 입력확인
 			if(basicAddr == ""||basicAddr == null||detailAddr == ""||detailAddr == null) {
 				alert("배송지를 확인해주세요");
-				return
+				return;
 			}
 			
 			//결제 방법
@@ -305,6 +305,14 @@
 			let paymentMethod = "";
 			for(let i=0; i<radioList.length; i++){
 				if(radioList[i].checked) paymentMethod = radioList[i].value;
+			}
+			
+			
+			//결제 동의
+			let agreement = document.getElementById("agreement");
+			if(!agreement.checked){
+				alert("주문자 동의를 확인해주세요");
+				return;
 			}
 			
 			//포인트 디폴트값 설정
@@ -323,7 +331,12 @@
 				joinName : addName,
 				basketNoArr : basketNoArr
 			};
+			
+			//결제 수단 확인
 			switch(paymentMethod){
+				case "" : {
+					alert("결제 수단을 선택해주세요");
+				}break; 
 				case "creditCard" : {}break;
 				case "kakaoPay" : {
 					kakaoPayAPI(data);
