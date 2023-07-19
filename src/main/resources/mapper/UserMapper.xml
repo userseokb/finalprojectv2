@@ -67,6 +67,21 @@
  		WHERE user_id = #{userId}
  	</select>
  	
-
- 
+ 	<select id="findUserId" resultType="String">
+ 		SELECT NVL(user_id, '0') 
+		FROM users
+		WHERE user_name = #{userName} AND phone = #{phone}
+	</select>
+	
+	<select id="findUserPw" resultType="String">
+ 		SELECT NVL(user_pw, '0') 
+		FROM users
+		WHERE user_name = #{userName} AND user_id = #{userId} AND phone = #{phone} 
+	</select>
+	
+	<!-- 회원 임시 비밀번호-->
+	<update id="temporaryPw" parameterType="String">
+		UPDATE users SET user_pw = #{userPw} where user_id = #{userId}
+	</update>
+	
  </mapper>

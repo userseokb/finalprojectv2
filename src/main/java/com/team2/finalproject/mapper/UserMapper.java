@@ -30,7 +30,11 @@ public interface UserMapper {
 
 	public void userWithdrawal(String userId);
 
+	public String findUserId(String userName, int phone);
 
+	public String findUserPw(String userName, String userId, int phone);
+
+	public void temporaryPw(String userId, String userPw);
 
 	
 	
