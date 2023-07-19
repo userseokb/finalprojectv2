@@ -47,8 +47,5 @@ public class ReviewDto {
 		this.agegroup = agegroup;
 		this.rdate = rdate;
 		this.content = content;
-	}
-	
-	
-	
+	}	
 }

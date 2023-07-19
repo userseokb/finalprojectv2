@@ -13,4 +13,6 @@ public interface NoticeMapper {
 	public NoticeDto getNoticeByNoticeNo(int noticeNo);
 
 	public void hitCount(int noticeNo);
+	
+	public int insertNotice(NoticeDto noticeDto); 
 }

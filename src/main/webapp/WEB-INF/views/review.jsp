@@ -39,14 +39,17 @@
                     <tr>
                         <td>상품</td>
                         <td>${products.name}</td>
+                        <td>${review.productName}
+                        	<input type="hidden" id="productNameInput" name="productName" value="${products.name}">
+                        	</td>
                     </tr>
-                    <tr>
-                        <td>제목</td>
-                        <td>
-            <input type="text" id="titleInput" placeholder="제목을 입력해주세요">
-        </td>
-                    </tr>
-                    <tr>
+                   <tr>
+  				  <td>제목</td>
+ 					   <td>
+					        <input type="text" id="titleInput" name="title" placeholder="제목을 입력해주세요" value="${review.title}">
+					    </td>
+					</tr>
+					<tr>
                         <td>별점</td>
                         <td>
                             <i class="bi-star" onclick="rateCalc(this)" value="1"></i>
@@ -54,32 +57,37 @@
                             <i class="bi-star" onclick="rateCalc(this)" value="3"></i>
                             <i class="bi-star" onclick="rateCalc(this)" value="4"></i>
                             <i class="bi-star" onclick="rateCalc(this)" value="5"></i>
+                             <input type="hidden" id="rateInput" name="rate" value="${review.rate}">
                         </td>
                     </tr>
-                    <tr>
-                        <td>용도</td>
-                        <td>
-                            <label><input type="radio" name="usage" id="1"> 선물용</label>
-                            <label><input type="radio" name="usage" id="2"> 직접음용</label>
-                        </td>
+					<tr>
+				    <td>용도</td>
+				    <td>
+				        <label><input type="radio" name="usage" value="1" onclick="setPurposeValue(1)"> 선물용</label>
+				        <label><input type="radio" name="usage" value="2" onclick="setPurposeValue(2)"> 직접음용</label>
+				        <input type="hidden" id="usageInput" name="purpose" value="${review.purpose}">
+				    </td>
+				</tr>
+					<tr>
+                       <td>대상자 연령</td>
+						<td>
+						    <label><input type="radio" name="age" value="1" onclick="setAgeGroupValue(1)"> 20</label>
+						    <label><input type="radio" name="age" value="2" onclick="setAgeGroupValue(2)"> 30</label>
+						    <label><input type="radio" name="age" value="3" onclick="setAgeGroupValue(3)"> 40</label>
+						    <label><input type="radio" name="age" value="4" onclick="setAgeGroupValue(4)"> 50</label>
+						    <label><input type="radio" name="age" value="5" onclick="setAgeGroupValue(5)"> 60이상</label>
+						    <input type="hidden" id="ageGroupInput" name="agegroup" value="${review.agegroup}">
+						</td>
+                       
                     </tr>
-                    <tr>
-                        <td>대상자 연령</td>
-                        <td>
-                            <label><input type="radio" name="age" id="1"> 20</label>
-                            <label><input type="radio" name="age" id="2"> 30</label>
-                            <label><input type="radio" name="age" id="3"> 40</label>
-                            <label><input type="radio" name="age" id="4"> 50</label>
-                            <label><input type="radio" name="age" id="5"> 60이상</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <textarea class="review-textarea" placeholder="리뷰를 작성해주세요(500자 이하)"
-                                onkeyup="textLengthCalc(this)" maxlength="500"></textarea>
-                            <div class="float-right small" id="subtext">500</div>
-                        </td>
-                    </tr>
+                    
+				<tr>
+    <td colspan="2">
+        <textarea class="review-textarea" name="content" placeholder="리뷰를 작성해주세요(500자 이하)"
+            onkeyup="textLengthCalc(this)" maxlength="500"></textarea>
+        <div class="float-right small" id="subtext">500</div>
+    </td>
+</tr>
                     <tr>
                         <td colspan="2">
                             <input class="float-left" type="file">
@@ -96,6 +104,8 @@
             </div>
         </div>
     </div>
+    
+    <input type="hidden" name="userNo" value="${userNo}">
 </form>
     <%@ include file="mainFooter.jsp" %>
     <!-- Bootstrap core JS-->
@@ -111,25 +121,20 @@
             subText.innerText = 500 - textLength;
         }
 
-        // 별 갯수 확인
         function rateCalc(rate) {
             let starsFill = document.querySelectorAll(".bi-star-fill");
             let tmp = rate.getAttribute("value");
-            // 별이 이미있다면 초기화
-            if (starsFill.length > 0) {
-                for (let i = 0; i < starsFill.length; i++) {
-                    starsFill[i].setAttribute("class", "bi-star");
-                }
-                let stars = document.querySelectorAll(".bi-star");
-                for (let i = 0; i < tmp; i++) {
-                    stars[i].setAttribute("class", "bi-star-fill");
-                }
-            } else {
-                let stars = document.querySelectorAll(".bi-star");
-                for (let i = 0; i < tmp; i++) {
-                    stars[i].setAttribute("class", "bi-star-fill");
-                }
+
+            for (let i = 0; i < starsFill.length; i++) {
+                starsFill[i].setAttribute("class", "bi-star");
             }
+            let stars = document.querySelectorAll(".bi-star");
+            for (let i = 0; i < tmp; i++) {
+                stars[i].setAttribute("class", "bi-star-fill");
+            }
+
+            // rateInput에 별점 값 설정
+            document.getElementById("rateInput").value = tmp;
         }
 
         // let getAll = (target) => document.querySelectorAll(target);
@@ -164,8 +169,19 @@
                 });
             }
         }
+        // 라디오 버튼 클릭 시 숨겨진 입력란의 값을 설정하는 함수
+        function setPurposeValue(value) {
+            document.getElementById("usageInput").value = value;
+        }
 
+        
     </script>
+	<script>
+	    // 라디오 버튼 클릭 시 숨겨진 입력란의 값을 설정하는 함수
+	    function setAgeGroupValue(value) {
+	        document.getElementById("ageGroupInput").value = value;
+	    }
+	</script>
     
 </body>
 
