@@ -43,11 +43,8 @@
             </div>
             <div class="login-info-signin">
                 <div>
-                    <a class="login-info-signin-anchor" href="">아이디찾기</a>
-                </div>
-                <div>
-                    <a class="login-info-signin-anchor" href="">비밀번호찾기</a>
-                </div>
+                    <a class="login-info-signin-anchor" href="/findUserInfo">아이디|비밀번호 찾기</a>
+                </div>    
                 <div>
                     <a class="login-info-signin-anchor" href="/signUp">회원가입</a>
                 </div>
