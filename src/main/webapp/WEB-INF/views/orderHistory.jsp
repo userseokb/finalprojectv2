@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +20,7 @@
 <link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
-<body onload="rowspan();">
+<body>
 	<div class="nav-and-content">
 		<%@ include file="mainNav.jsp"%>
 
@@ -37,7 +37,7 @@
 				<div class="mypage-content-detail">
 
 					<!-- 주문내역 조회 -->
-					<table class="mypage-table table-text-center">
+					<table class="mypage-table table-text-center" id="myTable">
 						<tr>
 							<th>주문 날짜</th>
 							<th>주문 상세</th>
@@ -49,7 +49,10 @@
 						<c:forEach items="${orderDetailList}" varStatus="status1">
 							<c:forEach items="${orderDetailList[status1.index]}" varStatus="status2">
 							<tr>
-								<td class="orderDate" value="${orderDetailList[status1.index][status2.index].orderNo}" rowspan="1">${orderList[status1.index].orderDate}</td>
+								<td class="orderDate" value="${orderDetailList[status1.index][status2.index].orderNo}" rowspan="1">
+								<fmt:formatDate pattern="yy.MM.dd" value="${orderList[status1.index].orderDate}"/><br>
+								<fmt:formatDate pattern="hh:mm" value="${orderList[status1.index].orderDate}"/>
+								</td>
 								<td>${productList[status1.index].name}</td>
 								<td>${orderDetailList[status1.index][status2.index].orderDetailQuantity}</td>
 					 			<td>
@@ -82,40 +85,6 @@
 							</c:forEach>
 						</c:forEach>
 						
-						
-						<%-- <c:forEach items="${orderList}" var="order" varStatus="status">
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="delivery-status">
-										<c:choose>
-											<c:when test="${order.orderStatus eq 1}">입금확인
-												<div>
-													<input type="button" class="change-option-btn" value="주문취소">
-												</div>
-											</c:when>
-											<c:when test="${order.orderStatus eq 2}">출고처리중</c:when>
-											<c:when test="${order.orderStatus eq 3}">출고 완료</c:when>
-											<c:when test="${order.orderStatus eq 4}">배송중</c:when>
-											<c:when test="${order.orderStatus eq 5}">배송완료
-												<div>
-													<input type="button" class="change-option-btn" value="교환/환불">
-													<input type="button" class="change-option-btn" value="구매확정">
-												</div>
-											</c:when>
-											<c:when test="${order.orderStatus eq 6}">구매확정
-												<a href="/review/${orderDetailList[status.index][status.index].productCode}">
-													<div>
-														<input type="button" class="change-option-btn" value="리뷰작성">
-													</div>
-												</a>
-											</c:when>
-											<c:when test="${order.orderStatus eq 7}">교환/환불</c:when>
-										</c:choose>
-									</td>
-								</tr>
-							</c:forEach> --%>
 					</table>
 				</div>
 			</div>
@@ -129,19 +98,41 @@
 	<!-- Core theme JS-->
 	<script src="../resources/js/scripts.js"></script>
 	<script>
-	function rowspan(){
-		let orderDateList = document.querySelectorAll(".orderDate");
-		for(let i=1; i<orderDateList.length; i++){
-			if(orderDateList[i].getAttribute("value") ==orderDateList[i-1].getAttribute("value")){
-				let num = Number(orderDateList[i-1].getAttribute("rowspan"));
-				orderDateList[i-1].setAttribute("rowspan",num+1);
-				orderDateList[i].remove();
-				//재귀함수사용해서 orderDateList개수 최신화
-				rowspan();
-			}
+
+	function rowspanSameValues() {
+		  const table = document.getElementById('myTable');
+		  const orderDetailCells = table.getElementsByClassName('orderDate');
+
+		  let currentVal = null;
+		  let count = 0;
+
+		  for (let i = 0; i < orderDetailCells.length; i++) {
+		    const cell = orderDetailCells[i];
+		    const val = cell.getAttribute('value');
+
+		    if (val === currentVal) {
+		      count++;
+		      cell.style.display = 'none'; 
+		    } else {
+		      if (count > 0) {
+		        const rowspan = count + 1;
+		        const previousCell = orderDetailCells[i - count - 1];
+		        previousCell.setAttribute('rowspan', rowspan);
+		      }
+		      currentVal = val;
+		      count = 0;
+		    }
+		  }
+		  
+		  // 마지막열 개별로직
+		  if (count > 0) {
+		    const rowspan = count + 1;
+		    const previousCell = orderDetailCells[orderDetailCells.length - count - 1];
+		    previousCell.setAttribute('rowspan', rowspan);
+		  }
 		}
-	}
-	
+		// 페이지 로딩후 병합실행
+		window.addEventListener('load', rowspanSameValues);
 
 	</script>
 </body>
