@@ -26,8 +26,8 @@ public class QnaService {
 		return qnaMapper.getAllQnaList();
 	}
 
-	public QnaDto insertQnaByUserNo(int userNo) {
-		return qnaMapper.insertQnaByUserNo(userNo);
+	public QnaDto insertQna(QnaDto newQna) {
+		return qnaMapper.insertQna(newQna);
 	}
 
 
