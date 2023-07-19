@@ -13,10 +13,10 @@ public class BasketDto {
 	
 	//장바구니 번호
 	private Integer basketNo;
-	//회원번호
-	private Integer userNo;
 	//상품코드
 	private Integer productCode;
+	//회원번호
+	private Integer userNo;
 	//상품수량
 	private Integer productQuantity;
 	//배송비
@@ -25,11 +25,11 @@ public class BasketDto {
 	private Integer priceSum;
 	
 	@Builder
-	public BasketDto(Integer basketNo, Integer userNo, Integer productCode, Integer productQuantity,
+	public BasketDto(Integer basketNo, Integer productCode, Integer userNo, Integer productQuantity,
 			Integer deliveryCharge, Integer priceSum) {
 		this.basketNo = basketNo;
-		this.userNo = userNo;
 		this.productCode = productCode;
+		this.userNo = userNo;
 		this.productQuantity = productQuantity;
 		this.deliveryCharge = deliveryCharge;
 		this.priceSum = priceSum;

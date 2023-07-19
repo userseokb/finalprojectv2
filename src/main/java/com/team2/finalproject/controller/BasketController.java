@@ -18,8 +18,11 @@ import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
+@Slf4j
 public class BasketController {
 	
 	@Autowired
@@ -38,7 +41,6 @@ public class BasketController {
 		int userNo = userService.getUserByUserId(userId).getUserNo();
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
 		List<ProductDto> productList = mainService.getProductByBasketList(basketList);
-		
 		
 		
 		model.addAttribute("userInfo", cud);

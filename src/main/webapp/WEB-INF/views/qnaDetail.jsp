@@ -23,7 +23,7 @@
     <main>
         <div class="main-container">
             
-			<h4>QnA</h4>            
+			<h4>Q&A</h4>            
             <table class="main-table">
                 <tr>
                     <th>제목</th>
@@ -35,8 +35,17 @@
                     <th>조회수 : ${qna.kinds}</th>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="3" >
+                    	내용:
+                    	<br>
                         ${qna.content}
+                     </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                    	답변:
+                    	<br>
+                        ${qna.answer}
                      </td>
                 </tr>
             </table>
@@ -51,7 +60,9 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../resources/js/scripts.js"></script>
+    <script src="../resources/js/scripts.js">
+  
+    </script>
 </body>
 
 </html>
