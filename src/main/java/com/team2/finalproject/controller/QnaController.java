@@ -74,16 +74,9 @@ public class QnaController {
 			return "qnaDetail";
 		}
 		
-		//모든 qna 가져오기
-		@RequestMapping(value="/admin/qnaManage", method=RequestMethod.GET)
-		public String qnaDetail (Model model) {
-			List<QnaDto> qnaList = qnaService.getAllQnaList();
-			model.addAttribute("qna", qnaList);
-			return "adminQnaManage";
-		}
 		
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.GET)
-		public String QnaForm(@AuthenticationPrincipal CustomUserDetails cud, Model model, HttpSession session) {
+		public String QnaForm(@AuthenticationPrincipal CustomUserDetails cud, Model model) {
 			int userNo = cud.getUserNo();
 			model.addAttribute("userNo", userNo);
 			log.info("QNA 작성 창으로 이동");
@@ -100,5 +93,29 @@ public class QnaController {
 			return "redirect:/qna";
 		}
 		
-
+		//모든 qna 가져오기
+		@RequestMapping(value="/admin/qnaManage", method=RequestMethod.GET)
+		public String qnaDetail (Model model) {
+			List<QnaDto> qnaList = qnaService.getAllQnaList();
+			model.addAttribute("qna", qnaList);
+			return "adminQnaManage";
+		}
+		
+		// 관리자 디테일 가져오기
+		@RequestMapping(value="/admin/qnaManage/detail/{qnaNo}", method=RequestMethod.GET)
+		public String adminQnaDetail(@PathVariable int qnaNo, Model model) {
+			QnaDto qna = qnaService.getQnaByQnaNo(qnaNo);
+			log.info("qnaNo = {}", qnaNo);
+			log.info("qna = {}",qna);
+			model.addAttribute("qna", qna);
+			return "/adminQnaDetail";
+		}
+		// 관리자 답변 작성
+		@RequestMapping(value = "/admin/qnaManage/detail/{qnaNo}", method = RequestMethod.POST)
+		public String registerAnswer(@PathVariable int qnaNo, @RequestParam("answer") String answer) {
+		    QnaDto updateQna = qnaService.getQnaByQnaNo(qnaNo);
+		    updateQna.setAnswer(answer);
+		    qnaService.insertAnswer(updateQna);
+		    return "redirect:/admin/qnaManage";
+		}
 }

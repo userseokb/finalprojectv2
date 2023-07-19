@@ -35,27 +35,27 @@
 							<th>날짜</th>
 							<th>작성자</th>
 							<th>조회수</th>
-							<th>관리</th>
+							<th>답변</th>
 						</tr>
 						<!-- c태그 반복영역 -->
-						<c:forEach items="${qna}" var="qnaList">
+						<c:forEach items="${qna}" var="qna">
 							<tr>
 								<td>
 									<input type="checkbox" id="delCheck" name="delCheck" value="${qna.qnaNo}">
 								</td>
-								<td>${qna.qnaNo}</td>
-								<td><a href="noticeManage/detail?no=${qna.qnaNo}">${qna.title}</a></td>
-								<td>${notice.writeDate }</td>
+								<td><c:set var = "i" value = "${i+1}"></c:set>${i}</td>
+								<td><a href="qnaManage/detail/${qna.qnaNo}">${qna.title}</a></td>
+								<td>${qna.writeDate }</td>
 								<td>관리자</td>
 								<td>${qna.kinds}</td>
 								<td>
-									<a class="btn btn-outline-dark mt-auto">수정</a>
+								    ${empty qna.answer ? 'N' : 'Y'}
 								</td>
 							</tr>
 						</c:forEach>
 						<!-- 반복 종료 -->
 					</table>
-					<a class="btn btn-outline-dark mt-auto" href="noticeManage/register">등록</a>
+
 				</div>
             </div>
             </div>

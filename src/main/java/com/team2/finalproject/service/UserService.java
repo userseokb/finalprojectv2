@@ -91,5 +91,6 @@ public class UserService {
 		int point = Math.floorDiv(price, 1000);
 		mapper.updateUserPoint(userNo,point*50);
 	}
+
 	
 }

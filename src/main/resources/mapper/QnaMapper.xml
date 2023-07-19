@@ -34,12 +34,19 @@
  		</update>
  		
  	 	<select id="getAllQnaList" resultType="com.team2.finalproject.dto.user.QnaDto">
- 	 		SELECT qna_no, user_no, title, state, write_date, content, kinds, answer
-			FROM qna
- 	 	</select>
+		    SELECT qna_no, user_no, title, state, write_date, content, kinds, answer
+		    FROM qna
+		    ORDER BY write_date DESC
+		</select>
  		
  		<select id="insertQna" resultType="com.team2.finalproject.dto.user.QnaDto">
 	 		INSERT INTO qna (qna_no, user_no, title, state, write_date, content)
 			VALUES (qna_no_seq.NEXTVAL, #{userNo}, #{title}, #{state}, sysdate, #{content})
  		</select>
+ 		
+ 		<update id="insertAnswer" parameterType="com.team2.finalproject.dto.user.QnaDto">
+ 			UPDATE qna
+ 			SET answer = #{answer}
+ 			WHERE qna_no = #{qnaNo}
+ 		</update>
  </mapper>
