@@ -1,6 +1,8 @@
 package com.team2.finalproject.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.team2.finalproject.dto.user.CustomUserDetails;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.mapper.UserMapper;
 
@@ -38,7 +41,7 @@ public class LoginIdPwValidator implements UserDetailsService {
         if (user == null) {
             throw new AuthenticationServiceException(String.format("아이디나 비밀번호를 찾을 수 없음"));
         }
-        String pw = user.getUserPw();
+//        String pw = user.getUserPw();
         
         //관리자 권한 확인 후 기록
         String role = "MEMBER";
@@ -47,12 +50,19 @@ public class LoginIdPwValidator implements UserDetailsService {
         } else {
         	role = "MEMBER";
         }
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        CustomUserDetails details = new CustomUserDetails(user, authorities);
+        
+        log.info("custom userDetail service = {}", details);
         	
 
-        return User.builder()
-                .username(userId)
-                .password(pw)
-                .roles(role)
-                .build();
+//        return User.builder()
+//                .username(userId)
+//                .password(pw)
+//                .roles(role)
+//                .build();
+        
+        return details;
     }
 }

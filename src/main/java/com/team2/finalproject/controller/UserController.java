@@ -8,15 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.team2.finalproject.dto.order.OrderInfoDto;
 import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.UserService;
 
@@ -73,12 +71,12 @@ public class UserController {
 	}
 	
 	//userDetail
-	@RequestMapping(value = "/personalInfomation/{userNo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUserByUserNo", method = RequestMethod.POST)
 	public String getUserByUserNo(@PathVariable int userNo, Model model) {
 		
 		service.getUserByUserNo(userNo);
 		
-		return "/personalInfomation/{userNo}";
+		return "qna";
 	}
 	
 
@@ -120,15 +118,42 @@ public class UserController {
 		return "/main";
 	}
 	
-	//orderInfoByUserId
-	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-	public String orderInfoByUserId(@RequestParam String userId, Model model) {
-
-		List<OrderInfoDto> orderInfo = service.orderInfoByUserId(userId);
-		
-		model.addAttribute("orderInfo", orderInfo);
-		
-		return "/mypage";
+	@GetMapping(value = "findUserInfo")
+	public String findUserId() {
+		return "findUserInfo"; 
+	}
+	
+	
+	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	public String userIdSearch(@RequestParam("inputName_1") String userName,
+	                           @RequestParam("inputPhone_1") String phone, Model model) {
+	    String result = service.findUserId(userName, Integer.parseInt(phone));
+	    System.out.println(result);
+	    if(null == result) {
+	    	result = "존재하지않는 회원정보입니다.";}
+	    else {
+	    	result = "ID : " + result;
+	    }
+	    
+	    model.addAttribute("userName", result);
+	    return "userInfo";
+	}
+	
+	@RequestMapping(value = "/userPwSearch", method = RequestMethod.GET)
+	public String userPwSearch(@RequestParam("inputName_2") String userName,
+							   @RequestParam("inputId_2") String userId,
+	                           @RequestParam("inputPhone_2") String phone, Model model) {
+	    String result = service.findUserPw(userName, userId, Integer.parseInt(phone));
+	    if(null == result) {
+	    	result = "존재하지않는 회원정보입니다.";}
+	    else {
+	    	result = "test1234";
+	    	String encryptedPassword = passwordEncoder.encode(result);
+	    	service.temporaryPw(userId, encryptedPassword);
+	    	result = "임시 PW : " + result;
+	    }
+	    model.addAttribute("userPw", result);
+	    return "userPwSearch";
 	}
 	
 	

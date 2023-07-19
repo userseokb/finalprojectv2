@@ -1,7 +1,13 @@
 package com.team2.finalproject.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.team2.finalproject.dto.order.OrderDetailDto;
+import com.team2.finalproject.dto.order.OrderDto;
+
 
 @Mapper
 public interface OrderMapper {
@@ -12,6 +18,10 @@ public interface OrderMapper {
 
 	void insertOrderDetail(@Param("productCode") int productCode, @Param("productQuantity") int productQuantity, @Param("orderNo") int orderNo);
 
-	int getOrderNoByUserNo(int userNo);
+	int getMaxOrderNoByUserNo(int userNo);
+
+	List<OrderDto> getOrderByUserNo(int userNo);
+
+	List<OrderDetailDto> getOrderDetailByOrderNo(int orderNo);
 
 }

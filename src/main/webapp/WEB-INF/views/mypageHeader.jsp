@@ -6,5 +6,5 @@
             <div class="mypage-header">
                 <div></div>
                 <div><a href="/basket"><i class="bi-cart"></i> 장바구니 : ${fn:length(basketList)}</a></div>
-                <div><a href=""><i class="bi-cash-stack"></i> 포인트 : </a></div>
+                <div><a href=""><i class="bi-cash-stack"></i> 포인트 : ${userInfo.point}</a></div>
             </div>

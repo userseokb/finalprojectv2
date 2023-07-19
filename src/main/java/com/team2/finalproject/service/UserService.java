@@ -53,5 +53,43 @@ public class UserService {
 		mapper.userWithdrawal(userId);
 	}
 
+	public String findUserId(String userName, int phone) {
+		
+		String result = "";
+		
+		try {
+			result = mapper.findUserId(userName, phone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public String findUserPw (String userName,String userId, int phone) {
+		
+		String result = "";
+		
+		try {
+			result = mapper.findUserPw(userName, userId, phone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void temporaryPw (String userId, String userPw) {
+		try {
+			 mapper.temporaryPw(userId,userPw);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateUserBuySum(int userNo, int price) {
+		mapper.updateUserBuySum(userNo,price);
+	}
+
+	public void updateUserPoint(int userNo, int price) {
+		int point = Math.floorDiv(price, 1000);
+		mapper.updateUserPoint(userNo,point*50);
+	}
 	
 }

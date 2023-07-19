@@ -14,10 +14,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet" />
-    <link href="/resources/css/traditional-main.css" rel="stylesheet" />
+    <link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
 <body>
+	<div class="nav-and-content">
     <!-- logo  -->
     <div class="login-header">
         <a class="navbar-brand" href="/main">
@@ -42,11 +43,8 @@
             </div>
             <div class="login-info-signin">
                 <div>
-                    <a class="login-info-signin-anchor" href="">아이디찾기</a>
-                </div>
-                <div>
-                    <a class="login-info-signin-anchor" href="">비밀번호찾기</a>
-                </div>
+                    <a class="login-info-signin-anchor" href="/findUserInfo">아이디|비밀번호 찾기</a>
+                </div>    
                 <div>
                     <a class="login-info-signin-anchor" href="/signUp">회원가입</a>
                 </div>
@@ -61,13 +59,9 @@
 
         </div>
     </form>
-
+	</div>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Korea Traditional 2023</p>
-        </div>
-    </footer>
+    <%@ include file="mainFooter.jsp"%>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

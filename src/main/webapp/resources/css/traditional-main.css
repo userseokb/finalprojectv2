@@ -3,9 +3,16 @@
     justify-content: space-between;
 }
 
+.flex-align-center{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .login-header{
     display: flex;
-    margin:10vh auto 3vh;
+    margin:0 auto 3vh;
+    padding-top: 10vh;
 }
 .navbar-brand{
     margin:0 auto;
@@ -115,6 +122,14 @@
     max-width: 1280px;
     margin: 1rem auto;
     border:1px solid #e5e5e5;
+}
+
+.nav-and-content{
+	min-height: calc(100vh - 120px);
+}
+
+footer{
+	height: 120px;
 }
 
 .mypage-sidebar{

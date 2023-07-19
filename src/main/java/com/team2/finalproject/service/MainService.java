@@ -3,8 +3,10 @@ package com.team2.finalproject.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team2.finalproject.dto.order.OrderDetailDto;
 import com.team2.finalproject.dto.pagination.PageRequestDto;
 import com.team2.finalproject.dto.product.BasketDto;
 import com.team2.finalproject.dto.product.ProductDto;
@@ -18,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class MainService {
 	
 	private final MainMapper mainMapper;
+	
 	
 	public List<ProductDto> getAllProducts() {
 		return mainMapper.getAllProduct();
@@ -66,5 +69,17 @@ public class MainService {
 		List<ReviewDto> reviewDto = mainMapper.getReviewByProductCode(productCode);
 	
 		return reviewDto;
+	}
+
+	public List<ProductDto> getProductByOrderDetailList(List<List<OrderDetailDto>> orderDetailList) {
+		List<ProductDto> productList = new ArrayList<ProductDto>();
+		for(int i=0; i<orderDetailList.size();i++) {
+			for(int j=0; j<orderDetailList.get(i).size();j++) {
+			int productCode = orderDetailList.get(i).get(j).getProductCode();
+			ProductDto product = mainMapper.getProductByProductCode(productCode);
+			productList.add(product);
+			}
+		}
+		return productList;
 	}
 }

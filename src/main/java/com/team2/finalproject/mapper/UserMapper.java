@@ -3,6 +3,7 @@ package com.team2.finalproject.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.team2.finalproject.dto.order.OrderInfoDto;
 import com.team2.finalproject.dto.user.UserDto;
@@ -30,6 +31,15 @@ public interface UserMapper {
 
 	public void userWithdrawal(String userId);
 
+	public String findUserId(String userName, int phone);
+
+	public String findUserPw(String userName, String userId, int phone);
+
+	public void temporaryPw(String userId, String userPw);
+
+	public void updateUserBuySum(@Param("userNo")int userNo, @Param("price") int price);
+
+	public void updateUserPoint(@Param("userNo")int userNo, @Param("point") int point);
 
 	
 	

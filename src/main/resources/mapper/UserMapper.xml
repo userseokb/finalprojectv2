@@ -36,26 +36,20 @@
  		FROM users
  		WHERE user_id = #{userId} AND operate = 'Y'
  	</select>
-<<<<<<< HEAD
+
  	
- 	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.order.OrderDto">
-     SELECT o.order_no, o.user_no, o.product_quantity, o.used_point, o.basic_addr, o.detail_addr, o.payment_method, o.order_date, o.delivery_charge, o.price, o.order_status,
-=======
+
 
  	<select id="orderInfoByUserId" resultType="com.team2.finalproject.dto.order.OrderDto">
     	SELECT o.order_no, o.user_no, o.product_quantity, o.used_point, o.basic_addr, o.detail_addr, o.payment_method, o.order_date, o.delivery_charge, o.price, o.order_status,
->>>>>>> master
                od.order_detail_no, od.product_code, od.order_detail_price, od.order_detail_quantity
         FROM users u
         JOIN orders o ON u.user_no = o.user_no
         JOIN order_detail od ON o.order_no = od.order_no
         WHERE u.user_id = #{userId}
-<<<<<<< HEAD
-   </select>
-=======
+
  	</select>
->>>>>>> master
-	
+
 	<update id="updateUser" parameterType="com.team2.finalproject.dto.user.UserDto">
  		UPDATE users
  		SET	user_pw = #{userPw}, email = #{email}, birth = #{birth}, phone = #{phone}, 
@@ -72,6 +66,29 @@
  		SET operate = 'N'
  		WHERE user_id = #{userId}
  	</select>
-
- 
+ 	
+ 	<select id="findUserId" resultType="String">
+ 		SELECT NVL(user_id, '0') 
+		FROM users
+		WHERE user_name = #{userName} AND phone = #{phone}
+	</select>
+	
+	<select id="findUserPw" resultType="String">
+ 		SELECT NVL(user_pw, '0') 
+		FROM users
+		WHERE user_name = #{userName} AND user_id = #{userId} AND phone = #{phone} 
+	</select>
+	
+	<!-- 회원 임시 비밀번호-->
+	<update id="temporaryPw" parameterType="String">
+		UPDATE users SET user_pw = #{userPw} where user_id = #{userId}
+	</update>
+	
+	<update id="updateUserBuySum">
+		UPDATE users SET buy_sum = buy_sum + #{price} WHERE user_no = #{userNo}
+	</update>
+	
+	<update id="updateUserPoint">
+		UPDATE users SET point = point + #{point} WHERE user_no = #{userNo}
+	</update>
  </mapper>
