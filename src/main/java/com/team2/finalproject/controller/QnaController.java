@@ -10,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,17 +72,22 @@ public class QnaController {
 		}
 		
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.GET)
-		public String QnaForm(Principal principal, Model model) {
-			String userId = principal.getName();
-			model.addAttribute("userId", userId);
+		public String QnaForm(@AuthenticationPrincipal CustomUserDetails cud, Model model, HttpSession session) {
+			int userNo = cud.getUserNo();
+			model.addAttribute("userNo", userNo);
+			log.info("QNA 작성 창으로 이동");
+			log.info("유저 번호 = {}", userNo);
 			return "/registerQna";
 		}
 
 		//insertQnaByUserNo
 		@RequestMapping(value="/registerQna/{userNo}", method = RequestMethod.POST)
-		public String registerQna(@PathVariable int userNo, Model model) {
-			QnaDto newQna = qnaService.insertQnaByUserNo(userNo);
+		public String registerQna(@ModelAttribute QnaDto newQna, Model model) {
+			qnaService.insertQna(newQna);
+			log.info("newQna = {}", newQna);
 			model.addAttribute("newQna", newQna);
-			return "/registerQna/{userNo}";
+			return "redirect:/qna";
 		}
+		
+
 }

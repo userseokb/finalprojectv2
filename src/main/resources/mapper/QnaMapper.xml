@@ -17,6 +17,7 @@
  	 			answer
  	 		FROM qna
  	 		WHERE user_no = (SELECT user_no FROM users WHERE user_id = #{userId})
+ 	 		ORDER BY qna_no ASC
  		</select>
  	 	
  	 	
@@ -37,10 +38,8 @@
 			FROM qna
  	 	</select>
  		
- 		<select id="insertQnaByUserNo" resultType="com.team2.finalproject.dto.user.QnaDto">
- 		INSERT INTO qna (qna_no, user_no, title, state, write_date, content, kinds, answer
- 		VALUES (qna_no_seq.NEXTVAL, #{userNo}, #{title}, #{state}, sysdate, #{content},
- 				#{kinds}, #{answer}
- 		WHERE user_no = #{userNo}
+ 		<select id="insertQna" resultType="com.team2.finalproject.dto.user.QnaDto">
+	 		INSERT INTO qna (qna_no, user_no, title, state, write_date, content)
+			VALUES (qna_no_seq.NEXTVAL, #{userNo}, #{title}, #{state}, sysdate, #{content})
  		</select>
  </mapper>

@@ -15,9 +15,9 @@ public interface QnaMapper {
 
 	public List<QnaDto> getAllQnaList();
 
-	public QnaDto insertQnaByUserNo(int userNo);
-
 	public void hitCount(int qnaNo);
+
+	public QnaDto insertQna(QnaDto newQna);
 
 
 }

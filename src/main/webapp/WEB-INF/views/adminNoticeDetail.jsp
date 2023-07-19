@@ -8,12 +8,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>전통주 양조장 관리자 페이지 - 공지사항 관리</title>
+        <title>전통주 양조장 관리자 페이지 - 공지사항 상세</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../resources/css/adminStyles.css" rel="stylesheet" />
-        <link href="../resources/css/traditional-admin.css" rel="stylesheet" />
+        <link href="/resources/css/adminStyles.css" rel="stylesheet" />
+        <link href="/resources/css/traditional-admin.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
@@ -25,37 +25,26 @@
                 <!-- Page content-->
                 <div class="container-fluid">
 					<div class="container">
-					<h4>공지사항 관리</h4>
-					<a class="btn btn-outline-dark mt-auto">선택삭제</a>
+					<h4>공지사항</h4>
 					<table class="table">
 						<tr>
-							<th>선택</th>
-							<th>No.</th>
 							<th>제목</th>
-							<th>날짜</th>
-							<th>작성자</th>
-							<th>조회수</th>
-							<th>관리</th>
+							<td colspan="2">${notice.title}</td>
 						</tr>
-						<!-- c태그 반복영역 -->
-						<c:forEach items="${noticeList}" var="notice">
-							<tr>
-								<td>
-									<input type="checkbox" id="delCheck" name="delCheck" value="${notice.noticeNo}">
-								</td>
-								<td>${notice.noticeNo}</td>
-								<td><a href="noticeManage/detail?no=${notice.noticeNo}">${notice.title}</a></td>
-								<td>${notice.writeDate }</td>
-								<td>관리자</td>
-								<td>${notice.kinds}</td>
-								<td>
-									<a class="btn btn-outline-dark mt-auto">수정</a>
-								</td>
-							</tr>
-						</c:forEach>
-						<!-- 반복 종료 -->
+						<tr>
+							<th>작성자 : 관리자</th>
+							<th>작성일자 : ${notice.writeDate}</th>
+							<th>조회수 : ${notice.kinds}</th>
+						</tr>
+						<tr>
+							<td colspan="3">${notice.content}</td>
+						</tr>
 					</table>
-					<a class="btn btn-outline-dark mt-auto" href="noticeManage/register">등록</a>
+					<div>
+					<input type="button" value="목록으로"
+						class="btn btn-outline-dark mt-auto"
+						onclick="history.back()">
+				</div>
 				</div>
             </div>
             </div>
