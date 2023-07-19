@@ -49,6 +49,7 @@ public class QnaController {
 		        List<QnaDto> qna = qnaService.getQnaByQnaNoByUserId(userid);
 		        session.setAttribute("qna", qna);
 		        model.addAttribute("qna", qna);
+		        model.addAttribute("userInfo",cud);
 		        
 		        System.out.println(qna);
 		}

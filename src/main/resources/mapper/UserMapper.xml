@@ -84,4 +84,11 @@
 		UPDATE users SET user_pw = #{userPw} where user_id = #{userId}
 	</update>
 	
+	<update id="updateUserBuySum">
+		UPDATE users SET buy_sum = buy_sum + #{price} WHERE user_no = #{userNo}
+	</update>
+	
+	<update id="updateUserPoint">
+		UPDATE users SET point = point + #{point} WHERE user_no = #{userNo}
+	</update>
  </mapper>

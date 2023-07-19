@@ -46,7 +46,7 @@ public class BasketController {
 			ProductDto basketProduct = mainService.getProductByProductCode(productCode); 
 			productList.add(basketProduct);
 		}
-
+		
 		model.addAttribute("userInfo", cud);
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);

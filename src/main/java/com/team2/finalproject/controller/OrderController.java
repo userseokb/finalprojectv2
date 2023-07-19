@@ -230,6 +230,12 @@ public class OrderController {
 			
 			// 장바구니에서 삭제
 			basketService.deleteBasketNoArr(basketNoArr);
+			
+			// 누적금액 갱신
+			userService.updateUserBuySum(userNo,price);
+			
+			//포인트 적립
+			//userService.updateUserPoint(userNo,price);
 			}else {
 				receive = connection.getErrorStream(); 
 			}
