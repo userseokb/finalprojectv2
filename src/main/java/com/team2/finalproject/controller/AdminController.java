@@ -1,5 +1,7 @@
 package com.team2.finalproject.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +65,31 @@ public class AdminController {
 	@GetMapping("/noticeManage/register")
 	public String adminNoticeRegisterForm() {
 		return "adminNoticeRegister";
+	}
+	
+	//실제 관리자 공지사항 등록
+	@PostMapping("/noticeManage/register")
+	public String adminNoticeRegister(@AuthenticationPrincipal CustomUserDetails cus,
+										@RequestParam String title,
+										@RequestParam String state,
+										@RequestParam String content) {
+		
+		Date currentDate = new Date(System.currentTimeMillis()); //현재 날짜
+		
+		NoticeDto newNotice = NoticeDto.builder()
+								.userNo(cus.getUserNo())
+								.title(title)
+								.state(state)
+								.writeDate(currentDate)
+								.content(content)
+								.build();
+		log.info("newNotice = {}", newNotice);
+		int result = noticeService.insertNotice(newNotice);
+		if(result == 0) {
+			log.info("등록 실패");
+		}
+				
+		return "redirect:/admin/noticeManage";
 	}
 	
 
