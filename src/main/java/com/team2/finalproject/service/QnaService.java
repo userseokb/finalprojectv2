@@ -19,6 +19,7 @@ public class QnaService {
 
 	public QnaDto getQnaByQnaNo(int qnaNo) {
 		qnaMapper.hitCount(qnaNo);
+		QnaDto qnaDto = qnaMapper.getQnaByQnaNo(qnaNo);
 		return qnaMapper.getQnaByQnaNo(qnaNo);
 	}
 

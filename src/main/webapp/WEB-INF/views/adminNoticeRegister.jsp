@@ -26,11 +26,12 @@
                 <div class="container-fluid">
 					<div class="container">
 					<h4>공지사항 등록</h4>
+					<form action="register" id="registerForm" name="registerForm" method="post">
 					<table class="table">
 						<tr>
 							<th>제목</th>
 							<td colspan="1">
-					        	<input type="text" name="title" id="title" placeholder="제목을 입력하세요(최대 50글자까지 입력 가능합니다)" class="form-control" />
+					        	<input type="text" name="title" id="title" maxlength='50' placeholder="제목을 입력하세요(최대 50글자까지 입력 가능합니다)" class="form-control" />
 					    	</td>
 					    </tr>
 					    <tr>
@@ -61,10 +62,11 @@
 						<tr>
 						<th>내용</th>
 							<td>
-							<textarea name="content" id="content" placeholder="내용을 입력하세요(최대 500자까지 입력 가능합니다)" class="form-control" rows="8"></textarea>
+							<textarea name="content" id="content" maxlength='500' placeholder="내용을 입력하세요(최대 500자까지 입력 가능합니다)" class="form-control" rows="8"></textarea>
 							</td>
 						</tr>
 					</table>
+					</form>
 					<div>
 					<button class="btn btn-outline-dark mt-auto" onclick="noticeRegisterCheck();"
 					type="button">등록</button>
@@ -81,6 +83,40 @@
         <!-- Core theme JS-->
         <script src="/resources/js/scripts.js"></script>
         <script>
+        
+        function noticeRegisterCheck() {
+            var title = document.getElementById("title");
+            var state = document.getElementById("state");
+            var content = document.getElementById("content");
+
+            
+            var nospaceReg = /^.*\S.*/;	//공백만 입력하는 것을 방지
+        	//제목 유효성 검사
+            if (!nospaceReg.test(title.value)) {
+                alert("제목은 필수 입력입니다");
+                title.focus();
+                return false;
+            };
+            
+        	//셀렉트박스 유효성 검사
+            if (state.value == "") {
+                alert("분류를 선택해 주세요");
+                return false;
+            };
+            
+            // 내용 유효성 검사
+            if (!nospaceReg.test(content.value)) {
+                alert("내용은 필수 입력입니다");
+                content.focus();
+                return false;
+            };
+            
+           //입력 값 전송
+           document.registerForm.submit(); //유효성 검사의 포인트
+
+        }
+        
+        
         </script>
     </body>
 </html>
