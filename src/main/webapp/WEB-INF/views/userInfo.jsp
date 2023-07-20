@@ -22,14 +22,33 @@
     <!-- logo  -->
     <div class="login-header">
         <a class="navbar-brand" href="/main">
-        
             <img src="/resources/image/logo.png" alt="logo" width="200px">
-            <br><br><br>
-            ${userName }
-	            
         </a>
     </div>
+    <div class="full">   
+            <form action="/userInfo" id="inputForm" name="inputForm" method="get">
+			<div class="content">
+
+				<!-- id, pw, email -->
+				<div class="input-wrap">
+					<div>
+						<i class="bi-person"></i><input class="user-info-input"
+											type="text" name="userId" id="userId"
+											value="${userId}" readonly="readonly">
+					</div>
+				</div>
+
+
+				<br>
+				<button class="long-btn bg-dark" onclick="redirectToLoginPage()" type="button">로그인</button>
+			</div>
+		</form>
+	</div> 
     <%@ include file="mainFooter.jsp"%>
 </body>
-
+<script>
+function redirectToLoginPage() {
+  window.location.href = "login";
+}
+</script>
 </html>

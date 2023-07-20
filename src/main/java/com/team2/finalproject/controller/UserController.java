@@ -128,21 +128,20 @@ public class UserController {
 	public String userIdSearch(@RequestParam("inputName_1") String userName,
 	                           @RequestParam("inputPhone_1") String phone, Model model) {
 	    String result = service.findUserId(userName, Integer.parseInt(phone));
-	    System.out.println(result);
 	    if(null == result) {
 	    	result = "존재하지않는 회원정보입니다.";}
 	    else {
 	    	result = "ID : " + result;
 	    }
-	    
-	    model.addAttribute("userName", result);
+	    System.out.println(result);
+	    model.addAttribute("userId", result);
 	    return "userInfo";
 	}
 	
 	@RequestMapping(value = "/userPwSearch", method = RequestMethod.GET)
-	public String userPwSearch(@RequestParam("inputName_2") String userName,
-							   @RequestParam("inputId_2") String userId,
-	                           @RequestParam("inputPhone_2") String phone, Model model) {
+	public String userPwSearch(@RequestParam("inputName_1") String userName,
+							   @RequestParam("inputId_1") String userId,
+	                           @RequestParam("inputPhone_1") String phone, Model model) {
 	    String result = service.findUserPw(userName, userId, Integer.parseInt(phone));
 	    if(null == result) {
 	    	result = "존재하지않는 회원정보입니다.";}
