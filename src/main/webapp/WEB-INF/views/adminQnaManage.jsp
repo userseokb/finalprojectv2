@@ -26,28 +26,21 @@
                 <div class="container-fluid">
 					<div class="container">
 					<h4>Q&A 관리</h4>
-					<a class="btn btn-outline-dark mt-auto">선택삭제</a>
 					<table class="table">
 						<tr>
-							<th>선택</th>
 							<th>No.</th>
 							<th>제목</th>
 							<th>날짜</th>
 							<th>작성자</th>
-							<th>조회수</th>
 							<th>답변</th>
 						</tr>
 						<!-- c태그 반복영역 -->
-						<c:forEach items="${qna}" var="qna">
+						<c:forEach items="${qna}" var="qna" varStatus="status">
 							<tr>
-								<td>
-									<input type="checkbox" id="delCheck" name="delCheck" value="${qna.qnaNo}">
-								</td>
 								<td><c:set var = "i" value = "${i+1}"></c:set>${i}</td>
 								<td><a href="qnaManage/detail/${qna.qnaNo}">${qna.title}</a></td>
 								<td>${qna.writeDate }</td>
-								<td>관리자</td>
-								<td>${qna.kinds}</td>
+								<td>${user[status.index].userId}</td>
 								<td>
 								    ${empty qna.answer ? 'N' : 'Y'}
 								</td>

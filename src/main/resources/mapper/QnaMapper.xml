@@ -36,7 +36,7 @@
  	 	<select id="getAllQnaList" resultType="com.team2.finalproject.dto.user.QnaDto">
 		    SELECT qna_no, user_no, title, state, write_date, content, kinds, answer
 		    FROM qna
-		    ORDER BY write_date DESC
+			ORDER BY CASE WHEN answer IS NULL THEN 0 ELSE 1 END, write_date ASC
 		</select>
  		
  		<select id="insertQna" resultType="com.team2.finalproject.dto.user.QnaDto">
