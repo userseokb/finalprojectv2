@@ -19,7 +19,7 @@
 <link href="../resources/css/traditional-main.css" rel="stylesheet" />
 </head>
 
-<body onload="onloadCheck();totalPrice();toLocaleString();">
+<body onload="onloadCheck();totalPrice();">
 	<div class="nav-and-content">
 	<%@ include file="mainNav.jsp"%>
 
@@ -190,6 +190,7 @@
             curNum.value = Number(curNum.value) + 1;
           	totalPrice();
           	createButton(index);
+          	
         }
 
         // 총 가격 계산,출력
@@ -205,6 +206,7 @@
             deliveryPrice.value = 3000;
             
             for(let i=0; i<productPriceList.length; i++){
+            	productPriceList[i].innerText = productPriceList[i].innerText.split(",").join("");
             	if(checkboxList[i].checked){
             		totalProductPrice += Number(productPriceList[i].innerText) * Number(productQuantityList[i].value);
             	}
@@ -213,6 +215,7 @@
             if(totalProductPrice >= 30000 ||totalProductPrice == 0) deliveryPrice.value = 0;
             
             totalPrice.value = Number(productPrice.value) + Number(deliveryPrice.value);
+            toLocaleString();
         }
         
         function deleteProduct(basketCode){
