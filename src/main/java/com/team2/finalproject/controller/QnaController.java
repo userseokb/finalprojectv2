@@ -118,4 +118,5 @@ public class QnaController {
 		    qnaService.insertAnswer(updateQna);
 		    return "redirect:/admin/qnaManage";
 		}
+		
 }
