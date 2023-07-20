@@ -102,7 +102,17 @@
 
 		<!--상품 후기 -->
 		<div class="container px-4 px-lg-5 mt-5">
-			<h2 class="fw-bolder mb-4">상품 후기</h2>
+			<span class="fw-bolder mb-4">상품 후기</span> 
+			<span class="small">
+				<c:choose>
+					<c:when test="${avgRate < 0}">
+						<i class="bi-star"></i>0
+					</c:when>
+					<c:when test="${avgRate > 0}">
+						<i class="bi-star-fill"></i>${avgRate}
+					</c:when>
+				</c:choose>
+			</span>
 			<hr class="reviewSeparator">
 			<c:choose>
 				<c:when test="${not empty reviews}">

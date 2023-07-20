@@ -124,7 +124,6 @@
 		    }
 		  }
 		  
-		  // 마지막열 개별로직
 		  if (count > 0) {
 		    const rowspan = count + 1;
 		    const previousCell = orderDetailCells[orderDetailCells.length - count - 1];
