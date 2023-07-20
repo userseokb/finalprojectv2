@@ -2,29 +2,35 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-   <mapper namespace="com.team2.finalproject.mapper.ReviewMapper">
-   
-<insert id="insertReview" parameterType="com.team2.finalproject.dto.user.ReviewDto">
-    INSERT INTO review(review_no, user_no, product_code, product_name, title, rate, purpose, agegroup, rdate, content)
-    VALUES(review_file_no_seq.NEXTVAL,
-           #{userNo},
-           #{productCode}, 
-           #{productName},
-           #{title},
-           #{rate}, 
-           #{purpose}, 
-           #{agegroup}, 
-           sysdate, 
-           #{content})
-</insert>
-   	
-   <select id="getProductNameByProductCode">
-  	 SELECT name
-  	 FROM product
-  	 WHERE product_code = #{productCode}
-   </select>
 
-   
-   
-   </mapper>
+<mapper namespace="com.team2.finalproject.mapper.ReviewMapper">
+
+	<insert id="insertReview"
+		parameterType="com.team2.finalproject.dto.user.ReviewDto">
+		INSERT INTO review(review_no, user_no, product_code, product_name, title,
+		rate, purpose, agegroup, rdate, content)
+		VALUES(review_file_no_seq.NEXTVAL,
+		#{userNo},
+		#{productCode},
+		#{productName},
+		#{title},
+		#{rate},
+		#{purpose},
+		#{agegroup},
+		sysdate,
+		#{content})
+	</insert>
+
+	<select id="getProductNameByProductCode">
+		SELECT name
+		FROM product
+		WHERE product_code = #{productCode}
+	</select>
+
+	<select id="getAvgRateByProductCode">
+		SELECT nvl(avg(rate),-1)
+		FROM review
+		WHERE product_code = #{productCode}
+	</select>
+
+</mapper>

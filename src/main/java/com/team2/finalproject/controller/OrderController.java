@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +53,8 @@ public class OrderController {
 	UserService userService;
 	@Autowired
 	OrderService orderService;
+	@Value("${kakao.admin}")
+	private String kakaoAdminKey; 
 	
 	private Map<String, Object> jsonData = null;
 	private String resData ="";
@@ -117,7 +120,7 @@ public class OrderController {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection();
 			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Authorization", "KakaoAK 2b9069293aadf1d01f7e1672e396e57d");
+			connection.setRequestProperty("Authorization", "KakaoAK " + kakaoAdminKey);
 			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			connection.setDoOutput(true);
 			String parameter = "cid=TC0ONETIME" 
@@ -203,7 +206,7 @@ public class OrderController {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/approve");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection();
 			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Authorization", "KakaoAK 2b9069293aadf1d01f7e1672e396e57d");
+			connection.setRequestProperty("Authorization", "KakaoAK " + kakaoAdminKey);
 			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			connection.setDoOutput(true);
 
