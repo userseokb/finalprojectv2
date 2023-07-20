@@ -27,4 +27,12 @@ public class NoticeService {
 	public int insertNotice(NoticeDto noticeDto) {
 		return noticeMapper.insertNotice(noticeDto);
 	}
+	
+	public int updateNotice(NoticeDto noticeDto) {
+		return noticeMapper.updateNotice(noticeDto);
+	}
+	
+	public int deleteNotice(List<Integer> noticeNoList) {
+		return noticeMapper.deleteNotice(noticeNoList);
+	}
 }
