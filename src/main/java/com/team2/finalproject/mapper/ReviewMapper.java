@@ -11,4 +11,6 @@ public interface ReviewMapper {
 
 	double getAvgRateByProductCode(Integer productCode);
 
+	void deleteReviewByReviewNo(int userNo, Integer reviewNo);
+
 }
