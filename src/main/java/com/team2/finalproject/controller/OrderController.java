@@ -194,7 +194,7 @@ public class OrderController {
 			}
 		}
 		
-		//상품이름 인코딩
+		//tid 가공
 		String encode = String.valueOf(tid).replace("\"", "");
 		String encodeTid ="";
 		try {
