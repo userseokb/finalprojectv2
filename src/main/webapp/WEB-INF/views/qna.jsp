@@ -47,6 +47,7 @@
 										<th>No.</th>
 										<th>제목</th>
 										<th>분류</th>
+										<th>답변</th>
 									</tr>
 									<!-- c태그 반복영역 -->
 									<c:forEach items="${qna}" var="qna">
@@ -74,6 +75,9 @@
 						                    	프로모션
 						                    	</c:when>
 												</c:choose></td>
+											<td>
+											    ${empty qna.answer ? 'N' : 'Y'}
+											</td>
 										</tr>
 									</c:forEach>
 									<!-- 반복 종료 -->

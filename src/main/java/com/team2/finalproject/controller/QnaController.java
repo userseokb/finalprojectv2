@@ -1,6 +1,7 @@
 package com.team2.finalproject.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -98,6 +99,18 @@ public class QnaController {
 		public String qnaDetail (Model model) {
 			List<QnaDto> qnaList = qnaService.getAllQnaList();
 			model.addAttribute("qna", qnaList);
+			
+			List<UserDto> userList = new ArrayList<>();
+			//리스트에서 qnaNo 뺴오기
+			for(QnaDto qna : qnaList) {
+				int userNo = qna.getUserNo();
+				//userNo로 userId 가져오기
+				UserDto user = userService.getUserByUserNo(userNo);
+				userList.add(user);
+			} 
+			log.info("userList = {}", userList);
+			model.addAttribute("user", userList);
+
 			return "adminQnaManage";
 		}
 		
