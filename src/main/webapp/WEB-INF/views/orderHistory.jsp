@@ -49,11 +49,12 @@
 						<c:forEach items="${orderDetailList}" varStatus="status1">
 							<c:forEach items="${orderDetailList[status1.index]}" varStatus="status2">
 							<tr>
+							<c:set var="count" value="${count + 1}"></c:set>
 								<td class="orderDate" value="${orderDetailList[status1.index][status2.index].orderNo}" rowspan="1">
 								<fmt:formatDate pattern="yy.MM.dd" value="${orderList[status1.index].orderDate}"/><br>
-								<fmt:formatDate pattern="hh:mm" value="${orderList[status1.index].orderDate}"/>
+								<fmt:formatDate pattern="HH:mm" value="${orderList[status1.index].orderDate}"/>
 								</td>
-								<td>${productList[status1.index].name}</td>
+								<td>${productList[count-1].name}</td>
 								<td>${orderDetailList[status1.index][status2.index].orderDetailQuantity}</td>
 					 			<td>
 									<c:choose>

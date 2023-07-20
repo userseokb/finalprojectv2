@@ -57,6 +57,7 @@
  	 			order_status
  			FROM orders
  			WHERE user_no = #{userNo}
+ 			ORDER BY order_no DESC
  	 	</select>
  	 	
  	 	<select id="getOrderDetailByOrderNo" resultType="com.team2.finalproject.dto.order.OrderDetailDto">
@@ -68,6 +69,5 @@
  	 			order_detail_quantity
  	 		FROM order_detail
  	 		WHERE order_no = #{orderNo}
- 	 			
  	 	</select>
  </mapper>

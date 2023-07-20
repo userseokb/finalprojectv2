@@ -284,9 +284,6 @@ public class OrderController {
 		List<List<OrderDetailDto>> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
-		Collections.reverse(orderList);
-		Collections.reverse(orderDetailList);
-		Collections.reverse(productList);
 		
 		log.info("product = {}", productList);
 		
