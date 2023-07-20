@@ -12,21 +12,21 @@ import lombok.ToString;
 public class OrderDetailDto {
 	//주문상세 번호
 	private Integer orderDetailNo;
-	//주문 번호
-	private Integer orderNo;
 	//상품 코드
 	private Integer productCode;
+	//주문 번호
+	private Integer orderNo;
 	//상품 가격
 	private Integer orderDetailPrice;
 	//상품 수량
 	private Integer orderDetailQuantity;
 	
 	@Builder
-	public OrderDetailDto(Integer orderDetailNo, Integer orderNo, Integer productCode, Integer orderDetailPrice,
+	public OrderDetailDto(Integer orderDetailNo, Integer productCode, Integer orderNo, Integer orderDetailPrice,
 			Integer orderDetailQuantity) {
 		this.orderDetailNo = orderDetailNo;
-		this.orderNo = orderNo;
 		this.productCode = productCode;
+		this.orderNo = orderNo;
 		this.orderDetailPrice = orderDetailPrice;
 		this.orderDetailQuantity = orderDetailQuantity;
 	}

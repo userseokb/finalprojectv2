@@ -41,7 +41,9 @@ import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.OrderService;
 import com.team2.finalproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class OrderController {
 
@@ -285,6 +287,8 @@ public class OrderController {
 		Collections.reverse(orderList);
 		Collections.reverse(orderDetailList);
 		Collections.reverse(productList);
+		
+		log.info("product = {}", productList);
 		
 		model.addAttribute("userInfo",cud);
 		model.addAttribute("orderList",orderList);
