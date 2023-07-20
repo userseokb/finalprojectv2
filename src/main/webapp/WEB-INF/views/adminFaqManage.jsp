@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>전통주 양조장 관리자 페이지 - 공지사항 관리</title>
+        <title>전통주 양조장 관리자 페이지 - FAQ 관리</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -25,7 +25,7 @@
                 <!-- Page content-->
                 <div class="container-fluid">
 					<div class="container">
-					<h4>공지사항 관리</h4>
+					<h4>FAQ 관리</h4>
 					<a class="btn btn-outline-dark mt-auto" onclick="deleteValue();">선택삭제</a>
 					<table class="table">
 						<tr>
@@ -38,24 +38,24 @@
 							<th>관리</th>
 						</tr>
 						<!-- c태그 반복영역 -->
-						<c:forEach items="${noticeList}" var="notice">
+						<c:forEach items="${faqList}" var="faq">
 							<tr>
 								<td>
-									<input type="checkbox" id="delCheck${notice.noticeNo}" name="delCheck" value="${notice.noticeNo}">
+									<input type="checkbox" id="delCheck${faq.faqNo}" name="delCheck" value="${faq.faqNo}">
 								</td>
 								<td><c:set var = "i" value = "${i+1}"></c:set>${i}</td>
-								<td><a href="noticeManage/detail?no=${notice.noticeNo}">${notice.title}</a></td>
-								<td>${notice.writeDate }</td>
+								<td><a href="faqManage/detail?no=${faq.faqNo}">${faq.title}</a></td>
+								<td>${faq.writeDate }</td>
 								<td>관리자</td>
-								<td>${notice.kinds}</td>
+								<td>${faq.kinds}</td>
 								<td>
-									<a class="btn btn-outline-dark mt-auto" href="noticeManage/modify?no=${notice.noticeNo}">수정</a>
+									<a class="btn btn-outline-dark mt-auto" href="faqManage/modify?no=${faq.faqNo}">수정</a>
 								</td>
 							</tr>
 						</c:forEach>
 						<!-- 반복 종료 -->
 					</table>
-					<a class="btn btn-outline-dark mt-auto" href="noticeManage/register">등록</a>
+					<a class="btn btn-outline-dark mt-auto" href="faqManage/register">등록</a>
 				</div>
             </div>
             </div>
@@ -87,7 +87,7 @@
             if (!confirm("정말로 삭제하시겠습니까?")) {
             } else {
                 var newForm = document.createElement("form");
-                newForm.setAttribute("action", "noticeManage/delete"); //요청 보낼 주소
+                newForm.setAttribute("action", "faqManage/delete"); //요청 보낼 주소
                 newForm.setAttribute("method", "post");  //Post 방식 
 
                // input 태그 생성 & 속성부여

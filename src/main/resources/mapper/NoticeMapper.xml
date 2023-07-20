@@ -55,12 +55,12 @@
  		</update>
  		
  		<delete id="deleteNotice" parameterType="List">
-		DELETE FROM notice
-		WHERE
-			notice_no in
-	    <foreach collection="list" item="item" index="i" open="(" separator="," close=")">
-	      #{item}
-    	</foreach>
-</delete>
+			DELETE FROM notice
+			WHERE
+				notice_no in
+		    <foreach collection="list" item="item" index="i" open="(" separator="," close=")">
+		      #{item}
+	    	</foreach>
+		</delete>
  		
  </mapper>

@@ -14,6 +14,7 @@
  	 			content,
  	 			kinds
  	 		FROM faq
+ 	 		order by faq_no asc
  	 	</select>
  		
  		<select id="getFaqByFaqNo" resultType="com.team2.finalproject.dto.user.FaqDto">
@@ -34,4 +35,32 @@
  			SET kinds = kinds + 1
  			WHERE faq_no = #{faqNo}
  		</update>
+ 		
+ 		
+ 		 <insert id="insertFaq">
+ 			insert into faq
+ 				values(
+ 				faq_no_seq.NEXTVAL,
+ 				#{userNo},
+ 	 			#{title},
+ 	 			#{state},
+ 	 			#{writeDate},
+ 	 			#{content},
+ 				0)
+ 		</insert>
+ 		
+ 		<update id="updateFaq">
+ 		UPDATE faq
+ 		SET	title = #{title}, state = #{state}, content = #{content}
+ 		WHERE faq_no = #{faqNo}
+ 		</update>
+ 		
+ 		<delete id="deleteFaq" parameterType="List">
+			DELETE FROM faq
+			WHERE
+				faq_no in
+		    <foreach collection="list" item="item" index="i" open="(" separator="," close=")">
+		      #{item}
+	    	</foreach>
+		</delete>
  </mapper>

@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>전통주 양조장 관리자 페이지 - 공지사항 상세</title>
+        <title>전통주 양조장 관리자 페이지 - FAQ 상세</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -25,40 +25,40 @@
                 <!-- Page content-->
                 <div class="container-fluid">
 					<div class="container">
-					<h4>공지사항</h4>
+					<h4>FAQ</h4>
 					<table class="table">
 						<tr>
 							<th>제목</th>
-							<td colspan="2">${notice.title}</td>
+							<td colspan="2">${faq.title}</td>
 						</tr>
 						<tr>
 							<th>작성자 : 관리자</th>
-							<th>작성일자 : ${notice.writeDate}</th>
-							<th>조회수 : ${notice.kinds}</th>
+							<th>작성일자 : ${faq.writeDate}</th>
+							<th>조회수 : ${faq.kinds}</th>
 						</tr>
 						<tr>
 							<th>
 								<c:choose>
-			                    	<c:when test="${notice.state == 'A'}">
+			                    	<c:when test="${faq.state == 'A'}">
 			                    	분류 : 회원가입/정보
 			                    	</c:when>
-			                    	<c:when test="${notice.state == 'B'}">
+			                    	<c:when test="${faq.state == 'B'}">
 			                    	분류 : 결제/배송
 			                    	</c:when>
-			                    	<c:when test="${notice.state == 'C'}">
+			                    	<c:when test="${faq.state == 'C'}">
 			                    	분류 : 교환/환불/반품
 			                    	</c:when>
-			                    	<c:when test="${notice.state == 'D'}">
+			                    	<c:when test="${faq.state == 'D'}">
 			                    	분류 : 마일리지
 			                    	</c:when>
-			                    	<c:when test="${notice.state == 'E'}">
+			                    	<c:when test="${faq.state == 'E'}">
 			                    	분류 : 기타
 			                    	</c:when>
 		                   		</c:choose>
 							</th>
 						</tr>
 						<tr>
-							<td colspan="3">${notice.content}</td>
+							<td colspan="3">${faq.content}</td>
 						</tr>
 					</table>
 					<div>
