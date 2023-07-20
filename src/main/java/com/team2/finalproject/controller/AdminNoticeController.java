@@ -105,7 +105,7 @@ public class AdminNoticeController {
 		return "redirect:/admin/noticeManage";
 	}
 	
-	
+	//관리자 공지사항 삭제
 	@PostMapping("/noticeManage/delete")
 	public String adminNoticeDelete(@RequestParam String ckStr) {
 		log.info("param = {}", ckStr);
