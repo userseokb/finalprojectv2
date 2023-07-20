@@ -19,5 +19,7 @@ public interface QnaMapper {
 
 	public QnaDto insertQna(QnaDto newQna);
 
+	public void insertAnswer(QnaDto updateQna);
+
 
 }
