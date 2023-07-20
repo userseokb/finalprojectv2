@@ -7,7 +7,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/main">관리자 통계</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">상품 관리</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">상품 등록</a>          
-                    <div class="list-group-item list-group-item-action list-group-item-light p-3 with-submenu">사이트 관리
+                    <div class="list-group-item list-group-item-action list-group-item-light p-3 with-submenu"  style="cursor:pointer">사이트 관리
                         <ul class="smenu">
                             <li><a href="/admin/noticeManage">공지사항 관리</a></li>
                             <li><a href="/admin/faqManage">FAQ 관리</a></li>
