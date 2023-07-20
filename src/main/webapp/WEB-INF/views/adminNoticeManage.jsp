@@ -26,7 +26,7 @@
                 <div class="container-fluid">
 					<div class="container">
 					<h4>공지사항 관리</h4>
-					<a class="btn btn-outline-dark mt-auto">선택삭제</a>
+					<a class="btn btn-outline-dark mt-auto" onclick="deleteValue();">선택삭제</a>
 					<table class="table">
 						<tr>
 							<th>선택</th>
@@ -41,7 +41,7 @@
 						<c:forEach items="${noticeList}" var="notice">
 							<tr>
 								<td>
-									<input type="checkbox" id="delCheck" name="delCheck" value="${notice.noticeNo}">
+									<input type="checkbox" id="delCheck${notice.noticeNo}" name="delCheck" value="${notice.noticeNo}">
 								</td>
 								<td>${notice.noticeNo}</td>
 								<td><a href="noticeManage/detail?no=${notice.noticeNo}">${notice.title}</a></td>
@@ -49,7 +49,7 @@
 								<td>관리자</td>
 								<td>${notice.kinds}</td>
 								<td>
-									<a class="btn btn-outline-dark mt-auto">수정</a>
+									<a class="btn btn-outline-dark mt-auto" href="noticeManage/modify?no=${notice.noticeNo}">수정</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -65,6 +65,44 @@
         <!-- Core theme JS-->
         <script src="/resources/js/scripts.js"></script>
         <script>
+        
+    	function deleteValue() {
+    		var cbArray = document.getElementsByName('delCheck');
+    		var checkedArray = new Array();
+    		for(let i = 0; i<cbArray.length; i++) {
+    			if(cbArray[i].checked == true) {
+    				let checkedValue = cbArray[i].value;
+    				checkedArray.push(checkedValue);
+    			}
+    		}
+    		if(checkedArray.length == 0) {
+    			alert("선택된 체크박스가 없습니다");
+    			return false;
+    		}
+    		
+    		let ckStr = checkedArray.join();
+    		
+
+    		
+            if (!confirm("정말로 삭제하시겠습니까?")) {
+            } else {
+                var newForm = document.createElement("form");
+                newForm.setAttribute("action", "noticeManage/delete"); //요청 보낼 주소
+                newForm.setAttribute("method", "post");  //Post 방식 
+
+               // input 태그 생성 & 속성부여
+               var newInput = document.createElement("input");
+               newInput.setAttribute("type", "text");
+               newInput.setAttribute("id", "ckStr");
+               newInput.setAttribute("name", "ckStr");
+               newInput.setAttribute("value", ckStr);
+               
+               newForm.appendChild(newInput);
+               document.body.appendChild(newForm); 
+               newForm.submit();
+               }
+    	}
+	        
         </script>
     </body>
 </html>

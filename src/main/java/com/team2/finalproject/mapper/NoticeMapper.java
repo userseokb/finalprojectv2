@@ -15,4 +15,8 @@ public interface NoticeMapper {
 	public void hitCount(int noticeNo);
 	
 	public int insertNotice(NoticeDto noticeDto); 
+	
+	public int updateNotice(NoticeDto noticeDto); 
+	
+	public int deleteNotice(List<Integer> noticeNoList);
 }
