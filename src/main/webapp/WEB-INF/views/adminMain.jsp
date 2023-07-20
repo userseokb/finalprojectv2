@@ -16,10 +16,10 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
-        <div class="d-flex" id="wrapper">
+        <div class="d-flex" id="wrapper" >
 				<%@ include file="adminSidebar.jsp" %>
             <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
+            <div id="page-content-wrapper" >
                 <%@ include file="adminNav.jsp" %>
                 <!-- Page content-->
                 <div class="container-fluid">

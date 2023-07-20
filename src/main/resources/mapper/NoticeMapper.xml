@@ -14,6 +14,7 @@
  	 			content,
  	 			kinds
  	 		FROM notice
+ 	 		order by notice_no asc
  	 	</select>
  		
  		<select id="getNoticeByNoticeNo" resultType="com.team2.finalproject.dto.user.NoticeDto">
@@ -46,5 +47,20 @@
  	 			#{content},
  				0)
  		</insert>
+ 		
+ 		<update id="updateNotice">
+ 		UPDATE notice
+ 		SET	title = #{title}, state = #{state}, content = #{content}
+ 		WHERE notice_no = #{noticeNo}
+ 		</update>
+ 		
+ 		<delete id="deleteNotice" parameterType="List">
+		DELETE FROM notice
+		WHERE
+			notice_no in
+	    <foreach collection="list" item="item" index="i" open="(" separator="," close=")">
+	      #{item}
+    	</foreach>
+</delete>
  		
  </mapper>
