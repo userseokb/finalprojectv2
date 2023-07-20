@@ -16,4 +16,12 @@ public class ReviewService {
         mapper.insertReview(newReview);
     }
 
+	public double getAvgRateByProductCode(Integer productCode) {
+		double avgRate = mapper.getAvgRateByProductCode(productCode);
+		if( avgRate < 0) {
+			return -1;
+		}
+		return (Math.round(avgRate*100)/100.0);
+	}
+
 }

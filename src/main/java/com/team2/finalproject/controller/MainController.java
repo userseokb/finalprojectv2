@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.ReviewDto;
 import com.team2.finalproject.mapper.MainMapper;
 import com.team2.finalproject.service.MainService;
+import com.team2.finalproject.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,9 @@ public class MainController {
 	
 	private final MainMapper mainMapper;
 	private final MainService mainService;
+	@Autowired
+	ReviewService reviewService;
+	
 	
 	@GetMapping(value = "/main")
 	public String mainmethod(@ModelAttribute PageRequestDto pageRequest,
@@ -70,9 +75,12 @@ public class MainController {
 		
 		ProductDto productDto = mainService.getProductByProductCode(productCode);
 		List<ReviewDto> reviewDto = mainService.getReviewByProductCode(productCode);
+		double avgRate = reviewService.getAvgRateByProductCode(productDto.getProductCode());
+		System.out.println(avgRate);
 		
 		model.addAttribute("products", productDto);
 		model.addAttribute("reviews", reviewDto);
+		model.addAttribute("avgRate",avgRate);
 			return "productdetail";
 		}
 //	
