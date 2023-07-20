@@ -24,4 +24,11 @@ public class ReviewService {
 		return (Math.round(avgRate*100)/100.0);
 	}
 
+
+	public void deleteReviewByReviewNo(int userNo, Integer reviewNo) {
+		mapper.deleteReviewByReviewNo(userNo, reviewNo);
+		
+	}
+
+
 }

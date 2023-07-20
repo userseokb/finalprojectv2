@@ -32,5 +32,9 @@
 		FROM review
 		WHERE product_code = #{productCode}
 	</select>
+	
+	<select id="deleteReviewByReviewNo">
+		DELETE FROM review WHERE review_no = #{reviewNo} AND user_no = #{userNo}
+	</select>
 
 </mapper>
