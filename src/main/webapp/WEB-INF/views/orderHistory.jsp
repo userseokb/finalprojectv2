@@ -73,7 +73,7 @@
 											</div>
 										</c:when>
 										<c:when test="${orderList[status1.index].orderStatus eq 6}">구매확정
-											<a href="/review/${productList[status1.index].productCode}">
+											<a href="/review/${productList[count-1].productCode}">
 												<div>
 													<input type="button" class="change-option-btn" value="리뷰작성">
 												</div>
