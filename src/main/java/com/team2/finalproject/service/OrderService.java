@@ -2,12 +2,15 @@ package com.team2.finalproject.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team2.finalproject.dto.order.AmountSalesDto;
 import com.team2.finalproject.dto.order.OrderDetailDto;
 import com.team2.finalproject.dto.order.OrderDto;
+import com.team2.finalproject.dto.order.TotalSalesDto;
 import com.team2.finalproject.mapper.OrderMapper;
 
 @Service
@@ -53,5 +56,15 @@ public class OrderService {
 		return orderDetailList;
 	}
 	
+	
+	//통계 차트 1번쨰(월별 총 판매량)
+	public List<AmountSalesDto> getMonthSalesAmount() {
+		return orderMapper.getMonthSalesAmount();
+	}
+	
+	//통계 차트 2번째(총 판매량 순위(1~3등))
+	public List<TotalSalesDto> getTotalSalesAmount() {
+		return orderMapper.getTotalSalesAmount();
+	}
 	
 }
