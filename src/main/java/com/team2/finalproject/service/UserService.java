@@ -92,5 +92,12 @@ public class UserService {
 		mapper.updateUserPoint(userNo,point*50);
 	}
 
+	public void updateUsedUserPoint(int userNo, int usedPoint) {
+		if(usedPoint > 0) {
+			mapper.updateUsedUserPoint(userNo, usedPoint);
+		}
+		
+	}
+
 	
 }

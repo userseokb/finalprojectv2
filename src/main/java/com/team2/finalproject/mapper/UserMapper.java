@@ -41,6 +41,8 @@ public interface UserMapper {
 
 	public void updateUserPoint(@Param("userNo")int userNo, @Param("point") int point);
 
+	public void updateUsedUserPoint(@Param("userNo") int userNo, @Param("usedPoint") int usedPoint);
+
 	
 	
 	

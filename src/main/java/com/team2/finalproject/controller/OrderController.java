@@ -241,6 +241,9 @@ public class OrderController {
 			// 누적금액 갱신
 			userService.updateUserBuySum(userNo,price);
 			
+			// 사용포인트 업데이트
+			userService.updateUsedUserPoint(userNo, usedPoint);
+			
 			//포인트 적립
 			userService.updateUserPoint(userNo,price);
 			}else {

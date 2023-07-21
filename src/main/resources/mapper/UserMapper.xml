@@ -91,4 +91,8 @@
 	<update id="updateUserPoint">
 		UPDATE users SET point = point + #{point} WHERE user_no = #{userNo}
 	</update>
+	
+	<update id="updateUsedUserPoint">
+		UPDATE users SET point = point - #{usedPoint} WHERE user_no = #{userNo}
+	</update>
  </mapper>
