@@ -61,7 +61,7 @@
                                     <div>수량변경</div>&nbsp;&nbsp;
                                     <div class="count-btn float-right">
                                         <button type="button" onclick="minus(this)">-</button>
-                                        <input class="count-input" type="number" name="" value="1" id="productQuantity">
+                                        <input class="count-input" type="number" name="" value="1" id="productQuantity" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <button type="button" onclick="plus(this)">+</button>
                                     </div>
                                 </div>
