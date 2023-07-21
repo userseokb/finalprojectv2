@@ -251,6 +251,19 @@
         }
         
         function order(){
+        	// 상품 체크 유효성 검사
+        	let noCheck = true;
+        	for(let i=0; i<items.length; i++){
+        		if(items[i].checked){
+        			noCheck =false;
+        			break;
+        		}
+        	}
+        	// 상품 체크 0개시 경고
+			if(noCheck) {
+				alert("구매할 상품을 확인해주세요");
+				return;
+			}
         	let basketForm = document.getElementById("basketForm");
         	basketForm.action="/order";
         	basketForm.method = "POST";
