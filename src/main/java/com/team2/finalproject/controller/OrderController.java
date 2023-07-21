@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +42,9 @@ import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.OrderService;
 import com.team2.finalproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class OrderController {
 
@@ -275,7 +278,7 @@ public class OrderController {
 		return "redirect:/basket";
 	}
 	
-	
+	//주문 내역
 	@RequestMapping(value="/orderHistory", method=RequestMethod.GET)
 	public String orderHistory(Principal principal, Model model,@AuthenticationPrincipal CustomUserDetails cud) {
 		String userId = principal.getName();
@@ -286,6 +289,8 @@ public class OrderController {
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
 		
+		log.info("product = {}", productList);
+		
 		model.addAttribute("userInfo",cud);
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("orderDetailList",orderDetailList);
@@ -295,4 +300,12 @@ public class OrderController {
 		return "orderHistory";
 	}
 	
+	
+	// 구매 확정
+	@RequestMapping(value="/purchase/{orderNo}", method=RequestMethod.PUT)
+	public String purchase(@PathVariable int orderNo) {
+		System.out.println(orderNo);
+		orderService.updateOrderStateToPurchase(orderNo);
+		return "redirect:/orderHistory";
+	}
 }

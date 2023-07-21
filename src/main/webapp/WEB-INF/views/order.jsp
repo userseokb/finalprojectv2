@@ -322,11 +322,13 @@
 			//포인트 디폴트값 설정
 			let usedPoint = document.getElementById("usePoint").value;
 			if(usedPoint == "" || usedPoint == "0" || usedPoint == 0) usedPoint = 0;
-			
+			else{
+				usedPoint = usedPoint.replace(",","")
+			}
 			let data = {
 				productList : productCodeQuantityArr,
 				productQuantity : totalProductQuantity, 
-				usedPoint : usedPoint.replace(",",""),
+				usedPoint : usedPoint,
 				basicAddr : basicAddr,
 				detailAddr : detailAddr,
 				paymentMethod : paymentMethod,

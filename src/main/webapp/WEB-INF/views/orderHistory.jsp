@@ -36,6 +36,8 @@
 				<!-- 마이페이지 컨텐츠 영역 -->
 				<div class="mypage-content-detail">
 
+
+					<form id="orderList">
 					<!-- 주문내역 조회 -->
 					<table class="mypage-table table-text-center" id="myTable">
 						<tr>
@@ -68,8 +70,7 @@
 										<c:when test="${orderList[status1.index].orderStatus eq 4}">배송중</c:when>
 										<c:when test="${orderList[status1.index].orderStatus eq 5}">배송완료
 											<div>
-												<input type="button" class="change-option-btn" value="교환/환불">
-												<input type="button" class="change-option-btn" value="구매확정">
+												<input type="button" class="change-option-btn" value="구매확정" onclick="purchase(${orderList[status1.index].orderNo});">
 											</div>
 										</c:when>
 										<c:when test="${orderList[status1.index].orderStatus eq 6}">구매확정
@@ -87,6 +88,7 @@
 						</c:forEach>
 						
 					</table>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -134,6 +136,18 @@
 		// 페이지 로딩후 병합실행
 		window.addEventListener('load', rowspanSameValues);
 
+		
+		function purchase(orderNo){
+			let orderList = document.getElementById("orderList");
+			let input = document.createElement('input'); 
+			input.type = 'hidden'; 
+			input.name = '_method'; 
+			input.value  = 'PUT'; 
+			orderList.appendChild(input); 
+			orderList.action = "/purchase/" + orderNo;
+			orderList.method = "POST";
+			orderList.submit();
+		}
 	</script>
 </body>
 
