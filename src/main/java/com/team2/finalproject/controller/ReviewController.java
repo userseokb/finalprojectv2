@@ -78,7 +78,6 @@ public class ReviewController {
 		
 	    reviewService.deleteReviewByReviewNo(userNo, reviewNo);
 
-	    model.addAttribute("reviewNo", reviewNo);
 	    return "redirect:/productdetail/" + productCode; // 삭제 후 상품 상세 페이지로 리다이렉트
 	} 
 }

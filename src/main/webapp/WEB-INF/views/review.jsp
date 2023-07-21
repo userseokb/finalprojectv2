@@ -38,10 +38,10 @@
                 <table class="mypage-table first-row-text-center">
                     <tr>
                         <td>상품</td>
-                        <td>${products.name}</td>
-                        <td>${review.productName}
-                        	<input type="hidden" id="productNameInput" name="productName" value="${products.name}">
-                        	</td>
+                        <td>${products.name}
+                        <input type="hidden" id="productNameInput" name="productName" value="${products.name}">
+                        </td>
+                        	
                     </tr>
                    <tr>
   				  <td>제목</td>
