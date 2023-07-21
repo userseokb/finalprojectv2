@@ -46,7 +46,7 @@
                    <tr>
   				  <td>제목</td>
  					   <td>
-					        <input type="text" id="titleInput" name="title" placeholder="제목을 입력해주세요" value="${review.title}">
+					        <input type="text" id="titleInput" name="title" maxlength='50' placeholder="제목을 입력해주세요" value="${review.title}">
 					    </td>
 					</tr>
 					<tr>
@@ -63,7 +63,7 @@
 					<tr>
 				    <td>용도</td>
 				    <td>
-				        <label><input type="radio" name="usage" value="1" onclick="setPurposeValue(1)"> 선물용</label>
+				        <label><input type="radio" name="usage" value="1" onclick="setPurposeValue(1)" > 선물용</label>
 				        <label><input type="radio" name="usage" value="2" onclick="setPurposeValue(2)"> 직접음용</label>
 				        <input type="hidden" id="usageInput" name="purpose" value="${review.purpose}">
 				    </td>
@@ -83,7 +83,7 @@
                     
 				<tr>
     <td colspan="2">
-        <textarea class="review-textarea" name="content" placeholder="리뷰를 작성해주세요(500자 이하)"
+        <textarea class="review-textarea" id="content" name="content" placeholder="리뷰를 작성해주세요(500자 이하)"
             onkeyup="textLengthCalc(this)" maxlength="500"></textarea>
         <div class="float-right small" id="subtext">500</div>
     </td>
@@ -94,8 +94,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <input type="submit" value="리뷰등록" class="change-option-btn">
+                        <td colspan="2">                   
+                            <button class="change-option-btn" onclick="reviewRegisterCheck();"
+								type="button">리뷰등록</button>
                         </td>
                     </tr>
                 </table>
@@ -181,6 +182,56 @@
 	    function setAgeGroupValue(value) {
 	        document.getElementById("ageGroupInput").value = value;
 	    }
+	    
+	    
+        function reviewRegisterCheck() {
+            var titleInput = document.getElementById("titleInput");
+            var rateInput = document.getElementById("rateInput");
+            var usageInput = document.getElementById("usageInput");
+            var ageGroupInput = document.getElementById("ageGroupInput");
+            var content = document.getElementById("content");
+
+            
+            var nospaceReg = /^.*\S.*/;	//공백만 입력하는 것을 방지
+        	//제목 유효성 검사
+            if (!nospaceReg.test(titleInput.value)) {
+                alert("제목은 필수 입력입니다");
+                titleInput.focus();
+                return false;
+            };
+            
+        	//별점 유효성 검사
+            if (rateInput.value == '') {
+                alert("별점을 선택해 주세요");
+                return false;
+            };
+            
+        	//용도 유효성 검사
+            if (usageInput.value == '') {
+                alert("용도을 선택해 주세요");
+                return false;
+            };
+            
+            
+        	//대상자 연령 유효성 검사
+            if (ageGroupInput.value == '') {
+                alert("연령을 선택해 주세요");
+                return false;
+            };
+            
+            // 내용 유효성 검사
+            if (!nospaceReg.test(content.value)) {
+                alert("내용은 필수 입력입니다");
+                content.focus();
+                return false;
+            };
+            
+           //입력 값 전송
+           document.reviewForm.submit(); //유효성 검사의 포인트
+
+        }
+	    
+	    
 	</script>
     
 </body>

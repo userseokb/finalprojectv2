@@ -82,6 +82,8 @@ public class MainService {
 			int productCode = orderDetailList.get(i).get(j).getProductCode();
 			ProductDto product = mainMapper.getProductByProductCode(productCode);
 			productList.add(product);
+			log.info("productCode = {}", productCode);
+			log.info("product = {}", product);
 			}
 		}
 		return productList;

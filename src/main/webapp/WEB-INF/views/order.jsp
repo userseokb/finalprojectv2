@@ -100,9 +100,9 @@
 										id="userPoint" readonly value="${userInfo.point}">
 								</div>
 								<div>
-									<span>사용할 포인트</span> <input id="usePoint" type="number"
-										class="price-input" placeholder="사용할 포인트"
-										onchange="verifyPoint(this);">
+									<span>사용할 포인트</span> <input id="usePoint" type="text"
+										class="price-input" placeholder="사용할 포인트" 
+										onchange="verifyPoint(this);" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 								</div>
 							</div>
 						</div>
@@ -244,12 +244,16 @@
 		function verifyPoint(point){
 			let userPoint = document.getElementById("userPoint");
 			let totalPrice = document.getElementById("totalPrice");
+			userPoint.value = userPoint.value.replace(",","");
+			totalPrice.value = totalPrice.value.replace(",","");
 			totalPrice.value = Number(${sum + derivery});
-			if(Number(point.value) > Number(userPoint.value)) {
+			if(Number(point.value.replace(",","")) > Number(userPoint.value.replace(",",""))) {
 				point.value = userPoint.value;
 			}
 			totalPrice.value = Number(totalPrice.value) - Number(point.value); 
-			
+			toLocaleStringLogic(userPoint);
+			toLocaleStringLogic(point);
+			toLocaleStringLogic(totalPrice);
 		}
 		
 		function payment(){
@@ -318,7 +322,9 @@
 			//포인트 디폴트값 설정
 			let usedPoint = document.getElementById("usePoint").value;
 			if(usedPoint == "" || usedPoint == "0" || usedPoint == 0) usedPoint = 0;
-			
+			else{
+				usedPoint = usedPoint.replace(",","")
+			}
 			let data = {
 				productList : productCodeQuantityArr,
 				productQuantity : totalProductQuantity, 
@@ -350,6 +356,7 @@
             let deliveryPrice = document.getElementById("deliveryPrice");
             let totalPrice = document.getElementById("totalPrice");
             let userPoint = document.getElementById("userPoint");
+            let usePoint = document.getElementById("usePoint");
         	for(let i=0; i<productPriceList.length; i++){
         		productPriceList[i].innerText = Number(productPriceList[i].innerText).toLocaleString("ko-KR");
         	}
@@ -357,6 +364,7 @@
         	toLocaleStringLogic(deliveryPrice);
         	toLocaleStringLogic(totalPrice);
         	toLocaleStringLogic(userPoint);
+        	toLocaleStringLogic(usePoint);
         }
         
         function toLocaleStringLogic(input){

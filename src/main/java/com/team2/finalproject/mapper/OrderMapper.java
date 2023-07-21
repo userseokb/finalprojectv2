@@ -33,4 +33,6 @@ public interface OrderMapper {
 	//통계 차트 2번째(총 판매량 순위(1~3등))
 	List<TotalSalesDto> getTotalSalesAmount();
 
+	void updateOrderStateToPurchase(@Param("orderNo") int orderNo);
+
 }

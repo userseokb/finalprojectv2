@@ -18,7 +18,7 @@
  	 				sysdate,
  	 				#{deliveryCharge},
  	 				#{price},
- 	 				1
+ 	 				5
  	 			)
  	 	</insert>
 
@@ -98,5 +98,10 @@
 		where rownum &lt;= 3
  	 	</select>
  	 	
+ 	 	
+ 	 	<update id="updateOrderStateToPurchase">
+ 	 	UPDATE orders SET order_status = 6
+ 	 	WHERE order_no = #{orderNo}
+ 	 	</update>
  	 	
  </mapper>
