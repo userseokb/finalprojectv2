@@ -52,7 +52,7 @@
 						<i class="bi-person"></i> 
 						<input class="user-info-input"
 							type="text" name="inputId_1" id="inputId_1" autocomplete="false"
-							placeholder="id(5글자 이상)">
+							placeholder="id(4글자 이상)">
 					</div>
 					<div>
 						<i class="bi-telephone"></i> <input class="user-info-input"
@@ -185,8 +185,8 @@ function submitForm() {
       return;
     }
 
-    if (inputId.length <= 4) {
-      alert('아이디는 5글자 이상 입력해주세요.');
+    if (inputId.length <= 3) {
+      alert('아이디는 4글자 이상 입력해주세요.');
       return;
     }
 
