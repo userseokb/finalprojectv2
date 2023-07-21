@@ -84,7 +84,7 @@
 										<input class="count-input" type="number" name=""
 											value="${basket.productQuantity}"
 											id="productQuantity${status.index}" onchange="totalPrice(); 
-											createButton(${status.index});">
+											createButton(${status.index});" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 										<button onclick="plus(this,${status.index})" type="button">+</button>
 										
 									</div><br>
