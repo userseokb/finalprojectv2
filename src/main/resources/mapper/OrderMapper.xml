@@ -70,4 +70,33 @@
  	 		FROM order_detail
  	 		WHERE order_no = #{orderNo}
  	 	</select>
+ 	 	
+ 	 	<!-- 첫번째 통계차트(년별 월별 판매량) -->
+ 	 	 <select id="getMonthSalesAmount" resultType="com.team2.finalproject.dto.order.AmountSalesDto">
+			SELECT
+			    TO_CHAR(A.order_date, 'MM') AS month,
+			    SUM(A.product_quantity) AS sales
+			FROM
+			    (SELECT * FROM orders WHERE extract(year from order_date) = extract(year from sysdate)) A
+			GROUP BY
+			    TO_CHAR(A.order_date, 'MM')
+			ORDER BY
+			    TO_CHAR(A.order_date, 'MM')
+ 	 	</select>
+ 	 	
+ 	 	<!-- 두번째 통계차트(총 판매량 순위(1~3등)) -->
+ 	 	<select id="getTotalSalesAmount" resultType="com.team2.finalproject.dto.order.TotalSalesDto">
+ 	 	select *
+		from(
+		select b.name, count(*) cnt
+		from order_detail a
+		inner join product b
+		on a.product_code = b.product_code
+		group by b.name
+		order by cnt desc
+		)
+		where rownum &lt;= 3
+ 	 	</select>
+ 	 	
+ 	 	
  </mapper>
