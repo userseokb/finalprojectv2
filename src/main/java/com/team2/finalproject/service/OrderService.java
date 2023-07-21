@@ -66,5 +66,9 @@ public class OrderService {
 	public List<TotalSalesDto> getTotalSalesAmount() {
 		return orderMapper.getTotalSalesAmount();
 	}
+
+	public void updateOrderStateToPurchase(int orderNo) {
+		orderMapper.updateOrderStateToPurchase(orderNo);
+	}
 	
 }

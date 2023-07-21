@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -275,7 +276,7 @@ public class OrderController {
 		return "redirect:/basket";
 	}
 	
-	
+	//주문 내역
 	@RequestMapping(value="/orderHistory", method=RequestMethod.GET)
 	public String orderHistory(Principal principal, Model model,@AuthenticationPrincipal CustomUserDetails cud) {
 		String userId = principal.getName();
@@ -295,4 +296,12 @@ public class OrderController {
 		return "orderHistory";
 	}
 	
+	
+	// 구매 확정
+	@RequestMapping(value="/purchase/{orderNo}", method=RequestMethod.PUT)
+	public String purchase(@PathVariable int orderNo) {
+		System.out.println(orderNo);
+		orderService.updateOrderStateToPurchase(orderNo);
+		return "redirect:/orderHistory";
+	}
 }
