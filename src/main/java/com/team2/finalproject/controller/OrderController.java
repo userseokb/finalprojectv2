@@ -42,7 +42,9 @@ import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.OrderService;
 import com.team2.finalproject.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class OrderController {
 
@@ -286,6 +288,8 @@ public class OrderController {
 		List<List<OrderDetailDto>> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
+		
+		log.info("product = {}", productList);
 		
 		model.addAttribute("userInfo",cud);
 		model.addAttribute("orderList",orderList);
