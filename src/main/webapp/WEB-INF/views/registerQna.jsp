@@ -81,9 +81,9 @@
             var state = document.getElementById("state");
             var content = document.getElementById("content");
 
-            var titleReg = /^[\s\S]{2,}$/;
+            var titleReg = /^.*\S.*/;
             if (!titleReg.test(title.value)) {
-                alert("제목은 두글자 이상이어야 합니다.");
+                alert("제목을 입력해 주세요.");
                 title.focus();
                 return false;
             }
@@ -94,7 +94,7 @@
                 return false;
             }
 
-            var contentReg = /^[\s\S]{2,}$/;
+            var contentReg = /^.*\S.*/;
             if (!contentReg.test(content.value)) {
                 alert("내용을 입력해 주세요.");
                 content.focus();
