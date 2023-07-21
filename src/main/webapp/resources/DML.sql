@@ -1,3 +1,17 @@
+
+
+INSERT INTO category values('A'
+,'soju');
+INSERT INTO category values( 'B' 
+,'liqueur');
+INSERT INTO category values( 'C' 
+,'makkoli');
+INSERT INTO category values( 'D' 
+,'yakju');
+
+
+
+
 INSERT INTO product values (
 product_code_seq.NEXTVAL
  ,'A'
@@ -616,3 +630,329 @@ product_code_seq.NEXTVAL
  ,6650
  ,0
  ,systimestamp);
+
+   INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'C'
+ ,'술마켓 두술도가 희양산 생막걸리 15도 650ml'
+ ,'두술도가의 막걸리는 우렁이쌀로 두 번 빚는 이양주인 희양산막걸리. 정직하게 우리쌀로 빚어 그 속은 아주 건강하지만
+ 외관을 먼저 보면 막걸리인가하는 생각이 들게합니다. 
+ 바로 독특하고 귀여워 웃음을 자아내는 힙한 라벨디자인 때문입니다. 
+ 이 디자인은 희양산공동체 식구인 전미화 동화작가의 작품으로 젊은 농부들이 모인 희양산 공동체와 두술도가의 에너지를 잘 보여줍니다.'
+ ,11400
+ ,0
+ ,systimestamp);
+ 
+   INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'C'
+ ,'마마스팜 문삼이공 잣막걸리 12도 500ml 무감미료'
+ ,'술잔에 잣기름이 동동 뜨고 첫 잔에 입안 가득 잣 향이 감도는 정통 잣막걸리입니다.
+ 누룩의 과일향과 잣의 부드러운 조화가 독특한 매력적인 문삼이공잣의 세계로 초대합니다.'
+ ,21850
+ ,0
+ ,systimestamp); 
+
+  INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'C'
+ ,'동강주조 얼떨결에 퍼플 6도 935ml 스파클링막걸리'
+ ,'얼떨결에 퍼플은 국내산 햅쌀 영월산 컴벨포도 영월산 유기농찰보리쌀로 만들어지며 저온발효로 12일 이상 발표 숙성과정을 거치며 이양주로 제작됩니다.
+ 바디감은 민터컬러에 비하여 조금은 묵직하며 상쾌하고 새콤달콤한 성상이 특징이며 스파클링 와인의 느낌도 느낄실 수 있습니다.'
+ ,9020
+ ,0
+ ,systimestamp); 
+
+  INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'C'
+ ,'이원양조장 향수 9도 700ml 무감미료 우리밀 100프로'
+ ,'우리밀 막걸리 향수는 쌀로 고두밥을 짓는 대신에 강대표가 직접 재배하는 밀을 가루 내 반죽하여 사용합니다.
+ 누룩을 더해 20일 가량 발효시켜 감미료가 전혀 들어가지않은 9도의 밀막걸리를 완성합니다.
+ 향수는 밀막걸리 답게 진하고 묵직한 맛을 자랑 합니다. 여기에 밀 특유의 구수한 풍미가 더해져 풍부한 맛을 즐길 수 있습니다.'
+ ,6650
+ ,0
+ ,systimestamp);  
+
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'배상면주가 심술 7도 330ml 포도블루베리탄산주'
+ ,'쌀을 베이스로 블루베리와 포드 과즙을 더해 새콤달콤 밸런스가 좋은 맛을 완성했습니다.
+ 톡톡 스파클링을 품은 투명한 핑크빛 색상이 더욱 매력적인 심술7.
+ 주세법상 약주로 분류되지만 도수가 낮은 스파클링 와인처럼 가볍고 산뜻하게 즐겨보세요.'
+ ,3000
+ ,0
+ ,systimestamp);
+  
+   INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'배상면주가 심술 12도 330ml 포도블루베리탄산주'
+ ,'블루베리와 포도과즙의 새콤달콤한 맛은 살리고 도수는 12도로 한층 높아진 심술입니다.
+ 적절한 도수가 받쳐주기에 마냥 음료처럼 달달하기만 하지 않습니다.
+ 더욱 깊은 맛의 심술을 느껴보세요.'
+ ,3000
+ ,0
+ ,systimestamp);  
+ 
+   INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'배상면주가 심술버블 7도 330ml 소다탄산주'
+ ,'이제까지 느껴보지 못한 색다른 맛의 심술7버블입니다. 
+ 소다와 바나나향기가 진하고 달콤하게 풍겨 이름처럼 버블껌 혹은 소다맛 아이스크림을 연상시키는 맛입니다.
+ 달콤함을 느끼며 디저트주로 또는 안주없이 홀짝홀짝 즐기기좋습니다.'
+ ,3000
+ ,0
+ ,systimestamp);  
+ 
+   INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'배상면주가 산사춘 12도 375ml'
+ ,'산이나 들에서 쉽게 볼 수 있는 산사나무의 작고 동글동글한 빨간열매가 들어간 약주입니다.
+ 달콤새콤한 맛을 자랑하는 산사나무 열매에 포도과즙까지 첨가했으며 12도의 낮은 도수로 편안하게 마시기 좋습니다.
+ 잔에 졸졸따라보면 맑고 투명한 다홍빛에 미세하고 은은하게 약재향이 새콤하게 감돌아 입맛을 돋웁니다.'
+ ,4300
+ ,0
+ ,systimestamp);  
+ 
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'백운주가 대나무술 11도 375ml'
+ ,'동의보감에 뇌졸중과 심신안정에 효능이 있다고 소개된 대나무잎과 백운산의 꺠끗한 물로 빚은 죽엽주입니다.
+ 저온 장기 휴면 발효공법과 자체개발한 향균포를 이용하여 은은한 향과 감칠맛이 일품입니다.'
+ ,3800
+ ,0
+ ,systimestamp); 
+ 
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'백운주가 배양근 산삼주 13도 375ml'
+ ,'배양근 산삼의 은은한 향이 감칠맛을 한층 더 살려주며 잡냄새 없이 깔끔하고 부드러운 목넘김을 자랑합니다.
+ 드시기 전 냉장고에 차갑게 보관하셨다가 드시면 산삼의 향을 더욱 깔끔하게 즐기실 수 있습니다.'
+ ,3320
+ ,0
+ ,systimestamp); 
+ 
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'석전주가 설련주 16도 750ml 곽우선명인 백련화 약주'
+ ,'부드러운 맛과향 설련. 백련꽃과 백련잎 찹쌀 멥살 전통누룩으로 3번빚어 3개월 이상 발효 숙성하여 만든술입니다.
+ 마음이 편안해지는 백련꽃의 은은한 향기로 마지막 잔까지 부담없이 드시기에 좋은 술입니다.'
+ ,33250
+ ,0
+ ,systimestamp); 
+ 
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'이가수불 이상헌약주 18도 500ml 무감미료'
+ ,'이상헌약주는 결코 가볍지 않은 약주입니다. 탁주보다는 조금 단맛을 느낄 수 있지만 과하게 튀지 않습니다.
+ 진한 곡물의 향을 베이스로 단맛과 신맛이 조화롭게 어우러지며 입안을 채워줍니다. '
+ ,42750
+ ,0
+ ,systimestamp); 
+ 
+      INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'우포의아침 양파와인 12도 500ml'
+ ,'우포의아침이 가진 발효의 노하우에 양파를 더했습니다.
+ 향긋한 밀누룩에 창녕산 양파가 들어가 신선한 양파가 가지는 단맛을 살렸습니다.
+ 하지만 양파의 맛이나 향이 과하게 다가오는 것이 아닌 달달하면서도 산뜻하게 입안을 적시고 감칠맛을 주며 마무리됩니다.'
+ ,9500
+ ,0
+ ,systimestamp); 
+
+    INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'우포의아침 맑은내일 유자 7도 735ml 유자주'
+ ,'유자의 맛과 향을 그대로 술 한병으로 담아냈습니다.
+ 밝은 노란빛깔이 품은 유자향이 상큼하게 퍼지며 한모금 머금으면 유자 그자체를 입에 가득넣은듯 산뜻함과 청량함이 차오릅니다.
+ 인위적인 향은 전혀 없이 새콤달콤한 유자가 부드럽게 목을 타고 넘어가며 잔향까지도 상큼하고 사랑스러운 유자 그대로입니다.'
+ ,18000
+ ,0
+ ,systimestamp); 
+
+      INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'신탄진주조 하타 16도 500ml 프리미엄 전통 청주'
+ ,'하타는 백제인으로 일본에 술만드는 기술을 전해주고 주신으로 모셔지고 있다고 합니다.
+ 그 이름을 딴 신탄진주조의 하타 또한 술에 대한 진실한 마음으로 딱 필요한 최소의 재료인 쌀 입국 효모 정제수만을 사용해 빚습니다.'
+ ,19000
+ ,0
+ ,systimestamp); 
+ 
+     INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'신탄진주조 대덕주 단상지교 16도 750ml 프리미엄 전통주'
+ ,'큰덕을 담은 술 이라는 뜻의 대덕주는 유씨 종가 대대로 내려온 가양주입니다.
+ 조선시대부터 차례주로 사용했으며 마을의 크고작은 경조사에도 함께하는 자랑스러운 술이었습니다.'
+ ,19000
+ ,0
+ ,systimestamp); 
+ 
+  INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'박흥선 명인 솔송주 13도 700ml'
+ ,'솔송주는 농림부 지정 전통식품으로 식품명인이자 무형문화제로 지정된 박흥선 명인이 100프로국내산 햅쌀 송순 솔잎과 지리산 암반수로 빚은 전통 프리미엄 약주로 도수가 높지않고 은은한 솔잎의 맑은 향기가 산뜻한 맛을 가지고 있습니다.'
+ ,18000
+ ,0
+ ,systimestamp);  
+ 
+ INSERT INTO product values (
+product_code_seq.NEXTVAL
+ ,'D'
+ ,'초가 한청 15도 700ml 철원오대쌀청주'
+ ,'초가는 한국의 청주를 세계에 알리겠다고 꿈을 안고 물맑고 공기좋은 강원도 철원에 터를 잡아 철원오대쌀로 우리술을 빚습니다.
+ 일본 사케의 주조방식을 따르지않겠다는 일념하에, 오랜시간의 시행착오를 거쳐 초가만의 새로운 기술을 개발하여 우리입에 잘 맞는 청주 한청을 선보입니다.'
+ ,19000
+ ,0
+ ,systimestamp); 
+
+ INSERT INTO qna values(
+qna_no_seq.NEXTVAL
+,1
+,'테스트용 제목'
+,'A'
+,sysdate
+,'테스트용 컨텐츠 입니다 
+Lorem Ipsum is simply dummy text 
+of the printing and typesetting industry. 
+Lorem Ipsum has been the industrys 
+standard dummy text ever si다nce the 
+1500s, when an unknown printer took 
+a galley of type and scrambled it to 
+make a type specimen book. 다
+It has survived not only five centuries, 
+but also the leap into electronic typesetting, 
+remaining essentially unchanged. 
+It was popularised in the 1960s 
+with the release of Letraset sheets containing 
+Lorem Ipsum passages, and more recently 
+with desktop publishing software like Aldus
+ PageMaker including versions of Lorem Ipsum.'
+,0
+,'테스트용 답변입니다'
+);
+
+INSERT INTO qna values(
+qna_no_seq.NEXTVAL
+,2
+,'테스트용 제목2'
+,'B'
+,sysdate
+,'테스트용 컨텐츠 입니다 
+Lorem Ipsum is simply dummy text 
+of the printing and typesetting industry. 
+Lorem Ipsum has been the industrys 
+standard dummy text ever since the 
+1500s, when an unknown printer took 
+a galley of type and scrambled it to 
+make a type specimen book. 다
+It has survived not only five centuries, 
+but also the leap into electronic typesetting, 
+remaining essentially unchanged. 
+It was popularised in the 1960s 
+with the release of Letraset sheets containing 
+Lorem Ipsum passages, and more recently 
+with desktop publishing software like Aldus
+ PageMaker including versions of Lorem Ipsum.'
+,0
+,'테스트용 답변입니다'
+);
+
+INSERT INTO qna values(
+qna_no_seq.NEXTVAL
+,2
+,'테스트용 제목3'
+,'C'
+,sysdate
+,'테스트용 컨텐츠 입니다 
+Lorem Ipsum is simply dummy text 
+of the printing and typesetting industry. 
+Lorem Ipsum has been the industrys 
+standard dummy text ever since the 
+1500s, when an unknown printer took 
+a galley of type and scrambled it to 
+make a type specimen book. 다
+It has survived not only five centuries, 
+but also the leap into electronic typesetting, 
+remaining essentially unchanged. 
+It was popularised in the 1960s 
+with the release of Letraset sheets containing 
+Lorem Ipsum passages, and more recently 
+with desktop publishing software like Aldus
+ PageMaker including versions of Lorem Ipsum.'
+,0
+,'테스트용 답변입니다'
+);
+
+INSERT INTO REVIEW values(
+REVIEW_FILE_NO_SEQ.nextval
+,1
+,100038
+,'더한 매실원주 13도 375ml 매실주'
+,'정말맛있습니다 매실원주'
+,5
+,1
+,1
+,systimestamp
+,'너무맛있어요 다음에 또 사겠습니다');
+
+INSERT INTO REVIEW values(
+REVIEW_FILE_NO_SEQ.nextval
+,1
+,100038
+,'더한 매실원주 13도 375ml 매실주'
+,'매실원주 리뷰'
+,5
+,2
+,1
+,systimestamp
+,'처음 구매했는데 정말 마음에들었습니다.');
+
+INSERT INTO REVIEW values(
+REVIEW_FILE_NO_SEQ.nextval
+,1
+,100038
+,'더한 매실원주 13도 375ml 매실주'
+,'맛좋은 매실원주'
+,4
+,1
+,3
+,systimestamp
+,'도수가 조금 있는 술이다보니 조금 강하지만 맛있습니다.');
+
+INSERT INTO REVIEW values(
+REVIEW_FILE_NO_SEQ.nextval
+,1
+,100038
+,'더한 매실원주 13도 375ml 매실주'
+,'배송이 별로입니다.'
+,1
+,2
+,2
+,systimestamp
+,'상품이 꺠져서 도착했습니다. 배송이 별로네요');
+
+INSERT INTO REVIEW values(
+REVIEW_FILE_NO_SEQ.nextval
+,2
+,100038
+,'더한 매실원주 13도 375ml 매실주'
+,'정말맛있습니다 매실원주'
+,3
+,1
+,1
+,systimestamp
+,'맛있지만 제스타일은아닙니다. 다른상품 구매해야겠어요');
