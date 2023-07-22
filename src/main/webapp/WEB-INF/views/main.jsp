@@ -45,7 +45,7 @@
 						<div class="col mb-5">
 							<div class="card h-100">
 								<!-- best badge-->
-								<!-- <div class="position-absolute">
+<!-- 								<div class="position-absolute">
 									<img class="best-banner" src=../resources/image/gift.jpg
 										style="width: 50px; height: 50px;" alt="..." />
 								</div> -->
