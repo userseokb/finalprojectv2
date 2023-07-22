@@ -84,7 +84,7 @@
 								</table>
 								<input type="button" value="QNA작성하기"
 								class="change-option-btn float-right margin-top"
-								onclick="location.href='http://localhost:8083/registerQna/{userNo}'">
+								onclick="location.href='http://localhost:8083/registerQna/${userInfo.userNo}'">
 							</div>
 							
 							
