@@ -20,6 +20,7 @@
 
 <body>
     <!-- logo  -->
+    <div class="nav-and-content">
     <div class="login-header">
         <a class="navbar-brand" href="/main">
             <img src="/resources/image/logo.png" alt="logo" width="200px">
@@ -44,7 +45,7 @@
 			</div>
 		</form>
 	</div>
-	 
+	 </div>
     <%@ include file="mainFooter.jsp"%>
 </body>
 <script>
