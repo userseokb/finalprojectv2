@@ -23,6 +23,7 @@
 </head>
 
 <body>
+	<div class="nav-and-content">
     <!-- logo  -->
     <div class="login-header">
         <a class="navbar-brand" href="index.html">
@@ -71,6 +72,7 @@
 			</div>
 		</form>
 		
+	</div>
 	</div>
 	<%@ include file="mainFooter.jsp"%>
     <!-- Bootstrap core JS-->
