@@ -110,7 +110,8 @@
 
 			</div>
 		</form>
-
+		
+		
 		<!-- Bootstrap core JS-->
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -252,9 +253,11 @@ function registerCheck() {
         return false;
       };
 
-   //입력 값 전송
-   document.inputForm.submit(); //유효성 검사의 포인트
-
+      
+    alert("회원가입이 완료되었습니다");
+	//입력 값 전송
+	document.inputForm.submit(); //유효성 검사의 포인트
+	
 }
 
 

@@ -35,36 +35,47 @@
 
 				<!-- 마이페이지 컨텐츠 영역 -->
 				<div class="mypage-content-detail">
-					<form action="/mypage" name="mypage" id="mypage" method="POST">
-
-
-						<!-- 기본 마이페이지 진입시 표 -->
-						<table class="mypage-table table-text-center">
-							<tr>
-								<th>상품 정보</th>
-								<th>주문 일자</th>
-								<th>수량/금액</th>
-								<th>주문상태</th>
-							</tr>
-
-							<!-- c태그 반복영역 -->
-							<tr>
-								<td>
-									<%-- ${orderInfo.} --%>1
-								</td>
-								<td>
-									<%-- ${orderInfo.orderDate} --%>2
-								</td>
-								<td>
-									<%-- ${orderInfo.orderDetailPrice} --%>3
-								</td>
-								<td>
-									<%-- ${orderInfo.orderStatus} --%>4
-								</td>
-
-							</tr>
-							<!-- 반복 여기까지 -->
-						</table>
+					<c:choose>
+						<c:when test="${result eq 'success'}">
+							<div class="half-area margin-center">
+								<div>
+									<b>주문이 완료되었습니다.</b>
+								</div>
+								<div class="border-top-grey">
+									<input type="button" value="쇼핑계속하기"
+										class="margin-center change-option-btn"
+										onclick="location.href='/main'">&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="button" value="주문상세보기"
+										class="margin-center change-option-btn"
+										onclick="location.href='/orderHistory'">
+								</div>
+							</div>
+						</c:when>
+						<c:when test="${result eq 'cancel'}">
+							<div class="half-area margin-center">
+								<div>
+									<b>주문이 취소되었습니다.</b>
+								</div>
+								<div class="border-top-grey">
+									<input type="button" value="쇼핑계속하기"
+										class="margin-center change-option-btn"
+										onclick="location.href='/main'">
+								</div>
+							</div>
+						</c:when>
+						<c:when test="${result eq 'fail'}">
+							<div class="half-area margin-center">
+								<div>
+									<b>결제를 실패했습니다.</b>
+								</div>
+								<div class="border-top-grey">
+									<input type="button" value="쇼핑계속하기"
+										class="margin-center change-option-btn"
+										onclick="location.href='/main'">
+								</div>
+							</div>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>
@@ -75,6 +86,15 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="../resources/js/scripts.js"></script>
+	<script>
+	
+	//브라우저 히스토리 강제주입 
+	history.pushState(null, null, "http://localhost:8083/mypage");
+	//뒤로가기 탐지후 장바구니로 이동
+	window.onpopstate = function(event) {
+		location.href="/basket";
+	};
+	</script>
 </body>
 
 </html>

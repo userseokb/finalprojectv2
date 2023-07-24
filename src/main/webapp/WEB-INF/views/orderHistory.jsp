@@ -21,6 +21,8 @@
 </head>
 
 <body>
+
+<c:if test="${!empty result}"></c:if>
 	<div class="nav-and-content">
 		<%@ include file="mainNav.jsp"%>
 

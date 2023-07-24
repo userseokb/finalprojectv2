@@ -46,7 +46,7 @@ public class updateFormController {
         List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
         session.setAttribute("user", user);
         model.addAttribute("user", user);
-        model.addAttribute("userInfo", cud);
+        model.addAttribute("userInfo", user);
         model.addAttribute("basketList", basketList);
         
         System.out.println(user);

@@ -53,8 +53,9 @@ public class ReviewController {
 		ProductDto productDto = mainService.getProductByProductCode(productCode);
 		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
 		int userNo = cud.getUserNo();
+		UserDto userInfo = userService.getUserByUserNo(userNo);
 		log.info("유저 번호 = {}", userNo);
-		model.addAttribute("userInfo",cud);
+		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("basketList",basketList);
 		model.addAttribute("products", productDto); // 상품 정보를 Model에 담기
 		model.addAttribute("userNo", userNo);

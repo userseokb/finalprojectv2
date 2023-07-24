@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.team2.finalproject.dto.product.BasketDto;
 import com.team2.finalproject.dto.product.ProductDto;
 import com.team2.finalproject.dto.user.CustomUserDetails;
+import com.team2.finalproject.dto.user.UserDto;
 import com.team2.finalproject.service.BasketService;
 import com.team2.finalproject.service.MainService;
 import com.team2.finalproject.service.UserService;
@@ -38,12 +39,12 @@ public class BasketController {
 		//security 에서 userId 획득
 		String userId = principal.getName();
 		//조회
-		int userNo = userService.getUserByUserId(userId).getUserNo();
-		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
+		UserDto userInfo = userService.getUserByUserId(userId);
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
 		List<ProductDto> productList = mainService.getProductByBasketList(basketList);
 		
 		
-		model.addAttribute("userInfo", cud);
+		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("basketList", basketList);
 		model.addAttribute("productList",productList);
 
