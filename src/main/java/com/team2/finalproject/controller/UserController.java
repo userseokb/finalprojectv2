@@ -106,7 +106,7 @@ public class UserController {
 		service.updateUser(updateUser);
 			
 		
-		return "/updateForm";
+		return "redirect:/updateForm";
 	}
 	
 	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
