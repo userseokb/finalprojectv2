@@ -250,7 +250,11 @@ public class OrderController {
 			
 			//포인트 적립
 			userService.updateUserPoint(userNo,price);
+			
+			List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
 			ra.addFlashAttribute("result","success");
+			ra.addFlashAttribute("userInfo",userInfo);
+			ra.addFlashAttribute("basketList",basketList);
 			}else {
 				receive = connection.getErrorStream(); 
 			}
@@ -269,10 +273,13 @@ public class OrderController {
 	
 	// 결제중단 큐알코드 닫기
 	@RequestMapping(value="/payment/cancel", method=RequestMethod.GET)
-	public String paymentCancel(RedirectAttributes ra) {
-		String cancel = "cancel";
-//		model.addAttribute("result",cancel);
-		System.out.println("cancel");
+	public String paymentCancel(RedirectAttributes ra,Principal principal) {
+		String userId = principal.getName();
+		UserDto userInfo = userService.getUserByUserId(userId);
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
+		ra.addFlashAttribute("result","success");
+		ra.addFlashAttribute("userInfo",userInfo);
+		ra.addFlashAttribute("basketList",basketList);
 		ra.addFlashAttribute("result", "cancel");
 		return "redirect:/mypage";
 	}
@@ -280,7 +287,13 @@ public class OrderController {
 	
 	// 결제 실패
 	@RequestMapping(value="/payment/fail", method=RequestMethod.GET)
-	public String paymentFail(RedirectAttributes ra) {
+	public String paymentFail(RedirectAttributes ra,Principal principal) {
+		String userId = principal.getName();
+		UserDto userInfo = userService.getUserByUserId(userId);
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
+		ra.addFlashAttribute("result","success");
+		ra.addFlashAttribute("userInfo",userInfo);
+		ra.addFlashAttribute("basketList",basketList);
 		ra.addFlashAttribute("result", "fail");
 		return "redirect:/mypage";
 	}
