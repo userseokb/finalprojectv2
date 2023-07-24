@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team2.finalproject.dto.order.OrderDetailDto;
 import com.team2.finalproject.dto.order.OrderDto;
@@ -167,7 +168,7 @@ public class OrderController {
 	
 	//카카오페이 결제 승인
 	@RequestMapping(value="/payment/approval", method=RequestMethod.GET)
-	public String approval(@RequestParam("pg_token")String pg_token,HttpServletRequest request, Principal pricipal) {
+	public String approval(@RequestParam("pg_token")String pg_token,HttpServletRequest request, Principal pricipal, RedirectAttributes ra) {
 		// 유저 정보 획득
 		String userName = pricipal.getName();
 		UserDto userInfo = userService.getUserByUserId(userName);
@@ -249,6 +250,7 @@ public class OrderController {
 			
 			//포인트 적립
 			userService.updateUserPoint(userNo,price);
+			ra.addFlashAttribute("result","success");
 			}else {
 				receive = connection.getErrorStream(); 
 			}
@@ -261,21 +263,26 @@ public class OrderController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/main";
+		return "redirect:/mypage";
 	}
 	
 	
 	// 결제중단 큐알코드 닫기
 	@RequestMapping(value="/payment/cancel", method=RequestMethod.GET)
-	public String paymentCancel() {
-		return "redirect:/basket";
+	public String paymentCancel(RedirectAttributes ra) {
+		String cancel = "cancel";
+//		model.addAttribute("result",cancel);
+		System.out.println("cancel");
+		ra.addFlashAttribute("result", "cancel");
+		return "redirect:/mypage";
 	}
 	
 	
 	// 결제 실패
 	@RequestMapping(value="/payment/fail", method=RequestMethod.GET)
-	public String paymentFail() {
-		return "redirect:/basket";
+	public String paymentFail(RedirectAttributes ra) {
+		ra.addFlashAttribute("result", "fail");
+		return "redirect:/mypage";
 	}
 	
 	//주문 내역
@@ -287,11 +294,11 @@ public class OrderController {
 		List<OrderDto> orderList = orderService.getOrderByUserNo(userInfo.getUserNo());
 		List<List<OrderDetailDto>> orderDetailList = orderService.getOrderDetatilByOrder(orderList);
 		List<ProductDto> productList = mainService.getProductByOrderDetailList(orderDetailList);
-		List<BasketDto> basketList = basketService.getUserBasketByUserNo(cud.getUserNo());
+		List<BasketDto> basketList = basketService.getUserBasketByUserNo(userInfo.getUserNo());
 		
 		log.info("product = {}", productList);
 		
-		model.addAttribute("userInfo",cud);
+		model.addAttribute("userInfo",userInfo);
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("orderDetailList",orderDetailList);
 		model.addAttribute("productList",productList);

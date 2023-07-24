@@ -107,7 +107,7 @@
 									type="text" class="price-input" readonly value="0">원</span>
 							</div>
 							<div>
-								<span>총 배송비</span> <span><input id="deliveryPrice"
+								<span>총 배송비 <span class="small">(30,000원 이상 무료배송)</span></span> <span><input id="deliveryPrice"
 									type="text" class="price-input" readonly value="0">원</span>
 							</div>
 							<div class="border-top-grey">

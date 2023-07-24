@@ -50,11 +50,12 @@ public class QnaController {
 		        int userNo = cud.getUserNo();
 		        String userid = cud.getUsername();
 		        log.info("유저 번호 = {}", userNo);
+		        UserDto userInfo = userService.getUserByUserId(userid);
 		        List<QnaDto> qna = qnaService.getQnaByQnaNoByUserId(userid);
 		        List<BasketDto> basketList = basketService.getUserBasketByUserNo(userNo);
 		        session.setAttribute("qna", qna);
 		        model.addAttribute("qna", qna);
-		        model.addAttribute("userInfo",cud);
+		        model.addAttribute("userInfo",userInfo);
 		        model.addAttribute("basketList",basketList);
 		        
 		        System.out.println(qna);
