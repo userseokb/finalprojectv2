@@ -246,7 +246,7 @@
 			let totalPrice = document.getElementById("totalPrice");
 			userPoint.value = userPoint.value.replace(",","");
 			totalPrice.value = totalPrice.value.replace(",","");
-			totalPrice.value = Number(${sum + derivery});
+			totalPrice.value = Number(${sum + delivery});
 			if(Number(point.value.replace(",","")) > Number(userPoint.value.replace(",",""))) {
 				point.value = userPoint.value;
 			}
