@@ -88,7 +88,7 @@
  	 	<select id="getTotalSalesAmount" resultType="com.team2.finalproject.dto.order.TotalSalesDto">
  	 	select *
 		from(
-		select b.name, count(*) cnt
+		select b.name, sum(a.order_detail_quantity) cnt
 		from order_detail a
 		inner join product b
 		on a.product_code = b.product_code
